@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="maskBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14181c"/>
+      <stop offset="100%" stop-color="#07090b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Full-bleed background for maskable adaptive masking -->
+  <rect width="512" height="512" fill="url(#maskBg)"/>
+
+  <!-- Centered Reachmark Brand Safe-Zone (within 80% diameter) -->
+  <g transform="translate(116, 116)">
+    <!-- Electric Lime Squircle -->
+    <rect width="280" height="280" rx="68" fill="#d6f269"/>
+
+    <!-- Dark Reachmark R Glyph & Brand Dot -->
+    <path d="M 62 62 L 157 62 C 190 62 210 82 210 110 C 210 135 190 149 157 154 L 216 218 L 165 218 L 118 162 L 106 162 L 106 218 L 62 218 Z M 106 100 L 106 126 L 148 126 C 160 126 168 120 168 113 C 168 106 160 100 148 100 Z" fill="#101416"/>
+    <circle cx="212" cy="68" r="21" fill="#101416"/>
+  </g>
+</svg>

@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 1334" width="750" height="1334">
+  <defs>
+    <radialGradient id="mobGlow" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#141c22"/>
+      <stop offset="70%" stop-color="#090c0f"/>
+      <stop offset="100%" stop-color="#040608"/>
+    </radialGradient>
+    <linearGradient id="limeM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2fa7a"/>
+      <stop offset="100%" stop-color="#c4e350"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Mobile Screen Body -->
+  <rect width="750" height="1334" fill="url(#mobGlow)"/>
+
+  <!-- Phone Status Bar -->
+  <text x="60" y="44" fill="#f0f4f8" font-family="-apple-system, sans-serif" font-weight="600" font-size="20">9:41</text>
+  <g transform="translate(630, 28)">
+    <!-- Battery / Signal -->
+    <rect width="40" height="20" rx="5" fill="none" stroke="#f0f4f8" stroke-width="2"/>
+    <rect x="3" y="3" width="28" height="14" rx="3" fill="#d6f269"/>
+    <rect x="42" y="6" width="3" height="8" rx="1.5" fill="#f0f4f8"/>
+  </g>
+
+  <!-- App Header -->
+  <g transform="translate(36, 76)">
+    <!-- Brand -->
+    <rect width="44" height="44" rx="12" fill="#d6f269"/>
+    <text x="58" y="31" fill="#f0f4f8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="26" letter-spacing="1">REACHMARK</text>
+    <circle cx="242" cy="27" r="5" fill="#d6f269"/>
+
+    <!-- fx Scientific Mode Toggle -->
+    <rect x="500" y="4" width="76" height="40" rx="10" fill="#1b232a" stroke="#2b3744" stroke-width="1.5"/>
+    <text x="538" y="29" fill="#d6f269" font-family="sans-serif" font-weight="800" font-size="16" text-anchor="middle">fx</text>
+
+    <!-- Menu Toggle -->
+    <rect x="588" y="4" width="90" height="40" rx="10" fill="#1b232a" stroke="#2b3744" stroke-width="1.5"/>
+    <text x="633" y="29" fill="#a0b0c0" font-family="sans-serif" font-weight="600" font-size="16" text-anchor="middle">Menu</text>
+  </g>
+
+  <!-- Scientific Tools Bar Preview -->
+  <g transform="translate(36, 146)">
+    <rect width="678" height="64" rx="14" fill="#12181f" stroke="#1d2732" stroke-width="1.5"/>
+    <text x="60" y="38" fill="#d6f269" font-family="monospace" font-size="15" font-weight="700" text-anchor="middle">DEG</text>
+    <text x="175" y="38" fill="#8da0b2" font-family="monospace" font-size="15" font-weight="700" text-anchor="middle">sin</text>
+    <text x="290" y="38" fill="#8da0b2" font-family="monospace" font-size="15" font-weight="700" text-anchor="middle">cos</text>
+    <text x="405" y="38" fill="#8da0b2" font-family="monospace" font-size="15" font-weight="700" text-anchor="middle">tan</text>
+    <text x="520" y="38" fill="#8da0b2" font-family="monospace" font-size="15" font-weight="700" text-anchor="middle">√x</text>
+    <text x="625" y="38" fill="#8da0b2" font-family="monospace" font-size="15" font-weight="700" text-anchor="middle">π</text>
+  </g>
+
+  <!-- Dynamic Screen Display -->
+  <g transform="translate(36, 230)">
+    <rect width="678" height="190" rx="22" fill="#07090b" stroke="#19222a" stroke-width="2"/>
+    <text x="24" y="36" fill="#627382" font-family="monospace" font-size="14" font-weight="700">TACTILE 3D ON • MEM 0</text>
+
+    <!-- Formula expression line -->
+    <text x="650" y="80" fill="#728494" font-family="monospace" font-size="24" text-anchor="end">250,000 × 12.5% + 4,500</text>
+
+    <!-- Large Result -->
+    <text x="650" y="152" fill="#d6f269" font-family="-apple-system, BlinkMacSystemFont, monospace" font-size="64" font-weight="800" text-anchor="end">= 35,750</text>
+  </g>
+
+  <!-- Mobile 3D Keypad Grid -->
+  <!-- Row 1: AC, +/-, %, ÷ -->
+  <g transform="translate(36, 450)">
+    <g transform="translate(0, 0)">
+      <rect width="154" height="120" rx="22" fill="#1d2630" stroke="#2d3b4b" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#242f3c"/>
+      <text x="77" y="68" fill="#f87171" font-family="sans-serif" font-weight="800" font-size="34" text-anchor="middle">AC</text>
+    </g>
+    <g transform="translate(174, 0)">
+      <rect width="154" height="120" rx="22" fill="#1d2630" stroke="#2d3b4b" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#242f3c"/>
+      <text x="77" y="68" fill="#a0b0c0" font-family="sans-serif" font-weight="700" font-size="36" text-anchor="middle">±</text>
+    </g>
+    <g transform="translate(348, 0)">
+      <rect width="154" height="120" rx="22" fill="#1d2630" stroke="#2d3b4b" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#242f3c"/>
+      <text x="77" y="68" fill="#a0b0c0" font-family="sans-serif" font-weight="700" font-size="36" text-anchor="middle">%</text>
+    </g>
+    <g transform="translate(522, 0)">
+      <rect width="154" height="120" rx="22" fill="#26313b" stroke="#3b4a59" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#303d4a"/>
+      <text x="77" y="70" fill="#d6f269" font-family="sans-serif" font-weight="800" font-size="44" text-anchor="middle">÷</text>
+    </g>
+  </g>
+
+  <!-- Row 2: 7, 8, 9, × -->
+  <g transform="translate(36, 594)">
+    <g transform="translate(0, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">7</text>
+    </g>
+    <g transform="translate(174, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">8</text>
+    </g>
+    <g transform="translate(348, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">9</text>
+    </g>
+    <g transform="translate(522, 0)">
+      <rect width="154" height="120" rx="22" fill="#26313b" stroke="#3b4a59" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#303d4a"/>
+      <text x="77" y="70" fill="#d6f269" font-family="sans-serif" font-weight="800" font-size="44" text-anchor="middle">×</text>
+    </g>
+  </g>
+
+  <!-- Row 3: 4, 5, 6, − -->
+  <g transform="translate(36, 738)">
+    <g transform="translate(0, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">4</text>
+    </g>
+    <g transform="translate(174, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">5</text>
+    </g>
+    <g transform="translate(348, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">6</text>
+    </g>
+    <g transform="translate(522, 0)">
+      <rect width="154" height="120" rx="22" fill="#26313b" stroke="#3b4a59" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#303d4a"/>
+      <text x="77" y="70" fill="#d6f269" font-family="sans-serif" font-weight="800" font-size="44" text-anchor="middle">−</text>
+    </g>
+  </g>
+
+  <!-- Row 4: 1, 2, 3, + -->
+  <g transform="translate(36, 882)">
+    <g transform="translate(0, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">1</text>
+    </g>
+    <g transform="translate(174, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">2</text>
+    </g>
+    <g transform="translate(348, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">3</text>
+    </g>
+    <g transform="translate(522, 0)">
+      <rect width="154" height="120" rx="22" fill="#26313b" stroke="#3b4a59" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#303d4a"/>
+      <text x="77" y="70" fill="#d6f269" font-family="sans-serif" font-weight="800" font-size="44" text-anchor="middle">+</text>
+    </g>
+  </g>
+
+  <!-- Row 5: 0, ., ⌫, = -->
+  <g transform="translate(36, 1026)">
+    <g transform="translate(0, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="600" font-size="40" text-anchor="middle">0</text>
+    </g>
+    <g transform="translate(174, 0)">
+      <rect width="154" height="120" rx="22" fill="#13191f" stroke="#212a33" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#1a222a"/>
+      <text x="77" y="70" fill="#f0f4f8" font-family="sans-serif" font-weight="700" font-size="40" text-anchor="middle">.</text>
+    </g>
+    <g transform="translate(348, 0)">
+      <rect width="154" height="120" rx="22" fill="#1d2630" stroke="#2d3b4b" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="#242f3c"/>
+      <text x="77" y="68" fill="#f87171" font-family="sans-serif" font-weight="700" font-size="34" text-anchor="middle">⌫</text>
+    </g>
+    <g transform="translate(522, 0)">
+      <!-- Lime Equals 3D Button -->
+      <rect width="154" height="120" rx="22" fill="#9db631" stroke="#798e22" stroke-width="2"/>
+      <rect width="154" height="110" rx="22" fill="url(#limeM)"/>
+      <text x="77" y="72" fill="#0b0f14" font-family="sans-serif" font-weight="900" font-size="52" text-anchor="middle">=</text>
+    </g>
+  </g>
+
+  <!-- Bottom Home Bar Indicator -->
+  <rect x="255" y="1300" width="240" height="6" rx="3" fill="#ffffff" opacity="0.3"/>
+</svg>

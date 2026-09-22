@@ -6,10 +6,12 @@ node_modules/
 # Scratch and test files
 comprehensive_test*.js
 test_*.js
+create_*.py
+*.pyc
+__pycache__/
 original_fixed.html
 test_svg.html
 
 # Archives and uploads
 *.zip
 uploads/
-

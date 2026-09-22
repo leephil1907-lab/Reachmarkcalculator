@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   
   <!-- Primary Meta Data -->
   <title>Reachmark | 3D Motion Calculator & Global Currency Exchanger</title>
@@ -26,13 +26,25 @@
   <meta property="twitter:image" content="reachmark-squircle.jpg">
 
   <!-- Mobile & PWA App Meta -->
-  <meta name="theme-color" content="#0a0c0e">
+  <meta name="theme-color" content="#0b0f14">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Reachmark">
+  <meta name="application-name" content="Reachmark">
+  <meta name="msapplication-TileColor" content="#0b0f14">
+  <meta name="msapplication-TileImage" content="icon-144.png">
+
+  <!-- Web App Manifest -->
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" type="image/jpeg" href="reachmark-squircle.jpg">
-  <link rel="apple-touch-icon" href="reachmark-squircle.jpg">
+  
+  <!-- Favicons and Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="mask-icon" href="icon.svg" color="#d6f269">
 
   <style>
     /* ==========================================================================
@@ -1245,6 +1257,22 @@
                 <span>Shortcuts Guide</span>
               </div>
               <span class="menu-badge">?</span>
+            </button>
+
+            <div class="menu-divider" id="menuInstallDivider"></div>
+
+            <button type="button" class="menu-item" id="menuItemInstall">
+              <div class="menu-item-left">
+                <span class="menu-item-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                </span>
+                <span>Install App</span>
+              </div>
+              <span class="menu-badge" style="color:var(--rm-lime);border-color:var(--rm-lime);">PWA</span>
             </button>
           </div>
         </div>
@@ -2944,6 +2972,91 @@
       menu3DStatus.textContent = STATE.motion3D ? 'ON' : 'OFF';
       menuSoundStatus.textContent = STATE.soundOn ? 'ON' : 'MUTED';
       menuThemeStatus.textContent = STATE.theme.toUpperCase();
+
+      /* ------------------------------------------------------------------------
+         18. PWA INSTALLATION, APP SHORTCUTS & SERVICE WORKER
+         ------------------------------------------------------------------------ */
+      // PWA deferred install prompt
+      let deferredInstallPrompt = null;
+      const btnInstall = document.getElementById('menuItemInstall');
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        if (btnInstall) {
+          btnInstall.style.display = 'flex';
+        }
+      });
+
+      if (btnInstall) {
+        btnInstall.addEventListener('click', async () => {
+          menuDropdown.classList.remove('open');
+          btnMenuToggle.classList.remove('open');
+
+          if (deferredInstallPrompt) {
+            deferredInstallPrompt.prompt();
+            const { outcome } = await deferredInstallPrompt.userChoice;
+            deferredInstallPrompt = null;
+            showToast(outcome === 'accepted' ? 'Installing Reachmark App...' : 'Installation dismissed');
+          } else {
+            showToast('To install: open browser menu (⋮ / Share) & select "Add to Home Screen"');
+          }
+        });
+      }
+
+      window.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        showToast('Reachmark installed successfully!');
+      });
+
+      // Handle PWA shortcuts and deep links (#currency, #scientific, #history)
+      function handleAppShortcuts() {
+        const hash = (window.location.hash || '').toLowerCase();
+        if (hash === '#currency' || hash === '#curr') {
+          openUtilsModal('curr');
+        } else if (hash === '#history') {
+          historyOverlay.classList.add('open');
+          updateJournalUI();
+        } else if (hash === '#scientific' || hash === '#fx') {
+          if (!sciGrid.classList.contains('active')) {
+            sciGrid.classList.add('active');
+            btnFX.classList.add('active');
+            viewport.classList.add('scientific-active');
+          }
+        } else if (hash === '#tip' || hash === '#unit') {
+          openUtilsModal('tip');
+        }
+
+        // Shared text target
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const sharedVal = params.get('text') || params.get('title');
+          if (sharedVal) {
+            const clean = sharedVal.replace(/[^0-9+\-*/.()]/g, '');
+            if (clean) {
+              STATE.currentVal = clean;
+              renderDisplay();
+              showToast(`Loaded: ${clean}`);
+            }
+          }
+        } catch (e) {}
+      }
+
+      window.addEventListener('hashchange', handleAppShortcuts);
+      handleAppShortcuts();
+
+      // Register Service Worker for offline PWA compliance
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then((registration) => {
+              console.log('[Reachmark] PWA Service Worker active:', registration.scope);
+            })
+            .catch((error) => {
+              console.warn('[Reachmark] Service Worker registration failed:', error);
+            });
+        });
+      }
 
     })();
   </script>
