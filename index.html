@@ -4034,24 +4034,39 @@
       });
 
       async function triggerInstallFlow() {
+        // The browser's native PWA prompt is the real installation mechanism.
+        // It installs Reachmark as an app on supported Chrome/Edge browsers.
         const promptEvent = window.reachmarkDeferredPrompt || deferredInstallPrompt;
+
         if (promptEvent) {
           if (pwaBanner) pwaBanner.classList.remove('visible');
-          promptEvent.prompt();
-          const { outcome } = await promptEvent.userChoice;
-          window.reachmarkDeferredPrompt = null;
-          deferredInstallPrompt = null;
-          showToast(outcome === 'accepted' ? 'Installing Reachmark...' : 'Installation postponed');
+          try {
+            promptEvent.prompt();
+            const { outcome } = await promptEvent.userChoice;
+            window.reachmarkDeferredPrompt = null;
+            deferredInstallPrompt = null;
+            showToast(outcome === 'accepted' ? 'Reachmark is being installed…' : 'Installation postponed');
+          } catch (error) {
+            console.warn('[Reachmark] Native install prompt failed:', error);
+            showToast('Open your browser menu and choose Install app.');
+          }
           return;
         }
 
+        if (isStandalone) {
+          showToast('Reachmark is already installed.');
+          return;
+        }
+
+        // iOS Safari does not expose beforeinstallprompt.
         if (isIos) {
           if (pwaBanner) pwaBanner.classList.remove('visible');
           if (iosModal) iosModal.classList.add('open');
           return;
         }
 
-        // Check if app is already installed on Android device
+        // If the native prompt is not available yet, check whether the app
+        // is already installed before showing the browser-specific fallback.
         if ('getInstalledRelatedApps' in navigator) {
           try {
             const apps = await navigator.getInstalledRelatedApps();
@@ -4067,7 +4082,7 @@
         if (androidModal) {
           androidModal.classList.add('open');
         } else {
-          showToast('Tap browser menu (⋮) & select "Install app"');
+          showToast('Open browser menu (⋮) and choose "Install app".');
         }
       }
 
