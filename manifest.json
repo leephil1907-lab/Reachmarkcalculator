@@ -39,18 +39,13 @@
   "prefer_related_applications": false,
   "related_applications": [
     {
-      "platform": "play",
-      "id": "io.github.leephil1907_lab.twa",
-      "url": "https://play.google.com/store/apps/details?id=io.github.leephil1907_lab.twa"
+      "platform": "windows",
+      "id": "Reachmark.3DMotionCalculator"
     },
     {
       "platform": "webapp",
       "url": "https://leephil1907-lab.github.io/Reachmarkcalculator/manifest.webmanifest",
       "id": "reachmark.calculator.app"
-    },
-    {
-      "platform": "windows",
-      "id": "Reachmark.3DMotionCalculator"
     }
   ],
   "scope_extensions": [

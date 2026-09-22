@@ -46,6 +46,16 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="mask-icon" href="icon.svg" color="#d6f269">
 
+  <script>
+    // Capture beforeinstallprompt immediately in <head> so it is never missed
+    window.reachmarkDeferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      window.reachmarkDeferredPrompt = e;
+      window.dispatchEvent(new CustomEvent('reachmark:install-ready'));
+    });
+  </script>
+
   <style>
     /* ==========================================================================
        REACHMARK BRAND DESIGN SYSTEM & CSS VARIABLES
@@ -3435,23 +3445,45 @@
         showInstallBanner();
       });
 
+      window.addEventListener('reachmark:install-ready', () => {
+        if (btnInstall) btnInstall.style.display = 'flex';
+      });
+
       async function triggerInstallFlow() {
-        if (deferredInstallPrompt) {
+        const promptEvent = window.reachmarkDeferredPrompt || deferredInstallPrompt;
+        if (promptEvent) {
           if (pwaBanner) pwaBanner.classList.remove('visible');
-          deferredInstallPrompt.prompt();
-          const { outcome } = await deferredInstallPrompt.userChoice;
+          promptEvent.prompt();
+          const { outcome } = await promptEvent.userChoice;
+          window.reachmarkDeferredPrompt = null;
           deferredInstallPrompt = null;
           showToast(outcome === 'accepted' ? 'Installing Reachmark...' : 'Installation postponed');
-        } else if (isIos) {
+          return;
+        }
+
+        if (isIos) {
           if (pwaBanner) pwaBanner.classList.remove('visible');
           if (iosModal) iosModal.classList.add('open');
+          return;
+        }
+
+        // Check if app is already installed on Android device
+        if ('getInstalledRelatedApps' in navigator) {
+          try {
+            const apps = await navigator.getInstalledRelatedApps();
+            if (apps && apps.length > 0) {
+              if (pwaBanner) pwaBanner.classList.remove('visible');
+              showToast('Reachmark is already installed on your device!');
+              return;
+            }
+          } catch (e) {}
+        }
+
+        if (pwaBanner) pwaBanner.classList.remove('visible');
+        if (androidModal) {
+          androidModal.classList.add('open');
         } else {
-          if (pwaBanner) pwaBanner.classList.remove('visible');
-          if (androidModal) {
-            androidModal.classList.add('open');
-          } else {
-            showToast('Tap browser menu (⋮) & select "Install app"');
-          }
+          showToast('Tap browser menu (⋮) & select "Install app"');
         }
       }
 
