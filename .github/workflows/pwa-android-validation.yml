@@ -16,7 +16,7 @@ jobs:
         run: node -e "const fs=require('fs'); for (const f of ['manifest.webmanifest','manifest.json','android/twa-manifest.template.json']) JSON.parse(fs.readFileSync(f,'utf8')); console.log('JSON manifests valid');"
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -31,16 +31,57 @@ jobs:
           printf '{"jdkPath":"%s","androidSdkPath":"%s"}\n' "$JAVA_HOME" "$SDK_PATH" > "$HOME/.bubblewrap/config.json"
 
       - name: Validate PWA for Trusted Web Activity
-        run: bubblewrap validate --url=https://leephil1907-lab.github.io/Reachmarkcalculator/
-
-      - name: Verify Android packaging inputs
         run: |
-          test -f manifest.webmanifest
-          test -f icon-512.png
-          test -f icon-maskable-512.png
-          test -f screenshot-desktop.png
-          test -f screenshot-mobile.png
-          test -f shortcut-currency.png
-          test -f shortcut-scientific.png
-          test -f shortcut-history.png
-          echo "Reachmark Android packaging assets are present."
+          set +e
+          OUTPUT=$(bubblewrap validate --url=https://leephil1907-lab.github.io/Reachmarkcalculator/ 2>&1)
+          STATUS=$?
+          printf '%s\n' "$OUTPUT"
+          if [ "$STATUS" -ne 0 ]; then
+            if printf '%s\n' "$OUTPUT" | grep -q "status 429"; then
+              echo "::warning::Bubblewrap validation reached the PWA, but Google PageSpeed Insights rate-limited the request (HTTP 429). Live manifest/asset checks continue below."
+            else
+              exit "$STATUS"
+            fi
+          fi
+
+      - name: Verify live PWA manifest and packaging assets
+        run: |
+          node <<'NODE'
+          const base = 'https://leephil1907-lab.github.io/Reachmarkcalculator/';
+          const manifestUrl = base + 'manifest.webmanifest';
+          const res = await fetch(manifestUrl, { cache: 'no-store' });
+          if (!res.ok) throw new Error(`Manifest fetch failed: ${res.status}`);
+          const manifest = await res.json();
+          const required = ['name','short_name','description','id','start_url','scope','display','orientation','lang','dir','theme_color','background_color','icons','shortcuts','categories','screenshots','file_handlers','launch_handler','protocol_handlers','share_target','iarc_rating_id','display_override','tab_strip','note_taking','scope_extensions','related_applications','prefer_related_applications','widgets','edge_side_panel'];
+          const missing = required.filter(k => !(k in manifest));
+          if (missing.length) throw new Error(`Missing manifest members: ${missing.join(', ')}`);
+          if (manifest.orientation !== 'any') throw new Error(`Unexpected orientation: ${manifest.orientation}`);
+          if (manifest.display !== 'standalone') throw new Error(`Unexpected display: ${manifest.display}`);
+          const pngDims = b => {
+            if (b.length < 24 || b.readUInt32BE(0) !== 0x89504e47 || b.readUInt32BE(4) !== 0x0d0a1a0a) return null;
+            return [b.readUInt32BE(16), b.readUInt32BE(20)];
+          };
+          async function checkImage(item) {
+            const url = new URL(item.src, manifestUrl).href;
+            const r = await fetch(url, { cache: 'no-store' });
+            if (!r.ok) throw new Error(`Image ${url} returned ${r.status}`);
+            const ct = (r.headers.get('content-type') || '').toLowerCase();
+            if (!ct.startsWith('image/')) throw new Error(`Image ${url} has content-type ${ct}`);
+            const b = Buffer.from(await r.arrayBuffer());
+            if (item.type === 'image/png') {
+              const d = pngDims(b);
+              if (!d) throw new Error(`Image ${url} is not a readable PNG`);
+              const declared = String(item.sizes || '').split(' ')[0].split('x').map(Number);
+              if (declared.length === 2 && (d[0] !== declared[0] || d[1] !== declared[1])) throw new Error(`Image ${url} declares ${item.sizes} but is ${d[0]}x${d[1]}`);
+            }
+          }
+          for (const item of manifest.icons) await checkImage(item);
+          for (const shot of manifest.screenshots) await checkImage(shot);
+          for (const shortcut of manifest.shortcuts) for (const icon of (shortcut.icons || [])) await checkImage(icon);
+          const any512 = manifest.icons.some(i => i.type === 'image/png' && i.sizes === '512x512' && (i.purpose || 'any').split(' ').includes('any'));
+          const mask512 = manifest.icons.some(i => i.type === 'image/png' && i.sizes === '512x512' && (i.purpose || '').split(' ').includes('maskable'));
+          if (!any512 || !mask512) throw new Error('Required 512px any/maskable PNG icons are missing');
+          console.log('Reachmark live PWA manifest/assets: PASS');
+          console.log(`Manifest: ${manifestUrl}`);
+          console.log(`Icons checked: ${manifest.icons.length}; screenshots: ${manifest.screenshots.length}; shortcut icons checked: ${manifest.shortcuts.flatMap(s => s.icons || []).length}`);
+          NODE
