@@ -469,6 +469,73 @@
       margin: 4px 6px;
     }
 
+    .menu-section-header {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      padding: 6px 10px 2px;
+      text-transform: uppercase;
+    }
+
+    .menu-subgrid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+      padding: 4px 6px 6px;
+    }
+
+    .menu-subitem {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 8px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.12s ease;
+      touch-action: manipulation;
+    }
+
+    .menu-subitem:hover {
+      background: rgba(214, 242, 105, 0.08);
+      border-color: rgba(214, 242, 105, 0.3);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .rm-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .rm-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 8px;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      touch-action: manipulation;
+    }
+
+    .rm-chip:hover {
+      background: rgba(214, 242, 105, 0.12);
+      border-color: rgba(214, 242, 105, 0.35);
+      color: var(--rm-lime);
+      transform: translateY(-1px);
+    }
+
     /* ==========================================================================
        DISPLAY SCREEN
        ========================================================================== */
@@ -1986,11 +2053,8 @@
           </div>
         </div>
 
-        <!-- Only FX and Menu on the Right -->
+        <!-- Only FX and Menu on the Right (Strict Top-Bar Spec) -->
         <div class="header-actions">
-          <!-- Smart Tools -->
-          <button type="button" class="smart-tools-btn rm-smart-tools-mobile" id="btnSmartTools" title="Smart Tools" aria-label="Open Smart Tools">✦</button>
-
           <!-- Scientific FX Button -->
           <button type="button" class="fx-btn" id="btnFX" title="Scientific Functions">
             fx
@@ -2059,15 +2123,38 @@
               </div>
             </button>
 
-            <button type="button" class="menu-item" id="menuItemSmartTools">
-              <div class="menu-item-left">
-                <span class="menu-item-icon" style="color:var(--rm-lime); font-size:14px; display:inline-flex; align-items:center; justify-content:center;">
+            <div class="menu-divider"></div>
+
+            <!-- ENHANCED: SMART EVERYDAY TOOLS SECTION -->
+            <div class="menu-section-header">SMART FINANCIAL TOOLS</div>
+
+            <button type="button" class="menu-item" id="menuItemSmartTools" style="background: rgba(214, 242, 105, 0.08); border: 1px solid rgba(214, 242, 105, 0.28); margin-bottom: 4px;">
+              <div class="menu-item-left" style="gap: 10px;">
+                <span class="menu-item-icon" style="background: rgba(214, 242, 105, 0.18); color: var(--rm-lime); width: 24px; height: 24px; border-radius: 7px; font-weight: 800; font-size: 13px;">
                   ✦
                 </span>
-                <span>Smart Financial Tools</span>
+                <div style="display: flex; flex-direction: column; text-align: left;">
+                  <span style="color: #ffffff; font-weight: 700;">Financial & Math Tools</span>
+                  <span style="color: var(--text-muted); font-size: 10.5px;">All 4 smart calculators</span>
+                </div>
               </div>
-              <span class="menu-badge" style="color:var(--rm-lime); border-color:var(--rm-lime);">PRO</span>
+              <span class="menu-badge" style="color: var(--rm-lime); border-color: var(--rm-lime); font-size: 9.5px;">OPEN</span>
             </button>
+
+            <div class="menu-subgrid">
+              <button type="button" class="menu-subitem" data-smart-open="percentage">
+                <span style="color: var(--rm-lime); font-weight: 800;">%</span> Percentage
+              </button>
+              <button type="button" class="menu-subitem" data-smart-open="discount">
+                <span style="color: var(--rm-lime); font-weight: 800;">🏷️</span> Discount & Tax
+              </button>
+              <button type="button" class="menu-subitem" data-smart-open="compound">
+                <span style="color: var(--rm-lime); font-weight: 800;">📈</span> Compound
+              </button>
+              <button type="button" class="menu-subitem" data-smart-open="margin">
+                <span style="color: var(--rm-lime); font-weight: 800;">💼</span> Profit Margin
+              </button>
+            </div>
 
             <div class="menu-divider"></div>
 
@@ -2441,55 +2528,150 @@
       <header class="rm-smart-head">
         <div>
           <div class="rm-smart-eyebrow">Reachmark Smart Tools</div>
-          <h2 id="smartToolsTitle">More than a calculator.</h2>
-          <p>Useful financial calculations with instant, copyable results.</p>
+          <h2 id="smartToolsTitle">Everyday Financial & Math Tools</h2>
+          <p>Instant calculations with 1-tap insert into your calculator.</p>
         </div>
         <button type="button" class="rm-smart-close" id="btnCloseSmartTools" aria-label="Close smart tools">×</button>
       </header>
       <nav class="rm-smart-tabs" aria-label="Smart tool categories">
-        <button type="button" class="rm-smart-tab active" data-smart-tab="percentage">Percentage</button>
-        <button type="button" class="rm-smart-tab" data-smart-tab="discount">Discount & Tax</button>
-        <button type="button" class="rm-smart-tab" data-smart-tab="compound">Compound</button>
-        <button type="button" class="rm-smart-tab" data-smart-tab="margin">Profit Margin</button>
+        <button type="button" class="rm-smart-tab active" data-smart-tab="percentage">% Percentage</button>
+        <button type="button" class="rm-smart-tab" data-smart-tab="discount">🏷️ Discount & Tax</button>
+        <button type="button" class="rm-smart-tab" data-smart-tab="compound">📈 Compound</button>
+        <button type="button" class="rm-smart-tab" data-smart-tab="margin">💼 Profit Margin</button>
       </nav>
 
+      <!-- Panel 1: Percentage -->
       <div class="rm-tool-panel active" data-smart-panel="percentage">
         <div class="rm-form-grid">
-          <div class="rm-field"><label for="rmPercentBase">Base value</label><input id="rmPercentBase" type="number" inputmode="decimal" value="100"></div>
-          <div class="rm-field"><label for="rmPercentRate">Percentage</label><input id="rmPercentRate" type="number" inputmode="decimal" value="15"></div>
+          <div class="rm-field">
+            <label for="rmPercentBase">Base Value ($)</label>
+            <input id="rmPercentBase" type="number" inputmode="decimal" value="100">
+          </div>
+          <div class="rm-field">
+            <label for="rmPercentRate">Percentage (%)</label>
+            <input id="rmPercentRate" type="number" inputmode="decimal" value="15">
+            <div class="rm-presets">
+              <button type="button" class="rm-chip" data-set-rate="5">5%</button>
+              <button type="button" class="rm-chip" data-set-rate="10">10%</button>
+              <button type="button" class="rm-chip" data-set-rate="15">15%</button>
+              <button type="button" class="rm-chip" data-set-rate="20">20%</button>
+              <button type="button" class="rm-chip" data-set-rate="25">25%</button>
+            </div>
+          </div>
         </div>
-        <div class="rm-result"><div class="rm-result-label">Result</div><div class="rm-result-value" id="rmPercentResult">15.00</div><div class="rm-result-sub" id="rmPercentSub">15% of 100</div></div>
-        <div class="rm-smart-actions"><button class="rm-action" type="button" data-copy-result="rmPercentResult">Copy result</button><button class="rm-action primary" type="button" data-use-result="rmPercentResult">Use result</button></div>
+        <div class="rm-result">
+          <div class="rm-result-label">Percentage Result</div>
+          <div class="rm-result-value" id="rmPercentResult">15.00</div>
+          <div class="rm-result-sub" id="rmPercentSub">15% of 100.00 · Total with %: 115.00</div>
+        </div>
+        <div class="rm-smart-actions">
+          <button class="rm-action" type="button" data-copy-result="rmPercentResult">📋 Copy Result</button>
+          <button class="rm-action primary" type="button" data-use-result="rmPercentResult">⚡ Use in Calculator</button>
+        </div>
       </div>
 
+      <!-- Panel 2: Discount & Tax -->
       <div class="rm-tool-panel" data-smart-panel="discount">
         <div class="rm-form-grid">
-          <div class="rm-field"><label for="rmDiscountPrice">Original price</label><input id="rmDiscountPrice" type="number" inputmode="decimal" value="100"></div>
-          <div class="rm-field"><label for="rmDiscountRate">Discount %</label><input id="rmDiscountRate" type="number" inputmode="decimal" value="10"></div>
-          <div class="rm-field"><label for="rmTaxRate">Tax %</label><input id="rmTaxRate" type="number" inputmode="decimal" value="0"></div>
+          <div class="rm-field">
+            <label for="rmDiscountPrice">Original Price ($)</label>
+            <input id="rmDiscountPrice" type="number" inputmode="decimal" value="100">
+          </div>
+          <div class="rm-field">
+            <label for="rmDiscountRate">Discount (%)</label>
+            <input id="rmDiscountRate" type="number" inputmode="decimal" value="20">
+            <div class="rm-presets">
+              <button type="button" class="rm-chip" data-set-discount="10">10% off</button>
+              <button type="button" class="rm-chip" data-set-discount="20">20% off</button>
+              <button type="button" class="rm-chip" data-set-discount="30">30% off</button>
+              <button type="button" class="rm-chip" data-set-discount="50">50% off</button>
+            </div>
+          </div>
+          <div class="rm-field" style="grid-column: span 2;">
+            <label for="rmTaxRate">Sales Tax (%)</label>
+            <input id="rmTaxRate" type="number" inputmode="decimal" value="7.5">
+            <div class="rm-presets">
+              <button type="button" class="rm-chip" data-set-tax="0">No Tax (0%)</button>
+              <button type="button" class="rm-chip" data-set-tax="5">5%</button>
+              <button type="button" class="rm-chip" data-set-tax="7.5">7.5%</button>
+              <button type="button" class="rm-chip" data-set-tax="10">10%</button>
+            </div>
+          </div>
         </div>
-        <div class="rm-result"><div class="rm-result-label">Final price</div><div class="rm-result-value" id="rmDiscountResult">90.00</div><div class="rm-result-sub" id="rmDiscountSub">Discount: 10.00 · Tax: 0.00</div></div>
-        <div class="rm-smart-actions"><button class="rm-action" type="button" data-copy-result="rmDiscountResult">Copy result</button><button class="rm-action primary" type="button" data-use-result="rmDiscountResult">Use result</button></div>
+        <div class="rm-result">
+          <div class="rm-result-label">Final Price to Pay</div>
+          <div class="rm-result-value" id="rmDiscountResult">86.00</div>
+          <div class="rm-result-sub" id="rmDiscountSub">You save 20.00 (20% discount) · Tax added: 6.00</div>
+        </div>
+        <div class="rm-smart-actions">
+          <button class="rm-action" type="button" data-copy-result="rmDiscountResult">📋 Copy Result</button>
+          <button class="rm-action primary" type="button" data-use-result="rmDiscountResult">⚡ Use in Calculator</button>
+        </div>
       </div>
 
+      <!-- Panel 3: Compound Interest -->
       <div class="rm-tool-panel" data-smart-panel="compound">
         <div class="rm-form-grid">
-          <div class="rm-field"><label for="rmCompoundPrincipal">Principal</label><input id="rmCompoundPrincipal" type="number" inputmode="decimal" value="1000"></div>
-          <div class="rm-field"><label for="rmCompoundRate">Annual rate %</label><input id="rmCompoundRate" type="number" inputmode="decimal" value="8"></div>
-          <div class="rm-field"><label for="rmCompoundYears">Years</label><input id="rmCompoundYears" type="number" inputmode="decimal" value="5"></div>
-          <div class="rm-field"><label for="rmCompoundFrequency">Compounds / year</label><input id="rmCompoundFrequency" type="number" inputmode="numeric" value="12" min="1"></div>
+          <div class="rm-field">
+            <label for="rmCompoundPrincipal">Initial Principal ($)</label>
+            <input id="rmCompoundPrincipal" type="number" inputmode="decimal" value="1000">
+          </div>
+          <div class="rm-field">
+            <label for="rmCompoundRate">Annual Rate (%)</label>
+            <input id="rmCompoundRate" type="number" inputmode="decimal" value="8">
+          </div>
+          <div class="rm-field">
+            <label for="rmCompoundYears">Time Horizon (Years)</label>
+            <input id="rmCompoundYears" type="number" inputmode="decimal" value="5">
+            <div class="rm-presets">
+              <button type="button" class="rm-chip" data-set-years="1">1 yr</button>
+              <button type="button" class="rm-chip" data-set-years="3">3 yrs</button>
+              <button type="button" class="rm-chip" data-set-years="5">5 yrs</button>
+              <button type="button" class="rm-chip" data-set-years="10">10 yrs</button>
+            </div>
+          </div>
+          <div class="rm-field">
+            <label for="rmCompoundFrequency">Compounding Frequency</label>
+            <select id="rmCompoundFrequency" style="width:100%; height:46px; border:1px solid var(--rm-line); border-radius:12px; outline:none; background:#11171a; color:var(--text-main); padding:0 13px; font-size:13px; font-weight:700;">
+              <option value="12" selected>Monthly (12x / yr)</option>
+              <option value="4">Quarterly (4x / yr)</option>
+              <option value="1">Annually (1x / yr)</option>
+              <option value="365">Daily (365x / yr)</option>
+            </select>
+          </div>
         </div>
-        <div class="rm-result"><div class="rm-result-label">Future value</div><div class="rm-result-value" id="rmCompoundResult">1,489.85</div><div class="rm-result-sub" id="rmCompoundSub">Interest earned: 489.85</div></div>
-        <div class="rm-smart-actions"><button class="rm-action" type="button" data-copy-result="rmCompoundResult">Copy result</button><button class="rm-action primary" type="button" data-use-result="rmCompoundResult">Use result</button></div>
+        <div class="rm-result">
+          <div class="rm-result-label">Future Total Balance</div>
+          <div class="rm-result-value" id="rmCompoundResult">1,489.85</div>
+          <div class="rm-result-sub" id="rmCompoundSub">Principal: 1,000.00 · Total Interest Earned: 489.85</div>
+        </div>
+        <div class="rm-smart-actions">
+          <button class="rm-action" type="button" data-copy-result="rmCompoundResult">📋 Copy Result</button>
+          <button class="rm-action primary" type="button" data-use-result="rmCompoundResult">⚡ Use in Calculator</button>
+        </div>
       </div>
 
+      <!-- Panel 4: Profit Margin -->
       <div class="rm-tool-panel" data-smart-panel="margin">
         <div class="rm-form-grid">
-          <div class="rm-field"><label for="rmMarginRevenue">Revenue</label><input id="rmMarginRevenue" type="number" inputmode="decimal" value="1000"></div>
-          <div class="rm-field"><label for="rmMarginCost">Cost</label><input id="rmMarginCost" type="number" inputmode="decimal" value="650"></div>
+          <div class="rm-field">
+            <label for="rmMarginRevenue">Selling Revenue ($)</label>
+            <input id="rmMarginRevenue" type="number" inputmode="decimal" value="1000">
+          </div>
+          <div class="rm-field">
+            <label for="rmMarginCost">Cost of Goods ($)</label>
+            <input id="rmMarginCost" type="number" inputmode="decimal" value="650">
+          </div>
         </div>
-        <div class="rm-result"><div class="rm-result-label">Profit margin</div><div class="rm-result-value" id="rmMarginResult">35.00%</div><div class="rm-result-sub" id="rmMarginSub">Profit: 350.00 · Markup: 53.85%</div></div>
-        <div class="rm-smart-actions"><button class="rm-action" type="button" data-copy-result="rmMarginResult">Copy result</button><button class="rm-action primary" type="button" data-use-result="rmMarginResult">Use result</button></div>
+        <div class="rm-result">
+          <div class="rm-result-label">Profit Margin %</div>
+          <div class="rm-result-value" id="rmMarginResult">35.00%</div>
+          <div class="rm-result-sub" id="rmMarginSub">Gross Profit: 350.00 · Markup on Cost: 53.85%</div>
+        </div>
+        <div class="rm-smart-actions">
+          <button class="rm-action" type="button" data-copy-result="rmMarginResult">📋 Copy Result</button>
+          <button class="rm-action primary" type="button" data-use-result="rmMarginResult">⚡ Use in Calculator</button>
+        </div>
       </div>
     </section>
   </div>
@@ -4463,6 +4645,62 @@
 
     $$("[data-use-result]").forEach(btn => {
       btn.addEventListener("click", () => useResult(btn.dataset.useResult));
+    });
+
+    // Wire up direct 1-tap menu launch buttons
+    $$("[data-smart-open]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const menu = $("menuDropdown");
+        const toggle = $("btnMenuToggle");
+        if (menu) menu.classList.remove('open');
+        if (toggle) toggle.classList.remove('open');
+        openSmartTools(btn.dataset.smartOpen);
+      });
+    });
+
+    // Preset chip listeners for instant calculations
+    $$("[data-set-rate]").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const input = $("rmPercentRate");
+        if (input) {
+          input.value = chip.dataset.setRate;
+          calculateSmartTool("percentage");
+        }
+      });
+    });
+
+    $$("[data-set-discount]").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const input = $("rmDiscountRate");
+        if (input) {
+          input.value = chip.dataset.setDiscount;
+          calculateSmartTool("discount");
+        }
+      });
+    });
+
+    $$("[data-set-tax]").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const input = $("rmTaxRate");
+        if (input) {
+          input.value = chip.dataset.setTax;
+          calculateSmartTool("discount");
+        }
+      });
+    });
+
+    $$("[data-set-years]").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const input = $("rmCompoundYears");
+        if (input) {
+          input.value = chip.dataset.setYears;
+          calculateSmartTool("compound");
+        }
+      });
+    });
+
+    $("rmCompoundFrequency")?.addEventListener("change", () => {
+      calculateSmartTool("compound");
     });
 
     // Real-time input calculation listeners
