@@ -236,16 +236,16 @@
     .reachmark-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 5px;
       cursor: pointer;
     }
 
-    /* Vector Reachmark Squircle Mark */
+    /* Vector Reachmark Squircle Mark - Serving as the initial 'R' */
     .rm-logo-squircle {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       background: var(--rm-lime);
-      border-radius: 9px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -255,25 +255,31 @@
     }
 
     .reachmark-brand:hover .rm-logo-squircle {
-      transform: scale(1.04);
+      transform: scale(1.05);
     }
 
     .rm-logo-squircle svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
     }
 
     .rm-wordmark {
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: var(--text-main);
       display: flex;
       align-items: center;
       gap: 7px;
     }
 
-    .rm-wordmark .dot {
+    .rm-brand-text {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      line-height: 1;
+    }
+
+    .rm-brand-text .dot {
       color: var(--rm-lime);
       font-size: 22px;
       line-height: 0;
@@ -1457,16 +1463,16 @@
       
       <!-- Top Brand Header: Reachmark + FX + Menu -->
       <header class="brand-header">
-        <!-- Reachmark Logo & Brand -->
-        <div class="reachmark-brand" id="brandLogoBtn" title="Reachmark 3D Motion Calculator">
-          <div class="rm-logo-squircle">
+        <!-- Reachmark Integrated Brand Lockup: [R] + eachmark. + Calculator -->
+        <div class="reachmark-brand" id="brandLogoBtn" title="Reachmark Calculator">
+          <div class="rm-logo-squircle" aria-label="R">
             <svg viewBox="0 0 100 100">
               <path d="M 22 22 L 56 22 C 68 22 75 29 75 39 C 75 48 68 53 56 55 L 77 78 L 59 78 L 42 58 L 38 58 L 38 78 L 22 78 Z M 38 36 L 38 45 L 53 45 C 57 45 60 43 60 40.5 C 60 38 57 36 53 36 Z" fill="#101416"/>
               <circle cx="76" cy="24" r="7.5" fill="#101416"/>
             </svg>
           </div>
           <div class="rm-wordmark">
-            <span>reachmark<span class="dot">.</span></span>
+            <span class="rm-brand-text">eachmark<span class="dot">.</span></span>
             <span class="rm-product-pill">Calculator</span>
           </div>
         </div>
