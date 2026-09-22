@@ -34,3 +34,4 @@ android/local.properties
 android-build/
 .bubblewrap/
 .npm/
+full_round_check.js
