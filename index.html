@@ -5,24 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   
   <!-- Primary Meta Data -->
-  <title>Reachmark | 3D Motion Calculator & Global Currency Exchanger</title>
-  <meta name="title" content="Reachmark | 3D Motion Calculator & Global Currency Exchanger">
-  <meta name="description" content="Reachmark is a high-precision 3D tactile motion calculator with calculation memory tape, global currency exchanger for 120+ countries, unit converter, and scientific math engine.">
-  <meta name="keywords" content="Reachmark, calculator, 3D calculator, currency exchanger, currency converter, scientific calculator, motion calculator, calculation memory">
+  <title>Reachmark Calculator | 3D Motion & Global Currency Exchanger</title>
+  <meta name="title" content="Reachmark Calculator | 3D Motion & Global Currency Exchanger">
+  <meta name="description" content="Reachmark Calculator is a high-precision 3D tactile motion calculator with calculation memory tape, global currency exchanger for 120+ countries, unit converter, and scientific math engine.">
+  <meta name="keywords" content="Reachmark, Reachmark Calculator, calculator, 3D calculator, currency exchanger, currency converter, scientific calculator, motion calculator, calculation memory">
   <meta name="author" content="Reachmark">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://leephil1907-lab.github.io/Reachmarkcalculator/">
-  <meta property="og:title" content="Reachmark | 3D Motion Calculator & Global Currency Exchanger">
-  <meta property="og:description" content="High-precision 3D tactile calculator with persistent calculation memory journal, global currency exchanger, and scientific tools.">
+  <meta property="og:title" content="Reachmark Calculator | 3D Motion & Global Currency Exchanger">
+  <meta property="og:description" content="High-precision 3D tactile calculator with persistent calculation memory journal, global currency exchanger, and scientific tools by Reachmark.">
   <meta property="og:image" content="reachmark-squircle.jpg">
 
   <!-- Twitter Card -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="Reachmark | 3D Motion Calculator & Global Currency Exchanger">
-  <meta property="twitter:description" content="High-precision 3D tactile calculator with persistent calculation memory journal, global currency exchanger, and scientific tools.">
+  <meta property="twitter:title" content="Reachmark Calculator | 3D Motion & Global Currency Exchanger">
+  <meta property="twitter:description" content="High-precision 3D tactile calculator with persistent calculation memory journal, global currency exchanger, and scientific tools by Reachmark.">
   <meta property="twitter:image" content="reachmark-squircle.jpg">
 
   <!-- Mobile & PWA App Meta -->
@@ -30,8 +30,8 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Reachmark">
-  <meta name="application-name" content="Reachmark">
+  <meta name="apple-mobile-web-app-title" content="Reachmark Calc">
+  <meta name="application-name" content="Reachmark Calculator">
   <meta name="msapplication-TileColor" content="#0b0f14">
   <meta name="msapplication-TileImage" content="icon-144.png">
 
@@ -264,19 +264,33 @@
     }
 
     .rm-wordmark {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
-      letter-spacing: -0.6px;
+      letter-spacing: -0.5px;
       color: var(--text-main);
       display: flex;
-      align-items: baseline;
+      align-items: center;
+      gap: 7px;
     }
 
     .rm-wordmark .dot {
       color: var(--rm-lime);
-      font-size: 24px;
+      font-size: 22px;
       line-height: 0;
       margin-left: 1px;
+    }
+
+    .rm-product-pill {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--rm-lime);
+      background: rgba(214, 242, 105, 0.12);
+      border: 1px solid rgba(214, 242, 105, 0.32);
+      padding: 2.5px 7px;
+      border-radius: 6px;
+      line-height: 1.1;
     }
 
     /* Header Actions: ONLY FX and MENU */
@@ -1341,7 +1355,10 @@
               <circle cx="76" cy="24" r="7.5" fill="#101416"/>
             </svg>
           </div>
-          <div class="rm-wordmark">reachmark<span class="dot">.</span></div>
+          <div class="rm-wordmark">
+            <span>reachmark<span class="dot">.</span></span>
+            <span class="rm-product-pill">Calculator</span>
+          </div>
         </div>
 
         <!-- Only FX and Menu on the Right -->
@@ -1761,7 +1778,7 @@
         </svg>
       </div>
       <div class="pwa-banner-info">
-        <div class="pwa-banner-title">Install Reachmark App</div>
+        <div class="pwa-banner-title">Install Reachmark Calculator</div>
         <div class="pwa-banner-sub">Install to your phone for offline use</div>
       </div>
     </div>

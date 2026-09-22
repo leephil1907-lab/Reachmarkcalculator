@@ -1,8 +1,8 @@
 {
   "id": "./index.html",
-  "name": "Reachmark 3D Motion Calculator",
-  "short_name": "Reachmark",
-  "description": "High-precision 3D tactile motion calculator with calculation memory tape, 120+ global currency exchanger, and scientific tools.",
+  "name": "Reachmark Calculator",
+  "short_name": "Reachmark Calc",
+  "description": "Reachmark Calculator is a high-precision 3D tactile motion calculator with calculation memory tape, 120+ global currency exchanger, and scientific tools.",
   "start_url": "./index.html?source=pwa",
   "scope": "./",
   "display": "standalone",
