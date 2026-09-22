@@ -1,0 +1,48 @@
+{
+  "packageId": "io.github.leephil1907_lab.twa",
+  "host": "leephil1907-lab.github.io",
+  "name": "Reachmark Calculator",
+  "launcherName": "Reachmark",
+  "themeColor": "#0B0F14",
+  "navigationColor": "#0B0F14",
+  "navigationColorDark": "#0B0F14",
+  "navigationDividerColor": "#22292D",
+  "navigationDividerColorDark": "#22292D",
+  "backgroundColor": "#0B0F14",
+  "enableNotifications": true,
+  "startUrl": "/Reachmarkcalculator/index.html?source=pwa",
+  "iconUrl": "https://leephil1907-lab.github.io/Reachmarkcalculator/icon-512.png",
+  "maskableIconUrl": "https://leephil1907-lab.github.io/Reachmarkcalculator/icon-maskable-512.png",
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [
+    {
+      "name": "Global Currency Exchanger",
+      "shortName": "Currency",
+      "url": "https://leephil1907-lab.github.io/Reachmarkcalculator/index.html#currency",
+      "chosenIconUrl": "https://leephil1907-lab.github.io/Reachmarkcalculator/shortcut-currency.png"
+    },
+    {
+      "name": "Scientific Calculator",
+      "shortName": "Scientific",
+      "url": "https://leephil1907-lab.github.io/Reachmarkcalculator/index.html#scientific",
+      "chosenIconUrl": "https://leephil1907-lab.github.io/Reachmarkcalculator/shortcut-scientific.png"
+    },
+    {
+      "name": "Calculation Memory Tape",
+      "shortName": "History",
+      "url": "https://leephil1907-lab.github.io/Reachmarkcalculator/index.html#history",
+      "chosenIconUrl": "https://leephil1907-lab.github.io/Reachmarkcalculator/shortcut-history.png"
+    }
+  ],
+  "splashScreenFadeOutDuration": 300,
+  "enableSiteSettingsShortcut": true,
+  "orientation": "portrait-primary",
+  "fingerprints": [
+    {
+      "value": "04:3F:D5:EA:6C:AB:2B:04:01:0E:48:24:04:C8:50:EC:C5:BC:BA:E9:43:CF:93:0A:2A:ED:0E:98:11:50:46:76"
+    }
+  ],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": []
+}

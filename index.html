@@ -183,6 +183,14 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    button, .key, .mem-key, .fx-btn, .menu-btn, .menu-item, .icon-btn, .btn-tool, .btn-swap, .tab-item, .btn-pwa-install, .btn-pwa-dismiss {
+      touch-action: manipulation;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
+    }
+
     html, body {
       min-height: 100%;
       height: 100%;
@@ -1264,9 +1272,9 @@
        ========================================================================== */
     .pwa-install-banner {
       position: fixed;
-      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      top: calc(12px + env(safe-area-inset-top, 0px));
       left: 50%;
-      transform: translateX(-50%) translateY(140%);
+      transform: translateX(-50%) translateY(-150%);
       width: calc(100% - 32px);
       max-width: 440px;
       background: rgba(18, 24, 30, 0.96);
@@ -1283,7 +1291,7 @@
       z-index: 9999;
       opacity: 0;
       pointer-events: none;
-      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
     }
 
     .pwa-install-banner.visible {
@@ -2537,26 +2545,36 @@
   <div class="ios-install-modal" id="androidInstallModal">
     <div class="ios-modal-card">
       <div class="ios-modal-header">
-        <h3>Install on Android</h3>
+        <h3>Install Reachmark</h3>
         <button type="button" class="btn-pwa-dismiss" id="btnCloseAndroidModal" aria-label="Close">✕</button>
       </div>
       <p style="font-size: 13px; color: var(--text-muted); margin: 6px 0 14px;">
-        Install Reachmark directly to your phone for full-screen offline calculations:
+        Choose an install option for your Android device:
       </p>
-      <div class="ios-step">
-        <span class="ios-step-num">1</span>
-        <span>Tap the <strong>three dots (⋮)</strong> at the top right of Chrome.</span>
+      
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px;">
+        <button type="button" class="btn-pwa-install" id="btnAndroidTryInstall" style="width:100%; justify-content:center; padding:12px; font-weight:700;">
+          ⚡ Install App (1-Tap Prompt)
+        </button>
+        <a href="intent://leephil1907-lab.github.io/Reachmarkcalculator/#Intent;scheme=https;package=io.github.leephil1907_lab.twa;end" class="btn-pwa-install" id="btnAndroidOpenApp" style="width:100%; justify-content:center; padding:12px; font-weight:700; text-decoration:none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: var(--text-main);">
+          🚀 Launch Installed App
+        </a>
       </div>
-      <div class="ios-step">
-        <span class="ios-step-num">2</span>
-        <span>Tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.</span>
+
+      <div class="ios-modal-steps" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px;">
+        <div style="font-size: 11px; font-weight:700; color: var(--text-dim); text-transform:uppercase; margin-bottom: 8px;">Or via Chrome Menu:</div>
+        <div class="ios-step">
+          <span class="ios-step-num">1</span>
+          <span>Tap the <strong>Chrome menu (⋮)</strong> at top right.</span>
+        </div>
+        <div class="ios-step">
+          <span class="ios-step-num">2</span>
+          <span>Tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.</span>
+        </div>
       </div>
-      <div class="ios-step">
-        <span class="ios-step-num">3</span>
-        <span>Tap <strong>Install</strong> to confirm. It will install into your phone's app list!</span>
-      </div>
-      <button type="button" class="btn-pwa-install" id="btnAndroidGotIt" style="width:100%; justify-content:center; margin-top:14px; padding:11px;">
-        Got it!
+
+      <button type="button" class="btn-pwa-dismiss" id="btnAndroidGotIt" style="width:100%; justify-content:center; margin-top:14px; padding:10px; font-size:12px; border-radius:10px;">
+        Close
       </button>
     </div>
   </div>
@@ -3368,9 +3386,14 @@
         }
       }
 
-      document.querySelector('.memory-row').addEventListener('click', (e) => {
-        const btn = e.target.closest('.mem-key');
+      // Passive touchstart enables instant CSS :active pseudo-class on iOS Safari & Chrome
+      document.addEventListener('touchstart', function() {}, { passive: true });
+
+      function handleMemAction(btn) {
         if (!btn) return;
+        btn.classList.add('is-pressed');
+        setTimeout(() => btn.classList.remove('is-pressed'), 120);
+
         playTone('op');
         const action = btn.dataset.mem;
 
@@ -3404,7 +3427,25 @@
           updateMemDisplay();
           showToast(`Stored ${cur} in Memory`);
         }
-      });
+      }
+
+      const memRow = document.querySelector('.memory-row');
+      let lastMemTouch = 0;
+      if (memRow) {
+        memRow.addEventListener('pointerdown', (e) => {
+          const btn = e.target.closest('.mem-key');
+          if (!btn) return;
+          lastMemTouch = Date.now();
+          handleMemAction(btn);
+        });
+
+        memRow.addEventListener('click', (e) => {
+          if (Date.now() - lastMemTouch < 350) return;
+          const btn = e.target.closest('.mem-key');
+          if (!btn) return;
+          handleMemAction(btn);
+        });
+      }
 
       memBadge.addEventListener('click', () => {
         handleDigitOrOp(STATE.memory.toString());
@@ -3412,12 +3453,14 @@
       });
 
       /* ------------------------------------------------------------------------
-         9. EVENT DELEGATION FOR KEYPAD
+         9. EVENT DELEGATION FOR KEYPAD (ULTRA-RESPONSIVE ZERO-DELAY TACTILE KEYS)
          ------------------------------------------------------------------------ */
       const keypad = document.getElementById('keypadContainer');
-      keypad.addEventListener('click', (e) => {
-        const key = e.target.closest('.key');
+
+      function handleKeyActivation(key) {
         if (!key) return;
+        key.classList.add('is-pressed');
+        setTimeout(() => key.classList.remove('is-pressed'), 120);
 
         const insert = key.dataset.insert;
         const action = key.dataset.action;
@@ -3430,6 +3473,21 @@
         } else if (fn !== undefined) {
           handleFunctionKey(fn);
         }
+      }
+
+      let lastKeyTouch = 0;
+      keypad.addEventListener('pointerdown', (e) => {
+        const key = e.target.closest('.key');
+        if (!key) return;
+        lastKeyTouch = Date.now();
+        handleKeyActivation(key);
+      });
+
+      keypad.addEventListener('click', (e) => {
+        if (Date.now() - lastKeyTouch < 350) return;
+        const key = e.target.closest('.key');
+        if (!key) return;
+        handleKeyActivation(key);
       });
 
       valueEl.addEventListener('click', () => {
@@ -4113,6 +4171,23 @@
       if (btnIosGotIt) {
         btnIosGotIt.addEventListener('click', () => {
           if (iosModal) iosModal.classList.remove('open');
+        });
+      }
+
+      const btnAndroidTryInstall = document.getElementById('btnAndroidTryInstall');
+      if (btnAndroidTryInstall) {
+        btnAndroidTryInstall.addEventListener('click', async () => {
+          const promptEvent = window.reachmarkDeferredPrompt || deferredInstallPrompt;
+          if (promptEvent) {
+            if (androidModal) androidModal.classList.remove('open');
+            promptEvent.prompt();
+            const { outcome } = await promptEvent.userChoice;
+            window.reachmarkDeferredPrompt = null;
+            deferredInstallPrompt = null;
+            showToast(outcome === 'accepted' ? 'Installing Reachmark...' : 'Installation cancelled');
+          } else {
+            showToast('Tap browser menu (⋮) at top right, then "Install app"');
+          }
         });
       }
 

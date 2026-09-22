@@ -1,7 +1,7 @@
 {
   "id": "./index.html",
   "name": "Reachmark Calculator",
-  "short_name": "Reachmark Calc",
+  "short_name": "Reachmark",
   "description": "Reachmark Calculator is a high-precision 3D tactile motion calculator with calculation memory tape, 120+ global currency exchanger, and scientific tools.",
   "start_url": "./index.html?source=pwa",
   "scope": "./",
@@ -38,6 +38,11 @@
   "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ec4e53b7",
   "prefer_related_applications": false,
   "related_applications": [
+    {
+      "platform": "play",
+      "id": "io.github.leephil1907_lab.twa",
+      "url": "https://play.google.com/store/apps/details?id=io.github.leephil1907_lab.twa"
+    },
     {
       "platform": "windows",
       "id": "Reachmark.3DMotionCalculator"
