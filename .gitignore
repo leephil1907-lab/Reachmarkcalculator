@@ -1,0 +1,15 @@
+# Node & System
+node_modules/
+.DS_Store
+*.log
+
+# Scratch and test files
+comprehensive_test*.js
+test_*.js
+original_fixed.html
+test_svg.html
+
+# Archives and uploads
+*.zip
+uploads/
+

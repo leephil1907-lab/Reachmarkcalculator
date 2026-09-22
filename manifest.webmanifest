@@ -1,0 +1,24 @@
+{
+  "name": "Reachmark Calculator",
+  "short_name": "Reachmark",
+  "description": "Reachmark 3D Motion Calculator with Calculation Memory, Currency Exchanger, and Scientific Tools",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0c0e",
+  "theme_color": "#0a0c0e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "reachmark-squircle.jpg",
+      "sizes": "232x232",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

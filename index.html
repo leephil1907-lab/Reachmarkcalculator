@@ -1,0 +1,2951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- Primary Meta Data -->
+  <title>Reachmark | 3D Motion Calculator & Global Currency Exchanger</title>
+  <meta name="title" content="Reachmark | 3D Motion Calculator & Global Currency Exchanger">
+  <meta name="description" content="Reachmark is a high-precision 3D tactile motion calculator with calculation memory tape, global currency exchanger for 120+ countries, unit converter, and scientific math engine.">
+  <meta name="keywords" content="Reachmark, calculator, 3D calculator, currency exchanger, currency converter, scientific calculator, motion calculator, calculation memory">
+  <meta name="author" content="Reachmark">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://leephil1907-lab.github.io/Reachmarkcalculator/">
+  <meta property="og:title" content="Reachmark | 3D Motion Calculator & Global Currency Exchanger">
+  <meta property="og:description" content="High-precision 3D tactile calculator with persistent calculation memory journal, global currency exchanger, and scientific tools.">
+  <meta property="og:image" content="reachmark-squircle.jpg">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Reachmark | 3D Motion Calculator & Global Currency Exchanger">
+  <meta property="twitter:description" content="High-precision 3D tactile calculator with persistent calculation memory journal, global currency exchanger, and scientific tools.">
+  <meta property="twitter:image" content="reachmark-squircle.jpg">
+
+  <!-- Mobile & PWA App Meta -->
+  <meta name="theme-color" content="#0a0c0e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Reachmark">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/jpeg" href="reachmark-squircle.jpg">
+  <link rel="apple-touch-icon" href="reachmark-squircle.jpg">
+
+  <style>
+    /* ==========================================================================
+       REACHMARK BRAND DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      /* Official Reachmark Signature Colors */
+      --rm-lime: #d6f269;
+      --rm-lime-hover: #c5e454;
+      --rm-lime-active: #b2d33c;
+      --rm-lime-glow: rgba(214, 242, 105, 0.4);
+      --rm-lime-subtle: rgba(214, 242, 105, 0.12);
+
+      /* Obsidian Dark Titanium (Default Theme) */
+      --bg-gradient: radial-gradient(circle at 50% 15%, #181d20 0%, #07090a 100%);
+      --chassis-bg: #101416;
+      --chassis-border: #22292d;
+      --chassis-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.5);
+
+      --screen-bg: #07090b;
+      --screen-border: #1a2125;
+      
+      --text-main: #ffffff;
+      --text-muted: #88979e;
+      --text-dim: #48545a;
+
+      /* 3D Physical Keys */
+      --key-num-bg: #1c2226;
+      --key-num-hover: #242c31;
+      --key-num-shadow: #0e1214;
+      --key-num-text: #f3f6f8;
+
+      --key-op-bg: #232c31;
+      --key-op-hover: #2c373e;
+      --key-op-shadow: #12171a;
+      --key-op-text: #d6f269;
+
+      --key-accent-bg: #d6f269;
+      --key-accent-hover: #c4e452;
+      --key-accent-shadow: #8fa928;
+      --key-accent-text: #0e1214;
+
+      --key-danger-bg: #2c1618;
+      --key-danger-hover: #381c1f;
+      --key-danger-shadow: #15090a;
+      --key-danger-text: #ff6161;
+
+      --drawer-bg: #121619;
+      --drawer-border: #232b2f;
+      --modal-overlay: rgba(0, 0, 0, 0.75);
+
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* Light Theme */
+    body.theme-light {
+      --bg-gradient: radial-gradient(circle at 50% 15%, #f6f8fa 0%, #d8e2ea 100%);
+      --chassis-bg: #ffffff;
+      --chassis-border: #e2e8f0;
+      --chassis-shadow: 0 25px 50px rgba(10, 25, 40, 0.12), 0 8px 20px rgba(0, 0, 0, 0.05);
+
+      --screen-bg: #f8fafc;
+      --screen-border: #e2e8f0;
+      
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+
+      --key-num-bg: #ffffff;
+      --key-num-hover: #f1f5f9;
+      --key-num-shadow: #cbd5e1;
+      --key-num-text: #1e293b;
+
+      --key-op-bg: #f1f5f9;
+      --key-op-hover: #e2e8f0;
+      --key-op-shadow: #cbd5e1;
+      --key-op-text: #2f4007;
+
+      --key-accent-bg: #d6f269;
+      --key-accent-hover: #c4e452;
+      --key-accent-shadow: #98b32e;
+      --key-accent-text: #0e1214;
+
+      --key-danger-bg: #fee2e2;
+      --key-danger-hover: #fecaca;
+      --key-danger-shadow: #fca5a5;
+      --key-danger-text: #dc2626;
+
+      --drawer-bg: #ffffff;
+      --drawer-border: #e2e8f0;
+    }
+
+    /* Cyber Theme */
+    body.theme-cyber {
+      --bg-gradient: radial-gradient(circle at 50% 10%, #0c2016 0%, #030805 100%);
+      --chassis-bg: #0b1a13;
+      --chassis-border: #183e2c;
+      --chassis-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(214, 242, 105, 0.2);
+
+      --screen-bg: #040e09;
+      --screen-border: #133324;
+      
+      --text-main: #ecfdf4;
+      --text-muted: #6ee7b7;
+      --text-dim: #235d44;
+
+      --key-num-bg: #10261d;
+      --key-num-hover: #163629;
+      --key-num-shadow: #07130e;
+      --key-num-text: #f0fdf4;
+
+      --key-op-bg: #16382a;
+      --key-op-hover: #1f4d3a;
+      --key-op-shadow: #0a1b14;
+      --key-op-text: #d6f269;
+
+      --drawer-bg: #0d1e16;
+      --drawer-border: #1c4735;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100%;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-gradient);
+      font-family: var(--font-family);
+      color: var(--text-main);
+      padding: 12px;
+      padding-top: max(12px, env(safe-area-inset-top));
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: background 0.25s ease;
+    }
+
+    /* Viewport & Responsive Card Container */
+    .viewport-3d {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      transition: max-width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .viewport-3d.scientific-active {
+      max-width: 620px;
+    }
+
+    /* 3D Chassis Card */
+    .calculator-chassis {
+      width: 100%;
+      background: var(--chassis-bg);
+      border: 1px solid var(--chassis-border);
+      border-radius: 26px;
+      box-shadow: var(--chassis-shadow);
+      position: relative;
+      transition: transform 0.15s ease-out;
+    }
+
+    /* ==========================================================================
+       HEADER: STRICTLY REACHMARK + FX + MENU
+       ========================================================================== */
+    .brand-header {
+      padding: 14px 18px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--screen-border);
+      position: relative;
+    }
+
+    .reachmark-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    /* Vector Reachmark Squircle Mark */
+    .rm-logo-squircle {
+      width: 32px;
+      height: 32px;
+      background: var(--rm-lime);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px var(--rm-lime-glow);
+      flex-shrink: 0;
+      transition: transform 0.15s ease;
+    }
+
+    .reachmark-brand:hover .rm-logo-squircle {
+      transform: scale(1.04);
+    }
+
+    .rm-logo-squircle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .rm-wordmark {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+    }
+
+    .rm-wordmark .dot {
+      color: var(--rm-lime);
+      font-size: 24px;
+      line-height: 0;
+      margin-left: 1px;
+    }
+
+    /* Header Actions: ONLY FX and MENU */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+
+    /* FX Scientific Button */
+    .fx-btn {
+      appearance: none;
+      background: var(--screen-bg);
+      border: 1px solid var(--screen-border);
+      color: var(--text-muted);
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      font-style: italic;
+      font-family: "Georgia", serif;
+      transition: all 0.15s ease;
+    }
+
+    .fx-btn:hover {
+      color: var(--rm-lime);
+      border-color: rgba(214, 242, 105, 0.4);
+      background: var(--key-num-bg);
+    }
+
+    .fx-btn.active {
+      color: var(--rm-lime);
+      border-color: var(--rm-lime);
+      background: var(--rm-lime-subtle);
+    }
+
+    /* MENU Dropdown Button */
+    .menu-btn {
+      appearance: none;
+      background: var(--screen-bg);
+      border: 1px solid var(--screen-border);
+      color: var(--text-main);
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: all 0.15s ease;
+    }
+
+    .menu-btn:hover {
+      border-color: rgba(214, 242, 105, 0.4);
+      color: var(--rm-lime);
+    }
+
+    .menu-btn svg {
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .menu-btn.open svg {
+      transform: rotate(180deg);
+    }
+
+    /* MENU DROPDOWN PANEL WITH PRECISE ICONS */
+    .menu-dropdown {
+      position: absolute;
+      top: 44px;
+      right: 0;
+      width: 260px;
+      background: var(--drawer-bg);
+      border: 1px solid var(--drawer-border);
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+      padding: 6px;
+      display: none;
+      flex-direction: column;
+      z-index: 99;
+      transform-origin: top right;
+      animation: menuFadeIn 0.16s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .menu-dropdown.open {
+      display: flex;
+    }
+
+    @keyframes menuFadeIn {
+      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      text-align: left;
+      width: 100%;
+      transition: all 0.12s;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--rm-lime);
+    }
+
+    .menu-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-item-icon {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--rm-lime);
+    }
+
+    .menu-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: var(--rm-lime-subtle);
+      color: var(--rm-lime);
+    }
+
+    .menu-divider {
+      height: 1px;
+      background: var(--screen-border);
+      margin: 4px 6px;
+    }
+
+    /* ==========================================================================
+       DISPLAY SCREEN
+       ========================================================================== */
+    .display-deck {
+      background: var(--screen-bg);
+      margin: 12px 16px 8px;
+      padding: 14px 18px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--screen-border);
+      display: flex;
+      flex-direction: column;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .screen-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .status-pills {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .pill-btn {
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 700;
+      transition: all 0.15s;
+    }
+
+    .pill-btn:hover {
+      color: var(--rm-lime);
+    }
+
+    .pill-btn.active {
+      background: var(--rm-lime-subtle);
+      color: var(--rm-lime);
+      border: 1px solid rgba(214, 242, 105, 0.3);
+    }
+
+    .mem-indicator {
+      font-size: 11px;
+      color: var(--rm-lime);
+      font-weight: 600;
+      display: none;
+      cursor: pointer;
+    }
+
+    .mem-indicator.visible {
+      display: inline-block;
+    }
+
+    /* Top Line: Formula */
+    .formula-line {
+      min-height: 22px;
+      color: var(--text-muted);
+      font-size: 15px;
+      text-align: right;
+      word-break: break-all;
+      overflow-wrap: break-word;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      letter-spacing: 0.5px;
+    }
+
+    /* Main Big Value Display */
+    .value-line {
+      color: var(--text-main);
+      font-size: 38px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      text-align: right;
+      width: 100%;
+      word-break: break-all;
+      line-height: 1.15;
+      cursor: pointer;
+      font-variant-numeric: tabular-nums;
+      margin-top: 4px;
+      transition: color 0.15s;
+    }
+
+    .value-line:hover {
+      color: var(--rm-lime);
+    }
+
+    .value-line.is-evaluated {
+      color: var(--rm-lime);
+      font-weight: 700;
+    }
+
+    .value-line.is-error {
+      color: #ff5252 !important;
+      font-size: 26px;
+    }
+
+    .copy-hint {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-align: right;
+      margin-top: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .display-deck:hover .copy-hint {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       MEMORY REGISTERS ROW
+       ========================================================================== */
+    .memory-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      padding: 0 16px 8px;
+    }
+
+    .mem-key {
+      background: transparent;
+      border: 1px solid var(--screen-border);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .mem-key:hover {
+      background: var(--screen-bg);
+      color: var(--rm-lime);
+      border-color: rgba(214, 242, 105, 0.3);
+    }
+
+    .mem-key:active {
+      transform: scale(0.95);
+    }
+
+    /* ==========================================================================
+       KEYPAD & 3D TACTILE BUTTONS
+       ========================================================================== */
+    .keypad-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 4px 16px 16px;
+    }
+
+    .scientific-grid {
+      display: none;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      padding-bottom: 4px;
+    }
+
+    .scientific-grid.active {
+      display: grid;
+    }
+
+    .standard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* Solid 3D Keycap Buttons */
+    .key {
+      appearance: none;
+      outline: none;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      height: 56px;
+      border-radius: 15px;
+      font-size: 22px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: auto;
+      transform: translateY(0);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
+    }
+
+    .key * {
+      pointer-events: none;
+    }
+
+    /* 3D Shadows */
+    .key-num {
+      background: var(--key-num-bg);
+      color: var(--key-num-text);
+      box-shadow: 0 4px 0 var(--key-num-shadow), 0 6px 10px rgba(0, 0, 0, 0.3);
+    }
+    .key-num:hover { background: var(--key-num-hover); }
+
+    .key-op {
+      background: var(--key-op-bg);
+      color: var(--key-op-text);
+      box-shadow: 0 4px 0 var(--key-op-shadow), 0 6px 10px rgba(0, 0, 0, 0.3);
+    }
+    .key-op:hover { background: var(--key-op-hover); }
+
+    .key-sci {
+      background: var(--key-num-bg);
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      height: 46px;
+      border-radius: 12px;
+      box-shadow: 0 3px 0 var(--key-num-shadow), 0 4px 6px rgba(0, 0, 0, 0.25);
+    }
+    .key-sci:hover {
+      background: var(--key-num-hover);
+      color: var(--rm-lime);
+    }
+
+    .key-danger {
+      background: var(--key-danger-bg);
+      color: var(--key-danger-text);
+      box-shadow: 0 4px 0 var(--key-danger-shadow), 0 6px 10px rgba(0, 0, 0, 0.3);
+    }
+    .key-danger:hover { background: var(--key-danger-hover); }
+
+    .key-equals {
+      background: var(--key-accent-bg);
+      color: var(--key-accent-text);
+      box-shadow: 0 4px 0 var(--key-accent-shadow), 0 8px 16px var(--rm-lime-glow);
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .key-equals:hover { background: var(--key-accent-hover); }
+
+    /* Tactile Press Down Effect */
+    .key:active, .key.is-pressed {
+      transform: translateY(3px) scale(0.985);
+    }
+    .key-num:active, .key-num.is-pressed {
+      box-shadow: 0 1px 0 var(--key-num-shadow), 0 2px 3px rgba(0, 0, 0, 0.2);
+    }
+    .key-op:active, .key-op.is-pressed {
+      box-shadow: 0 1px 0 var(--key-op-shadow), 0 2px 3px rgba(0, 0, 0, 0.2);
+    }
+    .key-sci:active, .key-sci.is-pressed {
+      box-shadow: 0 1px 0 var(--key-num-shadow), 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+    .key-danger:active, .key-danger.is-pressed {
+      box-shadow: 0 1px 0 var(--key-danger-shadow), 0 2px 3px rgba(0, 0, 0, 0.2);
+    }
+    .key-equals:active, .key-equals.is-pressed {
+      box-shadow: 0 1px 0 var(--key-accent-shadow), 0 3px 6px var(--rm-lime-glow);
+    }
+
+    .sub {
+      font-size: 10px;
+      position: relative;
+      top: -5px;
+    }
+
+    /* Footer */
+    .calc-footer {
+      padding: 0 16px 12px;
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .calc-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .calc-footer a:hover {
+      color: var(--rm-lime);
+    }
+
+    /* ==========================================================================
+       SIDE DRAWER: PERSISTENT CALCULATION MEMORY JOURNAL
+       ========================================================================== */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--modal-overlay);
+      backdrop-filter: blur(3px);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .history-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 360px;
+      background: var(--drawer-bg);
+      border-left: 1px solid var(--drawer-border);
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
+      z-index: 101;
+      transform: translateX(100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-overlay.open .history-drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--drawer-border);
+    }
+
+    .drawer-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .count-pill {
+      background: var(--rm-lime);
+      color: #0e1214;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+
+    .drawer-toolbar {
+      padding: 10px 16px;
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--drawer-border);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-tool {
+      flex: 1;
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--chassis-border);
+      background: var(--screen-bg);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+
+    .btn-tool:hover {
+      color: var(--text-main);
+      border-color: rgba(214, 242, 105, 0.3);
+    }
+
+    .btn-tool.danger:hover {
+      color: #ff6b6b;
+      border-color: rgba(255, 107, 107, 0.3);
+    }
+
+    .history-tape {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-empty {
+      margin: auto;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13px;
+      padding: 24px;
+    }
+
+    .calc-entry {
+      background: var(--screen-bg);
+      border: 1px solid var(--drawer-border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .calc-entry:hover {
+      border-color: rgba(214, 242, 105, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .calc-entry-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-bottom: 3px;
+    }
+
+    .calc-entry-expr {
+      font-size: 13px;
+      color: var(--text-muted);
+      word-break: break-all;
+      font-family: ui-monospace, "SF Mono", monospace;
+    }
+
+    .calc-entry-res {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--rm-lime);
+      text-align: right;
+      margin-top: 2px;
+    }
+
+    .calc-entry-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .mini-action {
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .mini-action:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* ==========================================================================
+       MODAL: TOOLS & CURRENCY EXCHANGER (ALL COUNTRIES)
+       ========================================================================== */
+    .modal-card {
+      background: var(--drawer-bg);
+      border: 1px solid var(--drawer-border);
+      border-radius: 22px;
+      width: 92%;
+      max-width: 460px;
+      padding: 20px;
+      margin: auto;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      position: relative;
+      z-index: 102;
+      animation: modalScaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes modalScaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-tabs {
+      display: flex;
+      background: var(--screen-bg);
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 14px;
+      border: 1px solid var(--screen-border);
+    }
+
+    .tab-item {
+      flex: 1;
+      padding: 8px 6px;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+
+    .tab-item.active {
+      background: var(--rm-lime);
+      color: #0e1214;
+    }
+
+    .field-group {
+      margin-bottom: 12px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .field-input, .field-select {
+      width: 100%;
+      background: var(--screen-bg);
+      border: 1px solid var(--chassis-border);
+      color: var(--text-main);
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 9px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .field-input:focus, .field-select:focus {
+      border-color: var(--rm-lime);
+    }
+
+    /* Currency Conversion Deck */
+    .currency-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .currency-search-bar {
+      margin-bottom: 4px;
+    }
+
+    .currency-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-swap {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--screen-border);
+      background: var(--screen-bg);
+      color: var(--rm-lime);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin: 0 auto;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .btn-swap:hover {
+      background: var(--key-num-bg);
+      transform: rotate(180deg);
+    }
+
+    .exchange-rate-badge {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 8px;
+      background: var(--screen-bg);
+      border-radius: 8px;
+      font-family: ui-monospace, monospace;
+    }
+
+    .currency-result-card {
+      background: var(--screen-bg);
+      border: 1px solid var(--screen-border);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .currency-result-val {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--rm-lime);
+      margin-top: 2px;
+    }
+
+    /* Tip Pills */
+    .tip-pills {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .tip-pill {
+      flex: 1;
+      padding: 6px 0;
+      text-align: center;
+      background: var(--screen-bg);
+      border: 1px solid var(--chassis-border);
+      color: var(--text-muted);
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tip-pill.active {
+      background: var(--rm-lime-subtle);
+      border-color: var(--rm-lime);
+      color: var(--rm-lime);
+    }
+
+    .summary-card {
+      background: var(--screen-bg);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .summary-col { text-align: center; }
+    .summary-label { font-size: 10px; color: var(--text-dim); }
+    .summary-val { font-size: 16px; font-weight: 700; color: var(--rm-lime); margin-top: 2px; }
+
+    /* Toast */
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #14181a;
+      color: var(--rm-lime);
+      border: 1px solid rgba(214, 242, 105, 0.4);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toast-popup.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Responsive Mobile Tweaks */
+    @media (max-width: 480px) {
+      body { padding: 4px; }
+      .calculator-chassis { border-radius: 22px; }
+      .brand-header { padding: 12px 14px 8px; }
+      .display-deck { margin: 8px 12px 6px; padding: 12px 14px 10px; }
+      .value-line { font-size: 32px; }
+      .key { height: 50px; font-size: 20px; border-radius: 13px; }
+      .keypad-container { padding: 4px 12px 14px; gap: 8px; }
+      .standard-grid { gap: 8px; }
+      .menu-dropdown { width: 230px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Viewport -->
+  <div class="viewport-3d" id="viewport3D">
+    
+    <!-- Chassis Card -->
+    <div class="calculator-chassis" id="calcChassis">
+      
+      <!-- Top Brand Header: Reachmark + FX + Menu -->
+      <header class="brand-header">
+        <!-- Reachmark Logo & Brand -->
+        <div class="reachmark-brand" id="brandLogoBtn" title="Reachmark 3D Motion Calculator">
+          <div class="rm-logo-squircle">
+            <svg viewBox="0 0 100 100">
+              <path d="M 22 22 L 56 22 C 68 22 75 29 75 39 C 75 48 68 53 56 55 L 77 78 L 59 78 L 42 58 L 38 58 L 38 78 L 22 78 Z M 38 36 L 38 45 L 53 45 C 57 45 60 43 60 40.5 C 60 38 57 36 53 36 Z" fill="#101416"/>
+              <circle cx="76" cy="24" r="7.5" fill="#101416"/>
+            </svg>
+          </div>
+          <div class="rm-wordmark">reachmark<span class="dot">.</span></div>
+        </div>
+
+        <!-- Only FX and Menu on the Right -->
+        <div class="header-actions">
+          <!-- Scientific FX Button -->
+          <button type="button" class="fx-btn" id="btnFX" title="Scientific Functions">
+            fx
+          </button>
+
+          <!-- Menu Dropdown Trigger -->
+          <button type="button" class="menu-btn" id="btnMenuToggle" title="Open Menu">
+            <span>Menu</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <!-- MENU DROPDOWN PANEL WITH PRECISE ICONS -->
+          <div class="menu-dropdown" id="menuDropdown">
+            <button type="button" class="menu-item" id="menuItemHistory">
+              <div class="menu-item-left">
+                <span class="menu-item-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </span>
+                <span>Calculation Memory</span>
+              </div>
+              <span class="menu-badge" id="menuHistoryCount">0</span>
+            </button>
+
+            <button type="button" class="menu-item" id="menuItemCurrency">
+              <div class="menu-item-left">
+                <span class="menu-item-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg>
+                </span>
+                <span>Currency Exchanger</span>
+              </div>
+              <span class="menu-badge">120+ Countries</span>
+            </button>
+
+            <button type="button" class="menu-item" id="menuItemUtils">
+              <div class="menu-item-left">
+                <span class="menu-item-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                  </svg>
+                </span>
+                <span>Unit & Tip Tools</span>
+              </div>
+            </button>
+
+            <div class="menu-divider"></div>
+
+            <button type="button" class="menu-item" id="menuItem3D">
+              <div class="menu-item-left">
+                <span class="menu-item-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                </span>
+                <span>3D Motion</span>
+              </div>
+              <span class="menu-badge" id="menu3DStatus">ON</span>
+            </button>
+
+            <button type="button" class="menu-item" id="menuItemSound">
+              <div class="menu-item-left">
+                <span class="menu-item-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  </svg>
+                </span>
+                <span>Tactile Sound</span>
+              </div>
+              <span class="menu-badge" id="menuSoundStatus">ON</span>
+            </button>
+
+            <button type="button" class="menu-item" id="menuItemTheme">
+              <div class="menu-item-left">
+                <span class="menu-item-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  </svg>
+                </span>
+                <span>Theme</span>
+              </div>
+              <span class="menu-badge" id="menuThemeStatus">DARK</span>
+            </button>
+
+            <div class="menu-divider"></div>
+
+            <button type="button" class="menu-item" id="menuItemHelp">
+              <div class="menu-item-left">
+                <span class="menu-item-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                    <line x1="6" y1="8" x2="6.01" y2="8"></line>
+                    <line x1="10" y1="8" x2="10.01" y2="8"></line>
+                    <line x1="14" y1="8" x2="14.01" y2="8"></line>
+                    <line x1="18" y1="8" x2="18.01" y2="8"></line>
+                    <line x1="7" y1="16" x2="17" y2="16"></line>
+                  </svg>
+                </span>
+                <span>Shortcuts Guide</span>
+              </div>
+              <span class="menu-badge">?</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Display -->
+      <section class="display-deck" id="displayDeck">
+        <div class="screen-status-bar">
+          <div class="status-pills">
+            <span class="pill-btn active" id="anglePill" title="Angle Mode (DEG / RAD)">DEG</span>
+          </div>
+          <!-- Stored Memory Badge -->
+          <div class="mem-indicator" id="memBadge" title="Click to recall stored memory">
+            MEM: <span id="memDisplayVal">0</span>
+          </div>
+        </div>
+
+        <!-- Formula Line -->
+        <div class="formula-line" id="formulaLine"></div>
+
+        <!-- Main Number Line -->
+        <div class="value-line" id="valueLine" title="Click to copy answer">0</div>
+        <div class="copy-hint">Click number to copy</div>
+      </section>
+
+      <!-- Memory Registers Keys -->
+      <div class="memory-row">
+        <button type="button" class="mem-key" data-mem="MC" title="Memory Clear">MC</button>
+        <button type="button" class="mem-key" data-mem="MR" title="Memory Recall">MR</button>
+        <button type="button" class="mem-key" data-mem="M+" title="Memory Add">M+</button>
+        <button type="button" class="mem-key" data-mem="M-" title="Memory Subtract">M−</button>
+        <button type="button" class="mem-key" data-mem="MS" title="Memory Store">MS</button>
+      </div>
+
+      <!-- Keypad -->
+      <main class="keypad-container" id="keypadContainer">
+        
+        <!-- Scientific Grid (Collapsible) -->
+        <div class="scientific-grid" id="scientificGrid">
+          <button type="button" class="key key-sci" data-fn="sin">sin</button>
+          <button type="button" class="key key-sci" data-fn="cos">cos</button>
+          <button type="button" class="key key-sci" data-fn="tan">tan</button>
+          <button type="button" class="key key-sci" data-insert="π">π</button>
+          <button type="button" class="key key-sci" data-insert="e">e</button>
+
+          <button type="button" class="key key-sci" data-fn="asin">sin<span class="sub">-1</span></button>
+          <button type="button" class="key key-sci" data-fn="acos">cos<span class="sub">-1</span></button>
+          <button type="button" class="key key-sci" data-fn="atan">tan<span class="sub">-1</span></button>
+          <button type="button" class="key key-sci" data-fn="fact">n!</button>
+          <button type="button" class="key key-sci" data-fn="sqrt">√x</button>
+
+          <button type="button" class="key key-sci" data-fn="sqr">x²</button>
+          <button type="button" class="key key-sci" data-fn="cube">x³</button>
+          <button type="button" class="key key-sci" data-insert="^">xʸ</button>
+          <button type="button" class="key key-sci" data-fn="log">log</button>
+          <button type="button" class="key key-sci" data-fn="ln">ln</button>
+
+          <button type="button" class="key key-sci" data-insert="(">(</button>
+          <button type="button" class="key key-sci" data-insert=")">)</button>
+          <button type="button" class="key key-sci" data-fn="inv">1/x</button>
+          <button type="button" class="key key-sci" data-fn="abs">|x|</button>
+          <button type="button" class="key key-sci" data-fn="ans">Ans</button>
+        </div>
+
+        <!-- Standard Numeric & Operator Keypad -->
+        <div class="standard-grid">
+          <!-- Row 1 -->
+          <button type="button" class="key key-danger" data-action="clear" data-kbd="Escape" title="Clear Display (Esc)">C</button>
+          <button type="button" class="key key-op" data-action="backspace" data-kbd="Backspace" title="Delete Last">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
+              <line x1="18" y1="9" x2="12" y2="15"></line>
+              <line x1="12" y1="9" x2="18" y2="15"></line>
+            </svg>
+          </button>
+          <button type="button" class="key key-op" data-insert="%" data-kbd="%" title="Percentage">%</button>
+          <button type="button" class="key key-op" data-insert="÷" data-kbd="/" title="Divide (/)">÷</button>
+
+          <!-- Row 2 -->
+          <button type="button" class="key key-num" data-insert="7" data-kbd="7">7</button>
+          <button type="button" class="key key-num" data-insert="8" data-kbd="8">8</button>
+          <button type="button" class="key key-num" data-insert="9" data-kbd="9">9</button>
+          <button type="button" class="key key-op" data-insert="×" data-kbd="*" title="Multiply (*)">×</button>
+
+          <!-- Row 3 -->
+          <button type="button" class="key key-num" data-insert="4" data-kbd="4">4</button>
+          <button type="button" class="key key-num" data-insert="5" data-kbd="5">5</button>
+          <button type="button" class="key key-num" data-insert="6" data-kbd="6">6</button>
+          <button type="button" class="key key-op" data-insert="−" data-kbd="-" title="Subtract (-)">−</button>
+
+          <!-- Row 4 -->
+          <button type="button" class="key key-num" data-insert="1" data-kbd="1">1</button>
+          <button type="button" class="key key-num" data-insert="2" data-kbd="2">2</button>
+          <button type="button" class="key key-num" data-insert="3" data-kbd="3">3</button>
+          <button type="button" class="key key-op" data-insert="+" data-kbd="+" title="Add (+)">+</button>
+
+          <!-- Row 5 -->
+          <button type="button" class="key key-num" data-action="negate" title="Toggle Positive/Negative (±)">±</button>
+          <button type="button" class="key key-num" data-insert="0" data-kbd="0">0</button>
+          <button type="button" class="key key-num" data-insert="." data-kbd="." title="Decimal point">.</button>
+          <button type="button" class="key key-equals" data-action="equals" data-kbd="Enter" title="Calculate (=)">=</button>
+        </div>
+
+      </main>
+
+      <!-- Footer Info -->
+      <footer class="calc-footer">
+        <span>Reachmark Pure Engine</span>
+        <a href="javascript:void(0)" id="footerHelpBtn" title="Keyboard Guide">Shortcuts ( ? )</a>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SIDE DRAWER: PERSISTENT CALCULATION MEMORY JOURNAL
+       ========================================================================== -->
+  <div class="drawer-overlay" id="historyOverlay">
+    <div class="history-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <span>Calculation Memory</span>
+          <span class="count-pill" id="historyCountPill">0</span>
+        </div>
+        <button type="button" class="icon-btn" id="btnCloseHistory" title="Close" style="border:none; background:transparent; color:var(--text-main); font-size:16px; cursor:pointer;">✕</button>
+      </div>
+
+      <div class="drawer-toolbar">
+        <button type="button" class="btn-tool" id="btnExportCSV" title="Export as CSV file">
+          Export CSV
+        </button>
+        <button type="button" class="btn-tool" id="btnCopyAll" title="Copy all calculations">
+          Copy All
+        </button>
+        <button type="button" class="btn-tool danger" id="btnClearHistory" title="Clear all saved memory">
+          Clear
+        </button>
+      </div>
+
+      <div class="history-tape" id="historyTape">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: TOOLS & CURRENCY EXCHANGER (GLOBAL LIST OF 120+ COUNTRIES)
+       ========================================================================== -->
+  <div class="drawer-overlay" id="utilsOverlay">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+        <h3 style="font-size: 16px; color: var(--text-main);">Reachmark Tools</h3>
+        <button type="button" class="icon-btn" id="btnCloseUtils" style="border:none; background:transparent; color:var(--text-main); font-size:16px; cursor:pointer;">✕</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button type="button" class="tab-item active" data-tab="curr">💱 Currency Exchanger</button>
+        <button type="button" class="tab-item" data-tab="tip">💵 Tip Split</button>
+        <button type="button" class="tab-item" data-tab="conv">🔄 Unit Converter</button>
+      </div>
+
+      <!-- Tab 1: Currency Exchanger (All Countries) -->
+      <div id="tabCurrency">
+        <div class="currency-grid">
+          <div class="field-group">
+            <label>Amount to Convert</label>
+            <input type="number" class="field-input" id="currAmount" value="100" min="0" step="any">
+          </div>
+
+          <div class="currency-row">
+            <div class="field-group" style="flex:1; margin-bottom:0;">
+              <label>From Currency</label>
+              <select class="field-select" id="currFrom"></select>
+            </div>
+
+            <button type="button" class="btn-swap" id="btnSwapCurrency" title="Swap Currencies">⇄</button>
+
+            <div class="field-group" style="flex:1; margin-bottom:0;">
+              <label>To Currency</label>
+              <select class="field-select" id="currTo"></select>
+            </div>
+          </div>
+
+          <div class="exchange-rate-badge" id="currRateText">1 USD = 1.00 USD</div>
+
+          <div class="currency-result-card">
+            <div style="font-size:11px; color:var(--text-dim);">Converted Value</div>
+            <div class="currency-result-val" id="currResultText">0.00</div>
+          </div>
+
+          <button type="button" class="btn-tool" id="btnInsertCurrency" style="margin-top: 4px; width: 100%; padding: 10px; background: var(--rm-lime); color:#0e1214; font-weight:800;">
+            Insert Result to Calculator
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 2: Tip & Bill Split -->
+      <div id="tabTip" style="display: none;">
+        <div class="field-group">
+          <label>Bill Amount ($)</label>
+          <input type="number" class="field-input" id="tipBill" placeholder="0.00" value="100">
+        </div>
+        <div class="field-group">
+          <label>Tip Percentage</label>
+          <div class="tip-pills">
+            <div class="tip-pill" data-pct="10">10%</div>
+            <div class="tip-pill active" data-pct="15">15%</div>
+            <div class="tip-pill" data-pct="18">18%</div>
+            <div class="tip-pill" data-pct="20">20%</div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Split between people</label>
+          <input type="number" class="field-input" id="tipPeople" min="1" value="2">
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-col">
+            <div class="summary-label">Tip</div>
+            <div class="summary-val" id="tipSumTip">$15.00</div>
+          </div>
+          <div class="summary-col">
+            <div class="summary-label">Total</div>
+            <div class="summary-val" id="tipSumTotal">$115.00</div>
+          </div>
+          <div class="summary-col">
+            <div class="summary-label">Per Person</div>
+            <div class="summary-val" id="tipSumEach">$57.50</div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-tool" id="btnUseTip" style="margin-top: 14px; width: 100%; padding: 10px; background: var(--rm-lime); color:#0e1214; font-weight:800;">
+          Insert Result to Calculator
+        </button>
+      </div>
+
+      <!-- Tab 3: Unit Converter -->
+      <div id="tabConv" style="display: none;">
+        <div class="field-group">
+          <label>Category</label>
+          <select class="field-select" id="convCategory">
+            <option value="length">Length</option>
+            <option value="weight">Weight / Mass</option>
+            <option value="temp">Temperature</option>
+            <option value="data">Digital Storage</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+          <div class="field-group" style="flex:1;">
+            <label>From</label>
+            <input type="number" class="field-input" id="convInVal" value="1">
+            <select class="field-select" id="convUnitFrom" style="margin-top: 6px;"></select>
+          </div>
+          <div class="field-group" style="flex:1;">
+            <label>To</label>
+            <input type="number" class="field-input" id="convOutVal" readonly>
+            <select class="field-select" id="convUnitTo" style="margin-top: 6px;"></select>
+          </div>
+        </div>
+
+        <button type="button" class="btn-tool" id="btnUseConv" style="margin-top: 14px; width: 100%; padding: 10px; background: var(--rm-lime); color:#0e1214; font-weight:800;">
+          Insert Result to Calculator
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-popup" id="toast">
+    <span id="toastText">Copied</span>
+  </div>
+
+  <!-- ==========================================================================
+       ROBUST APPLICATION LOGIC
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ------------------------------------------------------------------------
+         1. STATE & STORAGE
+         ------------------------------------------------------------------------ */
+      const STATE = {
+        formula: '',
+        activeValue: '0',
+        isEvaluated: false,
+        lastResult: '0',
+        memory: 0,
+        angleMode: 'DEG',
+        soundOn: true,
+        motion3D: true,
+        theme: 'dark',
+        history: []
+      };
+
+      const STORAGE_KEYS = {
+        JOURNAL: 'reachmark_journal_v4',
+        MEMORY: 'reachmark_memory_v4',
+        SETTINGS: 'reachmark_settings_v4'
+      };
+
+      function loadStorage() {
+        try {
+          const h = localStorage.getItem(STORAGE_KEYS.JOURNAL);
+          if (h) STATE.history = JSON.parse(h);
+
+          const m = localStorage.getItem(STORAGE_KEYS.MEMORY);
+          if (m) STATE.memory = parseFloat(m) || 0;
+
+          const s = localStorage.getItem(STORAGE_KEYS.SETTINGS);
+          if (s) {
+            const parsed = JSON.parse(s);
+            if (parsed.angleMode) STATE.angleMode = parsed.angleMode;
+            if (parsed.theme) STATE.theme = parsed.theme;
+            if (parsed.soundOn !== undefined) STATE.soundOn = parsed.soundOn;
+            if (parsed.motion3D !== undefined) STATE.motion3D = parsed.motion3D;
+          }
+        } catch (e) {}
+      }
+
+      function saveJournal() {
+        try { localStorage.setItem(STORAGE_KEYS.JOURNAL, JSON.stringify(STATE.history)); } catch (e) {}
+      }
+      function saveMemory() {
+        try { localStorage.setItem(STORAGE_KEYS.MEMORY, STATE.memory.toString()); } catch (e) {}
+      }
+      function saveSettings() {
+        try {
+          localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify({
+            angleMode: STATE.angleMode,
+            theme: STATE.theme,
+            soundOn: STATE.soundOn,
+            motion3D: STATE.motion3D
+          }));
+        } catch (e) {}
+      }
+
+      /* ------------------------------------------------------------------------
+         2. DOM REFERENCES
+         ------------------------------------------------------------------------ */
+      const chassis = document.getElementById('calcChassis');
+      const formulaEl = document.getElementById('formulaLine');
+      const valueEl = document.getElementById('valueLine');
+      const memBadge = document.getElementById('memBadge');
+      const memValText = document.getElementById('memDisplayVal');
+      const anglePill = document.getElementById('anglePill');
+      const sciGrid = document.getElementById('scientificGrid');
+      const viewport = document.getElementById('viewport3D');
+      const toastEl = document.getElementById('toast');
+      const toastText = document.getElementById('toastText');
+      const historyOverlay = document.getElementById('historyOverlay');
+      const historyTape = document.getElementById('historyTape');
+      const historyCountPill = document.getElementById('historyCountPill');
+      const menuHistoryCount = document.getElementById('menuHistoryCount');
+      const menuDropdown = document.getElementById('menuDropdown');
+      const btnMenuToggle = document.getElementById('btnMenuToggle');
+      const btnFX = document.getElementById('btnFX');
+      const menu3DStatus = document.getElementById('menu3DStatus');
+      const menuSoundStatus = document.getElementById('menuSoundStatus');
+      const menuThemeStatus = document.getElementById('menuThemeStatus');
+
+      /* ------------------------------------------------------------------------
+         3. AUDIO SYNTHESIZER
+         ------------------------------------------------------------------------ */
+      let audioCtx = null;
+      function playTone(type) {
+        if (!STATE.soundOn) return;
+        try {
+          if (!audioCtx) {
+            const AudioClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioClass) audioCtx = new AudioClass();
+          }
+          if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          if (!audioCtx) return;
+
+          const t = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          if (type === 'equals') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(520, t);
+            osc.frequency.exponentialRampToValueAtTime(780, t + 0.08);
+            gain.gain.setValueAtTime(0.25, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+          } else if (type === 'clear') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(320, t);
+            osc.frequency.exponentialRampToValueAtTime(160, t + 0.06);
+            gain.gain.setValueAtTime(0.18, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
+          } else if (type === 'op') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(420, t);
+            osc.frequency.exponentialRampToValueAtTime(280, t + 0.04);
+            gain.gain.setValueAtTime(0.14, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+          } else {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(340, t);
+            osc.frequency.exponentialRampToValueAtTime(140, t + 0.03);
+            gain.gain.setValueAtTime(0.12, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+          }
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + 0.14);
+
+          if (navigator.vibrate) navigator.vibrate(8);
+        } catch (e) {}
+      }
+
+      /* ------------------------------------------------------------------------
+         4. PURE MATH PARSER (ZERO EVAL, ZERO FUNCTION, 100% CSP COMPLIANT)
+         ------------------------------------------------------------------------ */
+      function safeFactorial(n) {
+        if (n < 0 || !Number.isInteger(n)) return NaN;
+        if (n > 170) return Infinity;
+        let r = 1;
+        for (let i = 2; i <= n; i++) r *= i;
+        return r;
+      }
+
+      class SafeMathParser {
+        constructor(angleMode = 'DEG') {
+          this.angleMode = angleMode;
+        }
+
+        preprocess(expr) {
+          if (!expr || typeof expr !== 'string') return '';
+          let s = expr.trim();
+
+          // Strip trailing operator if expression is unfinished
+          s = s.replace(/[+−×÷*/^xX]$/, '').trim();
+
+          // Standardize visual multiplication & division
+          s = s.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+          s = s.replace(/(\d)\s*[xX]\s*(\d)/g, '$1 * $2');
+          s = s.replace(/(\d)\s*[xX]\s*([a-zA-Z(√πe])/g, '$1 * $2');
+
+          // Square root shorthand
+          s = s.replace(/√\s*(\d+(?:\.\d+)?)/g, 'sqrt($1)');
+          s = s.replace(/√\(/g, 'sqrt(');
+
+          // Absolute value
+          s = s.replace(/\|([^|]+)\|/g, 'abs($1)');
+
+          // Percentages
+          s = s.replace(/(\d+(?:\.\d+)?)\s*([+\-])\s*(\d+(?:\.\d+)?)%/g, '($1 $2 ($1 * ($3 / 100)))');
+          s = s.replace(/(\d+(?:\.\d+)?)%/g, '($1 / 100)');
+
+          return s;
+        }
+
+        tokenize(s) {
+          const tokens = [];
+          let i = 0;
+
+          while (i < s.length) {
+            const c = s[i];
+
+            if (/\s/.test(c)) {
+              i++;
+              continue;
+            }
+
+            // Numbers
+            if (/[0-9]/.test(c) || (c === '.' && i + 1 < s.length && /[0-9]/.test(s[i + 1]))) {
+              let numStr = '';
+              while (i < s.length && (/[0-9]/.test(s[i]) || s[i] === '.')) {
+                numStr += s[i];
+                i++;
+              }
+              tokens.push({ type: 'NUM', val: parseFloat(numStr) });
+              continue;
+            }
+
+            // Factorial
+            if (c === '!') {
+              tokens.push({ type: 'FACT', val: '!' });
+              i++;
+              continue;
+            }
+
+            // Identifiers / Constants / Functions
+            if (/[a-zA-Zπ]/.test(c)) {
+              let word = '';
+              if (c === 'π') {
+                word = 'π';
+                i++;
+              } else {
+                while (i < s.length && /[a-zA-Z]/.test(s[i])) {
+                  word += s[i];
+                  i++;
+                }
+              }
+
+              const low = word.toLowerCase();
+              if (low === 'pi' || word === 'π') {
+                tokens.push({ type: 'NUM', val: Math.PI });
+              } else if (low === 'e') {
+                tokens.push({ type: 'NUM', val: Math.E });
+              } else if (['sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'log', 'ln', 'sqrt', 'abs'].includes(low)) {
+                tokens.push({ type: 'FN', val: low });
+              } else {
+                throw new Error('Unknown token: ' + word);
+              }
+              continue;
+            }
+
+            // Operators
+            if ('+-*/^()'.includes(c)) {
+              tokens.push({ type: 'OP', val: c });
+              i++;
+              continue;
+            }
+
+            throw new Error('Invalid character: ' + c);
+          }
+
+          return tokens;
+        }
+
+        applyImplicitMultiplication(tokens) {
+          const result = [];
+          for (let i = 0; i < tokens.length; i++) {
+            const cur = tokens[i];
+            result.push(cur);
+
+            if (i + 1 < tokens.length) {
+              const next = tokens[i + 1];
+              const isCurValue = cur.type === 'NUM' || (cur.type === 'OP' && cur.val === ')') || cur.type === 'FACT';
+              const isNextValueOrFn = next.type === 'NUM' || (next.type === 'OP' && next.val === '(') || next.type === 'FN';
+
+              if (isCurValue && isNextValueOrFn) {
+                result.push({ type: 'OP', val: '*' });
+              }
+            }
+          }
+          return result;
+        }
+
+        getPrecedence(op) {
+          switch (op) {
+            case '+': case '-': return 1;
+            case '*': case '/': return 2;
+            case '^': return 3;
+            case 'NEG': case 'POS': return 4;
+            default: return 0;
+          }
+        }
+
+        isRightAssoc(op) {
+          return op === '^' || op === 'NEG' || op === 'POS';
+        }
+
+        toRPN(rawTokens) {
+          const tokens = this.applyImplicitMultiplication(rawTokens);
+          const output = [];
+          const opStack = [];
+
+          for (let i = 0; i < tokens.length; i++) {
+            const token = tokens[i];
+
+            if (token.type === 'NUM') {
+              output.push(token);
+            } else if (token.type === 'FN') {
+              opStack.push(token);
+            } else if (token.type === 'FACT') {
+              output.push(token);
+            } else if (token.type === 'OP') {
+              let op = token.val;
+
+              // Detect unary minus or plus
+              if (op === '-' || op === '+') {
+                const prev = i > 0 ? tokens[i - 1] : null;
+                const isUnary = !prev || (prev.type === 'OP' && prev.val !== ')') || prev.type === 'FN';
+                if (isUnary) {
+                  op = op === '-' ? 'NEG' : 'POS';
+                }
+              }
+
+              if (op === '(') {
+                opStack.push({ type: 'PAREN', val: '(' });
+              } else if (op === ')') {
+                while (opStack.length > 0 && opStack[opStack.length - 1].val !== '(') {
+                  output.push(opStack.pop());
+                }
+                if (opStack.length > 0 && opStack[opStack.length - 1].val === '(') {
+                  opStack.pop();
+                }
+                if (opStack.length > 0 && opStack[opStack.length - 1].type === 'FN') {
+                  output.push(opStack.pop());
+                }
+              } else {
+                while (opStack.length > 0) {
+                  const top = opStack[opStack.length - 1];
+                  if (top.val === '(') break;
+
+                  const precC = this.getPrecedence(op);
+                  const precT = this.getPrecedence(top.val);
+
+                  if ((this.isRightAssoc(op) && precC < precT) || (!this.isRightAssoc(op) && precC <= precT)) {
+                    output.push(opStack.pop());
+                  } else {
+                    break;
+                  }
+                }
+                opStack.push({ type: 'OP', val: op });
+              }
+            }
+          }
+
+          while (opStack.length > 0) {
+            const top = opStack.pop();
+            if (top.val !== '(' && top.val !== ')') {
+              output.push(top);
+            }
+          }
+
+          return output;
+        }
+
+        evaluateRPN(rpn) {
+          const stack = [];
+
+          for (let i = 0; i < rpn.length; i++) {
+            const token = rpn[i];
+
+            if (token.type === 'NUM') {
+              stack.push(token.val);
+            } else if (token.type === 'FACT') {
+              if (stack.length === 0) throw new Error('Invalid expression');
+              const v = stack.pop();
+              stack.push(safeFactorial(v));
+            } else if (token.type === 'FN') {
+              if (stack.length === 0) throw new Error('Invalid expression');
+              const arg = stack.pop();
+              const mode = this.angleMode;
+              const degToRad = Math.PI / 180;
+              const radToDeg = 180 / Math.PI;
+
+              let res;
+              switch (token.val) {
+                case 'sin':
+                  res = Math.sin(mode === 'DEG' ? arg * degToRad : arg);
+                  break;
+                case 'cos':
+                  res = Math.cos(mode === 'DEG' ? arg * degToRad : arg);
+                  break;
+                case 'tan':
+                  res = Math.tan(mode === 'DEG' ? arg * degToRad : arg);
+                  break;
+                case 'asin':
+                  res = Math.asin(arg);
+                  if (mode === 'DEG') res *= radToDeg;
+                  break;
+                case 'acos':
+                  res = Math.acos(arg);
+                  if (mode === 'DEG') res *= radToDeg;
+                  break;
+                case 'atan':
+                  res = Math.atan(arg);
+                  if (mode === 'DEG') res *= radToDeg;
+                  break;
+                case 'sqrt':
+                  if (arg < 0) throw new Error('Invalid input');
+                  res = Math.sqrt(arg);
+                  break;
+                case 'abs':
+                  res = Math.abs(arg);
+                  break;
+                case 'log':
+                  if (arg <= 0) throw new Error('Invalid input');
+                  res = Math.log10(arg);
+                  break;
+                case 'ln':
+                  if (arg <= 0) throw new Error('Invalid input');
+                  res = Math.log(arg);
+                  break;
+                default:
+                  throw new Error('Unknown function: ' + token.val);
+              }
+              stack.push(res);
+            } else if (token.type === 'OP') {
+              const op = token.val;
+
+              if (op === 'NEG') {
+                if (stack.length === 0) throw new Error('Invalid expression');
+                stack.push(-stack.pop());
+              } else if (op === 'POS') {
+                if (stack.length === 0) throw new Error('Invalid expression');
+              } else {
+                if (stack.length < 2) throw new Error('Invalid expression');
+                const b = stack.pop();
+                const a = stack.pop();
+
+                let res;
+                switch (op) {
+                  case '+': res = a + b; break;
+                  case '-': res = a - b; break;
+                  case '*': res = a * b; break;
+                  case '/':
+                    if (b === 0) throw new Error('Cannot divide by 0');
+                    res = a / b;
+                    break;
+                  case '^': res = Math.pow(a, b); break;
+                  default: throw new Error('Unknown operator: ' + op);
+                }
+                stack.push(res);
+              }
+            }
+          }
+
+          if (stack.length !== 1) throw new Error('Invalid expression');
+          const result = stack[0];
+          if (!isFinite(result)) {
+            if (isNaN(result)) throw new Error('Calculation Error');
+            throw new Error('Cannot divide by 0');
+          }
+          return result;
+        }
+
+        evaluate(expr) {
+          const pre = this.preprocess(expr);
+          if (!pre) return null;
+          const tokens = this.tokenize(pre);
+          const rpn = this.toRPN(tokens);
+          return this.evaluateRPN(rpn);
+        }
+      }
+
+      function evaluateFormula(expr, angleMode = 'DEG') {
+        const parser = new SafeMathParser(angleMode);
+        return parser.evaluate(expr);
+      }
+
+      function formatNumber(num) {
+        if (num === null || num === undefined) return '';
+        if (typeof num === 'string') return num;
+        if (!isFinite(num)) return 'Cannot divide by 0';
+        if (num === 0) return '0';
+
+        if (Math.abs(num) >= 1e12 || Math.abs(num) < 1e-9) {
+          return num.toPrecision(10).replace(/(?:\.0+|(\.\d+?)0+)e/, '$1e');
+        }
+
+        const prec = parseFloat(num.toPrecision(12));
+        return prec.toString();
+      }
+
+      function formatWithCommas(str) {
+        const s = String(str ?? '');
+        if (!s) return '0';
+        return s.replace(/\b\d+(?:\.\d+)?\b/g, (match) => {
+          const parts = match.split('.');
+          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          return parts.join('.');
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         5. DISPLAY UPDATING
+         ------------------------------------------------------------------------ */
+      function renderDisplay() {
+        formulaEl.textContent = formatWithCommas(STATE.formula);
+        valueEl.textContent = formatWithCommas(STATE.activeValue);
+
+        valueEl.classList.toggle('is-evaluated', STATE.isEvaluated);
+        valueEl.classList.toggle('is-error', STATE.activeValue === 'Cannot divide by 0' || STATE.activeValue === 'ERROR');
+
+        const len = valueEl.textContent.length;
+        if (len > 16) {
+          valueEl.style.fontSize = '24px';
+        } else if (len > 11) {
+          valueEl.style.fontSize = '30px';
+        } else {
+          valueEl.style.fontSize = '';
+        }
+      }
+
+      function showToast(msg) {
+        toastText.textContent = msg;
+        toastEl.classList.add('show');
+        setTimeout(() => toastEl.classList.remove('show'), 1600);
+      }
+
+      /* ------------------------------------------------------------------------
+         6. PERSISTENT JOURNAL
+         ------------------------------------------------------------------------ */
+      function logCalculation(expr, result) {
+        const entry = {
+          id: Date.now(),
+          expression: expr,
+          result: result,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+          date: new Date().toLocaleDateString()
+        };
+
+        STATE.history.unshift(entry);
+        if (STATE.history.length > 250) STATE.history.pop();
+
+        saveJournal();
+        updateJournalUI();
+      }
+
+      function updateJournalUI() {
+        const count = STATE.history.length;
+        if (historyCountPill) historyCountPill.textContent = count;
+        if (menuHistoryCount) menuHistoryCount.textContent = count;
+
+        if (!count) {
+          historyTape.innerHTML = `
+            <div class="history-empty">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.3; margin-bottom:8px;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <p>No calculations saved yet.</p>
+              <span style="font-size:11px; opacity:0.6;">All calculations will be permanently remembered here.</span>
+            </div>
+          `;
+          return;
+        }
+
+        historyTape.innerHTML = STATE.history.map(item => `
+          <div class="calc-entry" data-expr="${item.expression}" data-res="${item.result}">
+            <div class="calc-entry-meta">
+              <span>${item.date} • ${item.time}</span>
+              <button type="button" class="mini-action btn-copy-one">Copy</button>
+            </div>
+            <div class="calc-entry-expr">${item.expression} =</div>
+            <div class="calc-entry-res">${item.result}</div>
+            <div class="calc-entry-actions">
+              <button type="button" class="mini-action btn-recall-expr">Edit</button>
+              <button type="button" class="mini-action btn-use-res">Use Result</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      historyTape.addEventListener('click', (e) => {
+        const card = e.target.closest('.calc-entry');
+        if (!card) return;
+
+        const expr = card.dataset.expr;
+        const res = card.dataset.res;
+
+        if (e.target.closest('.btn-copy-one')) {
+          e.stopPropagation();
+          navigator.clipboard.writeText(res);
+          showToast(`Copied ${res}`);
+          return;
+        }
+
+        if (e.target.closest('.btn-recall-expr')) {
+          e.stopPropagation();
+          STATE.formula = expr;
+          STATE.activeValue = res;
+          STATE.isEvaluated = false;
+          renderDisplay();
+          historyOverlay.classList.remove('open');
+          showToast('Equation loaded');
+          return;
+        }
+
+        if (STATE.isEvaluated) {
+          STATE.formula = res;
+        } else {
+          STATE.formula += res;
+        }
+        STATE.activeValue = res;
+        STATE.isEvaluated = false;
+        renderDisplay();
+        historyOverlay.classList.remove('open');
+        showToast(`Inserted ${res}`);
+      });
+
+      /* ------------------------------------------------------------------------
+         7. INPUT PROCESSING (KEYPAD & KEYBOARD)
+         ------------------------------------------------------------------------ */
+      const OPERATORS = ['+', '−', '×', '÷', '%', '^'];
+
+      function handleDigitOrOp(token) {
+        const isOp = OPERATORS.includes(token);
+        playTone(isOp ? 'op' : 'digit');
+
+        if (STATE.isEvaluated) {
+          if (isOp) {
+            STATE.formula = STATE.lastResult + ' ' + token + ' ';
+          } else {
+            STATE.formula = token;
+          }
+          STATE.isEvaluated = false;
+          STATE.activeValue = token;
+          renderDisplay();
+          return;
+        }
+
+        const trimmed = STATE.formula.trim();
+        const lastChar = trimmed.slice(-1);
+
+        if (isOp) {
+          if (!trimmed) {
+            if (token === '−') {
+              STATE.formula = '−';
+              STATE.activeValue = '−';
+              renderDisplay();
+            }
+            return;
+          }
+
+          if (OPERATORS.includes(lastChar)) {
+            STATE.formula = trimmed.slice(0, -1) + token + ' ';
+            renderDisplay();
+            return;
+          }
+
+          STATE.formula += ' ' + token + ' ';
+        } else {
+          if (token === '.') {
+            const parts = STATE.formula.split(/[+−×÷%^() ]+/);
+            const currentPart = parts[parts.length - 1];
+            if (currentPart && currentPart.includes('.')) return;
+            if (!currentPart) {
+              STATE.formula += '0.';
+              STATE.activeValue = '0.';
+              renderDisplay();
+              return;
+            }
+          }
+          STATE.formula += token;
+        }
+
+        try {
+          const liveVal = evaluateFormula(STATE.formula, STATE.angleMode);
+          if (liveVal !== null) {
+            STATE.activeValue = formatNumber(liveVal);
+          } else {
+            STATE.activeValue = STATE.formula;
+          }
+        } catch (e) {
+          STATE.activeValue = STATE.formula;
+        }
+
+        renderDisplay();
+      }
+
+      function handleSpecialAction(action) {
+        if (action === 'clear') {
+          playTone('clear');
+          STATE.formula = '';
+          STATE.activeValue = '0';
+          STATE.isEvaluated = false;
+          renderDisplay();
+        } else if (action === 'backspace') {
+          playTone('op');
+          if (STATE.isEvaluated) {
+            handleSpecialAction('clear');
+            return;
+          }
+          let f = STATE.formula.trimEnd();
+          if (f.length > 0) {
+            STATE.formula = f.slice(0, -1).trimEnd();
+            if (!STATE.formula) {
+              STATE.activeValue = '0';
+            } else {
+              try {
+                const live = evaluateFormula(STATE.formula, STATE.angleMode);
+                STATE.activeValue = live !== null ? formatNumber(live) : STATE.formula;
+              } catch (e) {
+                STATE.activeValue = STATE.formula;
+              }
+            }
+            renderDisplay();
+          }
+        } else if (action === 'equals') {
+          playTone('equals');
+          if (!STATE.formula) return;
+
+          const toEval = STATE.formula;
+          try {
+            const raw = evaluateFormula(toEval, STATE.angleMode);
+            if (raw === null) return;
+
+            const resFormatted = formatNumber(raw);
+            logCalculation(toEval, resFormatted);
+
+            STATE.lastResult = resFormatted;
+            STATE.activeValue = resFormatted;
+            STATE.formula = toEval + ' =';
+            STATE.isEvaluated = true;
+          } catch (err) {
+            STATE.activeValue = err.message || 'ERROR';
+            STATE.isEvaluated = true;
+          }
+          renderDisplay();
+        } else if (action === 'negate') {
+          playTone('op');
+          toggleSign();
+        }
+      }
+
+      function toggleSign() {
+        if (!STATE.formula || STATE.formula === '0') {
+          STATE.formula = '−';
+          STATE.activeValue = '−';
+          renderDisplay();
+          return;
+        }
+        if (STATE.isEvaluated) {
+          const val = parseFloat(STATE.lastResult);
+          const negated = formatNumber(-val);
+          STATE.formula = negated;
+          STATE.activeValue = negated;
+          STATE.lastResult = negated;
+          STATE.isEvaluated = false;
+          renderDisplay();
+          return;
+        }
+
+        const match = STATE.formula.match(/(.*?)([+−×÷^() ]|^)(−?\d+(?:\.\d+)?)$/);
+        if (match) {
+          const prefix = match[1] + (match[2] || '');
+          const num = match[3];
+          const newNum = num.startsWith('−') ? num.slice(1) : '−' + num;
+          STATE.formula = prefix + newNum;
+          STATE.activeValue = newNum;
+          renderDisplay();
+        }
+      }
+
+      function handleFunctionKey(fn) {
+        playTone('op');
+        if (STATE.isEvaluated) {
+          STATE.formula = '';
+          STATE.isEvaluated = false;
+        }
+
+        if (fn === 'sqr') {
+          STATE.formula += '^2';
+        } else if (fn === 'cube') {
+          STATE.formula += '^3';
+        } else if (fn === 'fact') {
+          STATE.formula += '!';
+        } else if (fn === 'inv') {
+          if (STATE.formula) {
+            STATE.formula = `1/(${STATE.formula})`;
+          }
+        } else if (fn === 'ans') {
+          STATE.formula += STATE.lastResult;
+        } else if (fn === 'sqrt') {
+          STATE.formula += '√(';
+        } else if (fn === 'abs') {
+          STATE.formula += '|';
+        } else {
+          STATE.formula += `${fn}(`;
+        }
+
+        STATE.activeValue = STATE.formula;
+        renderDisplay();
+      }
+
+      /* ------------------------------------------------------------------------
+         8. MEMORY REGISTERS (MC, MR, M+, M-, MS)
+         ------------------------------------------------------------------------ */
+      function updateMemDisplay() {
+        if (STATE.memory !== 0) {
+          memBadge.classList.add('visible');
+          memValText.textContent = formatNumber(STATE.memory);
+        } else {
+          memBadge.classList.remove('visible');
+        }
+      }
+
+      document.querySelector('.memory-row').addEventListener('click', (e) => {
+        const btn = e.target.closest('.mem-key');
+        if (!btn) return;
+        playTone('op');
+        const action = btn.dataset.mem;
+
+        let cur = 0;
+        try {
+          const evaluated = evaluateFormula(STATE.formula || STATE.activeValue, STATE.angleMode);
+          cur = evaluated || 0;
+        } catch (err) {}
+
+        if (action === 'MC') {
+          STATE.memory = 0;
+          saveMemory();
+          updateMemDisplay();
+          showToast('Memory Cleared');
+        } else if (action === 'MR') {
+          handleDigitOrOp(STATE.memory.toString());
+          showToast(`Recalled Memory: ${STATE.memory}`);
+        } else if (action === 'M+') {
+          STATE.memory += cur;
+          saveMemory();
+          updateMemDisplay();
+          showToast(`Added ${cur} to Memory`);
+        } else if (action === 'M-') {
+          STATE.memory -= cur;
+          saveMemory();
+          updateMemDisplay();
+          showToast(`Subtracted ${cur} from Memory`);
+        } else if (action === 'MS') {
+          STATE.memory = cur;
+          saveMemory();
+          updateMemDisplay();
+          showToast(`Stored ${cur} in Memory`);
+        }
+      });
+
+      memBadge.addEventListener('click', () => {
+        handleDigitOrOp(STATE.memory.toString());
+        showToast(`Inserted Memory: ${STATE.memory}`);
+      });
+
+      /* ------------------------------------------------------------------------
+         9. EVENT DELEGATION FOR KEYPAD
+         ------------------------------------------------------------------------ */
+      const keypad = document.getElementById('keypadContainer');
+      keypad.addEventListener('click', (e) => {
+        const key = e.target.closest('.key');
+        if (!key) return;
+
+        const insert = key.dataset.insert;
+        const action = key.dataset.action;
+        const fn = key.dataset.fn;
+
+        if (insert !== undefined) {
+          handleDigitOrOp(insert);
+        } else if (action !== undefined) {
+          handleSpecialAction(action);
+        } else if (fn !== undefined) {
+          handleFunctionKey(fn);
+        }
+      });
+
+      valueEl.addEventListener('click', () => {
+        const v = valueEl.textContent;
+        if (v && v !== '0' && !valueEl.classList.contains('is-error')) {
+          navigator.clipboard.writeText(v.replace(/,/g, '')).then(() => {
+            showToast(`Copied ${v}`);
+          }).catch(() => {
+            showToast(`Copied ${v}`);
+          });
+        }
+      });
+
+      /* ------------------------------------------------------------------------
+         10. PHYSICAL KEYBOARD & PASTE
+         ------------------------------------------------------------------------ */
+      const KBD_MAP = {
+        '0': '0', '1': '1', '2': '2', '3': '3', '4': '4',
+        '5': '5', '6': '6', '7': '7', '8': '8', '9': '9',
+        '.': '.', '+': '+', '-': '−', '*': '×', 'x': '×', 'X': '×', '/': '÷',
+        '%': '%', '^': '^', '(': '(', ')': ')'
+      };
+
+      window.addEventListener('keydown', (e) => {
+        if (['INPUT', 'SELECT'].includes(document.activeElement.tagName)) return;
+
+        const k = e.key;
+
+        const btn = document.querySelector(`[data-kbd="${k}"], [data-insert="${KBD_MAP[k]}"]`);
+        if (btn) {
+          btn.classList.add('is-pressed');
+          setTimeout(() => btn.classList.remove('is-pressed'), 120);
+        }
+
+        if (KBD_MAP[k] !== undefined) {
+          handleDigitOrOp(KBD_MAP[k]);
+        } else if (k === 'Enter' || k === '=') {
+          e.preventDefault();
+          handleSpecialAction('equals');
+        } else if (k === 'Backspace') {
+          e.preventDefault();
+          handleSpecialAction('backspace');
+        } else if (k === 'Escape' || k === 'c' || k === 'C') {
+          handleSpecialAction('clear');
+        } else if (k === 's' || k === 'S') {
+          handleFunctionKey('sin');
+        } else if (k === 'o' || k === 'O') {
+          handleFunctionKey('cos');
+        } else if (k === 't' || k === 'T') {
+          handleFunctionKey('tan');
+        } else if (k === 'p' || k === 'P') {
+          handleDigitOrOp('π');
+        } else if (k === 'e' || k === 'E') {
+          handleDigitOrOp('e');
+        } else if (k === '!') {
+          handleFunctionKey('fact');
+        }
+      });
+
+      window.addEventListener('paste', (e) => {
+        if (['INPUT', 'SELECT'].includes(document.activeElement.tagName)) return;
+        const pasted = (e.clipboardData || window.clipboardData).getData('text');
+        if (pasted) {
+          e.preventDefault();
+          const clean = pasted.trim().replace(/\s+/g, ' ');
+          if (/^[0-9+\-*/×÷()%.^ eπxX]+$/.test(clean)) {
+            STATE.formula += clean;
+            renderDisplay();
+            showToast('Pasted formula');
+          }
+        }
+      });
+
+      /* ------------------------------------------------------------------------
+         11. HEADER: FX BUTTON & MENU DROPDOWN
+         ------------------------------------------------------------------------ */
+      btnFX.addEventListener('click', () => {
+        const isOpen = sciGrid.classList.toggle('active');
+        btnFX.classList.toggle('active', isOpen);
+        viewport.classList.toggle('scientific-active', isOpen);
+        showToast(isOpen ? 'Scientific Mode' : 'Standard Mode');
+      });
+
+      btnMenuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = menuDropdown.classList.toggle('open');
+        btnMenuToggle.classList.toggle('open', isOpen);
+      });
+
+      window.addEventListener('click', (e) => {
+        if (!menuDropdown.contains(e.target) && e.target !== btnMenuToggle) {
+          menuDropdown.classList.remove('open');
+          btnMenuToggle.classList.remove('open');
+        }
+      });
+
+      document.getElementById('menuItemHistory').addEventListener('click', () => {
+        menuDropdown.classList.remove('open');
+        btnMenuToggle.classList.remove('open');
+        historyOverlay.classList.add('open');
+        updateJournalUI();
+      });
+
+      document.getElementById('menuItemCurrency').addEventListener('click', () => {
+        menuDropdown.classList.remove('open');
+        btnMenuToggle.classList.remove('open');
+        openUtilsModal('curr');
+      });
+
+      document.getElementById('menuItemUtils').addEventListener('click', () => {
+        menuDropdown.classList.remove('open');
+        btnMenuToggle.classList.remove('open');
+        openUtilsModal('tip');
+      });
+
+      document.getElementById('menuItem3D').addEventListener('click', () => {
+        STATE.motion3D = !STATE.motion3D;
+        menu3DStatus.textContent = STATE.motion3D ? 'ON' : 'OFF';
+        if (!STATE.motion3D) {
+          chassis.style.transform = 'none';
+        }
+        saveSettings();
+        showToast(STATE.motion3D ? '3D Motion Enabled' : 'Flat Mode');
+      });
+
+      document.getElementById('menuItemSound').addEventListener('click', () => {
+        STATE.soundOn = !STATE.soundOn;
+        menuSoundStatus.textContent = STATE.soundOn ? 'ON' : 'MUTED';
+        saveSettings();
+        showToast(STATE.soundOn ? 'Sound ON' : 'Muted');
+      });
+
+      const themes = ['dark', 'light', 'cyber'];
+      function applyTheme(name) {
+        document.body.classList.remove('theme-light', 'theme-cyber');
+        if (name === 'light') document.body.classList.add('theme-light');
+        if (name === 'cyber') document.body.classList.add('theme-cyber');
+        STATE.theme = name;
+        menuThemeStatus.textContent = name.toUpperCase();
+        saveSettings();
+      }
+
+      document.getElementById('menuItemTheme').addEventListener('click', () => {
+        const next = themes[(themes.indexOf(STATE.theme) + 1) % themes.length];
+        applyTheme(next);
+        showToast(`Theme: ${next.toUpperCase()}`);
+      });
+
+      function showHelp() {
+        alert(
+          "REACHMARK 3D CALCULATOR KEYBOARD SHORTCUTS:\n\n" +
+          "• Digits: 0 - 9, .\n" +
+          "• Operators: +, -, *, /, x, X\n" +
+          "• Calculate: Enter or =\n" +
+          "• Delete: Backspace\n" +
+          "• Clear: Escape or C\n" +
+          "• Functions: S (sin), O (cos), T (tan), P (pi), E (e), ! (factorial)\n" +
+          "• Parentheses: ( and )\n" +
+          "• Paste: Ctrl+V / Cmd+V to paste equations"
+        );
+      }
+      document.getElementById('menuItemHelp').addEventListener('click', () => {
+        menuDropdown.classList.remove('open');
+        btnMenuToggle.classList.remove('open');
+        showHelp();
+      });
+      document.getElementById('footerHelpBtn').addEventListener('click', showHelp);
+
+      anglePill.addEventListener('click', () => {
+        STATE.angleMode = STATE.angleMode === 'DEG' ? 'RAD' : 'DEG';
+        anglePill.textContent = STATE.angleMode;
+        saveSettings();
+        showToast(`Angle Mode: ${STATE.angleMode}`);
+        renderDisplay();
+      });
+
+      /* ------------------------------------------------------------------------
+         12. DRAWER CONTROLS (HISTORY & EXPORT)
+         ------------------------------------------------------------------------ */
+      const btnCloseHist = document.getElementById('btnCloseHistory');
+      const btnClearHist = document.getElementById('btnClearHistory');
+      const btnExportCSV = document.getElementById('btnExportCSV');
+      const btnCopyAll = document.getElementById('btnCopyAll');
+
+      btnCloseHist.addEventListener('click', () => historyOverlay.classList.remove('open'));
+      historyOverlay.addEventListener('click', (e) => {
+        if (e.target === historyOverlay) historyOverlay.classList.remove('open');
+      });
+
+      btnClearHist.addEventListener('click', () => {
+        if (!STATE.history.length) return;
+        if (confirm('Clear all saved calculations from memory?')) {
+          STATE.history = [];
+          saveJournal();
+          updateJournalUI();
+          showToast('Memory Cleared');
+        }
+      });
+
+      btnExportCSV.addEventListener('click', () => {
+        if (!STATE.history.length) {
+          showToast('No calculations to export');
+          return;
+        }
+        const csv = "Date,Time,Expression,Result\n" + STATE.history.map(item =>
+          `"${item.date}","${item.time}","${item.expression}","${item.result}"`
+        ).join('\n');
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `reachmark_calculations_${new Date().toISOString().slice(0,10)}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Exported CSV file');
+      });
+
+      btnCopyAll.addEventListener('click', () => {
+        if (!STATE.history.length) {
+          showToast('No history to copy');
+          return;
+        }
+        const text = STATE.history.map(h => `${h.expression} = ${h.result}`).join('\n');
+        navigator.clipboard.writeText(text).then(() => showToast('All calculations copied!'));
+      });
+
+      /* ------------------------------------------------------------------------
+         13. MODAL: CURRENCY EXCHANGER (120+ COUNTRIES), TIP & UNIT TOOLS
+         ------------------------------------------------------------------------ */
+      const utilsOverlay = document.getElementById('utilsOverlay');
+      const btnCloseUtils = document.getElementById('btnCloseUtils');
+
+      function openUtilsModal(tab = 'curr') {
+        utilsOverlay.classList.add('open');
+        switchTab(tab);
+      }
+
+      function switchTab(tab) {
+        document.querySelectorAll('.tab-item').forEach(b => {
+          b.classList.toggle('active', b.dataset.tab === tab);
+        });
+        document.getElementById('tabCurrency').style.display = tab === 'curr' ? 'block' : 'none';
+        document.getElementById('tabTip').style.display = tab === 'tip' ? 'block' : 'none';
+        document.getElementById('tabConv').style.display = tab === 'conv' ? 'block' : 'none';
+      }
+
+      btnCloseUtils.addEventListener('click', () => utilsOverlay.classList.remove('open'));
+      utilsOverlay.addEventListener('click', (e) => {
+        if (e.target === utilsOverlay) utilsOverlay.classList.remove('open');
+      });
+
+      document.querySelectorAll('.tab-item').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+      });
+
+      /* ------------------------------------------------------------------------
+         14. CURRENCY EXCHANGER (GLOBAL LIST OF 120+ COUNTRIES & CURRENCIES)
+         ------------------------------------------------------------------------ */
+      const GLOBAL_CURRENCIES = [
+        // Major Reserve Currencies
+        { code: 'USD', name: 'US Dollar', flag: '🇺🇸', country: 'United States', rate: 1.0 },
+        { code: 'EUR', name: 'Euro', flag: '🇪🇺', country: 'European Union', rate: 0.92 },
+        { code: 'GBP', name: 'British Pound', flag: '🇬🇧', country: 'United Kingdom', rate: 0.79 },
+        { code: 'JPY', name: 'Japanese Yen', flag: '🇯🇵', country: 'Japan', rate: 154.5 },
+        { code: 'CAD', name: 'Canadian Dollar', flag: '🇨🇦', country: 'Canada', rate: 1.36 },
+        { code: 'AUD', name: 'Australian Dollar', flag: '🇦🇺', country: 'Australia', rate: 1.52 },
+        { code: 'CHF', name: 'Swiss Franc', flag: '🇨🇭', country: 'Switzerland', rate: 0.90 },
+        { code: 'CNY', name: 'Chinese Yuan', flag: '🇨🇳', country: 'China', rate: 7.24 },
+        { code: 'INR', name: 'Indian Rupee', flag: '🇮🇳', country: 'India', rate: 83.5 },
+
+        // Africa (Comprehensive)
+        { code: 'NGN', name: 'Nigerian Naira', flag: '🇳🇬', country: 'Nigeria', rate: 1480.0 },
+        { code: 'ZAR', name: 'South African Rand', flag: '🇿🇦', country: 'South Africa', rate: 18.2 },
+        { code: 'KES', name: 'Kenyan Shilling', flag: '🇰🇪', country: 'Kenya', rate: 130.0 },
+        { code: 'GHS', name: 'Ghanaian Cedi', flag: '🇬🇭', country: 'Ghana', rate: 15.2 },
+        { code: 'EGP', name: 'Egyptian Pound', flag: '🇪🇬', country: 'Egypt', rate: 47.8 },
+        { code: 'MAD', name: 'Moroccan Dirham', flag: '🇲🇦', country: 'Morocco', rate: 10.05 },
+        { code: 'ETB', name: 'Ethiopian Birr', flag: '🇪🇹', country: 'Ethiopia', rate: 57.5 },
+        { code: 'TZS', name: 'Tanzanian Shilling', flag: '🇹🇿', country: 'Tanzania', rate: 2600.0 },
+        { code: 'UGX', name: 'Ugandan Shilling', flag: '🇺🇬', country: 'Uganda', rate: 3720.0 },
+        { code: 'RWF', name: 'Rwandan Franc', flag: '🇷🇼', country: 'Rwanda', rate: 1310.0 },
+        { code: 'DZD', name: 'Algerian Dinar', flag: '🇩🇿', country: 'Algeria', rate: 134.5 },
+        { code: 'TND', name: 'Tunisian Dinar', flag: '🇹🇳', country: 'Tunisia', rate: 3.12 },
+        { code: 'MUR', name: 'Mauritian Rupee', flag: '🇲🇺', country: 'Mauritius', rate: 46.5 },
+        { code: 'BWP', name: 'Botswana Pula', flag: '🇧🇼', country: 'Botswana', rate: 13.6 },
+        { code: 'ZMW', name: 'Zambian Kwacha', flag: '🇿🇲', country: 'Zambia', rate: 25.8 },
+        { code: 'AOA', name: 'Angolan Kwanza', flag: '🇦🇴', country: 'Angola', rate: 850.0 },
+        { code: 'MZN', name: 'Mozambican Metical', flag: '🇲🇿', country: 'Mozambique', rate: 63.8 },
+        { code: 'NAD', name: 'Namibian Dollar', flag: '🇳🇦', country: 'Namibia', rate: 18.2 },
+        { code: 'SCR', name: 'Seychellois Rupee', flag: '🇸🇨', country: 'Seychelles', rate: 13.5 },
+        { code: 'XOF', name: 'West African CFA Franc', flag: '🌍', country: 'BCEAO / Senegal / Ivory Coast', rate: 605.0 },
+        { code: 'XAF', name: 'Central African CFA Franc', flag: '🌍', country: 'BEAC / Cameroon / Gabon', rate: 605.0 },
+
+        // Americas (North, Central, South & Caribbean)
+        { code: 'BRL', name: 'Brazilian Real', flag: '🇧🇷', country: 'Brazil', rate: 5.40 },
+        { code: 'MXN', name: 'Mexican Peso', flag: '🇲🇽', country: 'Mexico', rate: 18.1 },
+        { code: 'ARS', name: 'Argentine Peso', flag: '🇦🇷', country: 'Argentina', rate: 915.0 },
+        { code: 'COP', name: 'Colombian Peso', flag: '🇨🇴', country: 'Colombia', rate: 4120.0 },
+        { code: 'CLP', name: 'Chilean Peso', flag: '🇨🇱', country: 'Chile', rate: 930.0 },
+        { code: 'PEN', name: 'Peruvian Sol', flag: '🇵🇪', country: 'Peru', rate: 3.75 },
+        { code: 'UYU', name: 'Uruguayan Peso', flag: '🇺🇾', country: 'Uruguay', rate: 39.5 },
+        { code: 'PYG', name: 'Paraguayan Guarani', flag: '🇵🇾', country: 'Paraguay', rate: 7500.0 },
+        { code: 'BOB', name: 'Bolivian Boliviano', flag: '🇧🇴', country: 'Bolivia', rate: 6.91 },
+        { code: 'CRC', name: 'Costa Rican Colon', flag: '🇨🇷', country: 'Costa Rica', rate: 525.0 },
+        { code: 'DOP', name: 'Dominican Peso', flag: '🇩🇴', country: 'Dominican Republic', rate: 59.2 },
+        { code: 'GTQ', name: 'Guatemalan Quetzal', flag: '🇬🇹', country: 'Guatemala', rate: 7.78 },
+        { code: 'HNL', name: 'Honduran Lempira', flag: '🇭🇳', country: 'Honduras', rate: 24.7 },
+        { code: 'JMD', name: 'Jamaican Dollar', flag: '🇯🇲', country: 'Jamaica', rate: 156.0 },
+        { code: 'TTD', name: 'Trinidad & Tobago Dollar', flag: '🇹🇹', country: 'Trinidad & Tobago', rate: 6.78 },
+        { code: 'BSD', name: 'Bahamian Dollar', flag: '🇧🇸', country: 'Bahamas', rate: 1.0 },
+        { code: 'BBD', name: 'Barbadian Dollar', flag: '🇧🇧', country: 'Barbados', rate: 2.0 },
+        { code: 'BZD', name: 'Belize Dollar', flag: '🇧🇿', country: 'Belize', rate: 2.0 },
+        { code: 'GYD', name: 'Guyanese Dollar', flag: '🇬🇾', country: 'Guyana', rate: 209.0 },
+        { code: 'PAB', name: 'Panamanian Balboa', flag: '🇵🇦', country: 'Panama', rate: 1.0 },
+
+        // Asia & Oceania
+        { code: 'SGD', name: 'Singapore Dollar', flag: '🇸🇬', country: 'Singapore', rate: 1.35 },
+        { code: 'HKD', name: 'Hong Kong Dollar', flag: '🇭🇰', country: 'Hong Kong', rate: 7.81 },
+        { code: 'NZD', name: 'New Zealand Dollar', flag: '🇳🇿', country: 'New Zealand', rate: 1.64 },
+        { code: 'KRW', name: 'South Korean Won', flag: '🇰🇷', country: 'South Korea', rate: 1375.0 },
+        { code: 'TWD', name: 'New Taiwan Dollar', flag: '🇹🇼', country: 'Taiwan', rate: 32.4 },
+        { code: 'IDR', name: 'Indonesian Rupiah', flag: '🇮🇩', country: 'Indonesia', rate: 16250.0 },
+        { code: 'MYR', name: 'Malaysian Ringgit', flag: '🇲🇾', country: 'Malaysia', rate: 4.71 },
+        { code: 'THB', name: 'Thai Baht', flag: '🇹🇭', country: 'Thailand', rate: 36.7 },
+        { code: 'PHP', name: 'Philippine Peso', flag: '🇵🇭', country: 'Philippines', rate: 58.6 },
+        { code: 'VND', name: 'Vietnamese Dong', flag: '🇻🇳', country: 'Vietnam', rate: 25450.0 },
+        { code: 'PKR', name: 'Pakistani Rupee', flag: '🇵🇰', country: 'Pakistan', rate: 278.5 },
+        { code: 'BDT', name: 'Bangladeshi Taka', flag: '🇧🇩', country: 'Bangladesh', rate: 117.5 },
+        { code: 'LKR', name: 'Sri Lankan Rupee', flag: '🇱🇰', country: 'Sri Lanka', rate: 302.0 },
+        { code: 'NPR', name: 'Nepalese Rupee', flag: '🇳🇵', country: 'Nepal', rate: 133.6 },
+        { code: 'KZT', name: 'Kazakhstani Tenge', flag: '🇰🇿', country: 'Kazakhstan', rate: 450.0 },
+        { code: 'UZS', name: 'Uzbekistani Som', flag: '🇺🇿', country: 'Uzbekistan', rate: 12600.0 },
+        { code: 'FJD', name: 'Fijian Dollar', flag: '🇫🇯', country: 'Fiji', rate: 2.25 },
+        { code: 'MVR', name: 'Maldivian Rufiyaa', flag: '🇲🇻', country: 'Maldives', rate: 15.4 },
+        { code: 'MNT', name: 'Mongolian Tugrik', flag: '🇲🇳', country: 'Mongolia', rate: 3450.0 },
+        { code: 'BND', name: 'Brunei Dollar', flag: '🇧🇳', country: 'Brunei', rate: 1.35 },
+        { code: 'KHR', name: 'Cambodian Riel', flag: '🇰🇭', country: 'Cambodia', rate: 4100.0 },
+        { code: 'LAK', name: 'Lao Kip', flag: '🇱🇦', country: 'Laos', rate: 21800.0 },
+
+        // Middle East
+        { code: 'AED', name: 'UAE Dirham', flag: '🇦🇪', country: 'United Arab Emirates', rate: 3.67 },
+        { code: 'SAR', name: 'Saudi Riyal', flag: '🇸🇦', country: 'Saudi Arabia', rate: 3.75 },
+        { code: 'QAR', name: 'Qatari Riyal', flag: '🇶🇦', country: 'Qatar', rate: 3.64 },
+        { code: 'KWD', name: 'Kuwaiti Dinar', flag: '🇰🇼', country: 'Kuwait', rate: 0.31 },
+        { code: 'BHD', name: 'Bahraini Dinar', flag: '🇧🇭', country: 'Bahrain', rate: 0.38 },
+        { code: 'OMR', name: 'Omani Rial', flag: '🇴🇲', country: 'Oman', rate: 0.385 },
+        { code: 'ILS', name: 'Israeli New Shekel', flag: '🇮🇱', country: 'Israel', rate: 3.72 },
+        { code: 'JOD', name: 'Jordanian Dinar', flag: '🇯🇴', country: 'Jordan', rate: 0.71 },
+        { code: 'LBP', name: 'Lebanese Pound', flag: '🇱🇧', country: 'Lebanon', rate: 89500.0 },
+        { code: 'IQD', name: 'Iraqi Dinar', flag: '🇮🇶', country: 'Iraq', rate: 1310.0 },
+
+        // Europe (Outside Eurozone)
+        { code: 'SEK', name: 'Swedish Krona', flag: '🇸🇪', country: 'Sweden', rate: 10.5 },
+        { code: 'NOK', name: 'Norwegian Krone', flag: '🇳🇴', country: 'Norway', rate: 10.7 },
+        { code: 'DKK', name: 'Danish Krone', flag: '🇩🇰', country: 'Denmark', rate: 6.88 },
+        { code: 'PLN', name: 'Polish Zloty', flag: '🇵🇱', country: 'Poland', rate: 3.98 },
+        { code: 'CZK', name: 'Czech Koruna', flag: '🇨🇿', country: 'Czech Republic', rate: 23.2 },
+        { code: 'HUF', name: 'Hungarian Forint', flag: '🇭🇺', country: 'Hungary', rate: 365.0 },
+        { code: 'RON', name: 'Romanian Leu', flag: '🇷🇴', country: 'Romania', rate: 4.58 },
+        { code: 'BGN', name: 'Bulgarian Lev', flag: '🇧🇬', country: 'Bulgaria', rate: 1.80 },
+        { code: 'ISK', name: 'Icelandic Krona', flag: '🇮🇸', country: 'Iceland', rate: 139.0 },
+        { code: 'TRY', name: 'Turkish Lira', flag: '🇹🇷', country: 'Turkey', rate: 32.8 },
+        { code: 'UAH', name: 'Ukrainian Hryvnia', flag: '🇺🇦', country: 'Ukraine', rate: 40.5 },
+        { code: 'RSD', name: 'Serbian Dinar', flag: '🇷🇸', country: 'Serbia', rate: 108.0 },
+        { code: 'GEL', name: 'Georgian Lari', flag: '🇬🇪', country: 'Georgia', rate: 2.70 },
+        { code: 'AMD', name: 'Armenian Dram', flag: '🇦🇲', country: 'Armenia', rate: 388.0 },
+        { code: 'AZN', name: 'Azerbaijani Manat', flag: '🇦🇿', country: 'Azerbaijan', rate: 1.70 }
+      ];
+
+      const currAmount = document.getElementById('currAmount');
+      const currFrom = document.getElementById('currFrom');
+      const currTo = document.getElementById('currTo');
+      const currRateText = document.getElementById('currRateText');
+      const currResultText = document.getElementById('currResultText');
+      const btnSwapCurrency = document.getElementById('btnSwapCurrency');
+      const btnInsertCurrency = document.getElementById('btnInsertCurrency');
+
+      function initCurrencySelectors() {
+        const optionsHtml = GLOBAL_CURRENCIES.map(c => 
+          `<option value="${c.code}">${c.flag} ${c.code} — ${c.country} (${c.name})</option>`
+        ).join('');
+
+        currFrom.innerHTML = optionsHtml;
+        currTo.innerHTML = optionsHtml;
+
+        currFrom.value = 'USD';
+        currTo.value = 'NGN';
+
+        updateCurrencyCalc();
+      }
+
+      function updateCurrencyCalc() {
+        const fromCode = currFrom.value;
+        const toCode = currTo.value;
+        const amt = parseFloat(currAmount.value) || 0;
+
+        const fromObj = GLOBAL_CURRENCIES.find(c => c.code === fromCode);
+        const toObj = GLOBAL_CURRENCIES.find(c => c.code === toCode);
+
+        if (!fromObj || !toObj) return;
+
+        const rate = toObj.rate / fromObj.rate;
+        const converted = amt * rate;
+
+        currRateText.textContent = `1 ${fromCode} = ${formatNumber(rate)} ${toCode}`;
+        currResultText.textContent = `${formatWithCommas(converted.toFixed(2))} ${toCode}`;
+      }
+
+      currAmount.addEventListener('input', updateCurrencyCalc);
+      currFrom.addEventListener('change', updateCurrencyCalc);
+      currTo.addEventListener('change', updateCurrencyCalc);
+
+      btnSwapCurrency.addEventListener('click', () => {
+        const temp = currFrom.value;
+        currFrom.value = currTo.value;
+        currTo.value = temp;
+        updateCurrencyCalc();
+      });
+
+      btnInsertCurrency.addEventListener('click', () => {
+        const fromObj = GLOBAL_CURRENCIES.find(c => c.code === currFrom.value);
+        const toObj = GLOBAL_CURRENCIES.find(c => c.code === currTo.value);
+        const amt = parseFloat(currAmount.value) || 0;
+        const rate = toObj.rate / fromObj.rate;
+        const converted = (amt * rate).toFixed(2);
+
+        handleDigitOrOp(converted);
+        utilsOverlay.classList.remove('open');
+        showToast(`Inserted ${converted} to calculator`);
+      });
+
+      /* ------------------------------------------------------------------------
+         15. TIP CALCULATOR
+         ------------------------------------------------------------------------ */
+      const tipBill = document.getElementById('tipBill');
+      const tipPeople = document.getElementById('tipPeople');
+      const tipSumTip = document.getElementById('tipSumTip');
+      const tipSumTotal = document.getElementById('tipSumTotal');
+      const tipSumEach = document.getElementById('tipSumEach');
+      let currentTipPct = 15;
+
+      document.querySelectorAll('.tip-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.tip-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentTipPct = parseFloat(pill.dataset.pct);
+          updateTip();
+        });
+      });
+
+      function updateTip() {
+        const b = parseFloat(tipBill.value) || 0;
+        const p = Math.max(1, parseInt(tipPeople.value) || 1);
+        const t = b * (currentTipPct / 100);
+        const total = b + t;
+        const each = total / p;
+
+        tipSumTip.textContent = '$' + t.toFixed(2);
+        tipSumTotal.textContent = '$' + total.toFixed(2);
+        tipSumEach.textContent = '$' + each.toFixed(2);
+      }
+
+      tipBill.addEventListener('input', updateTip);
+      tipPeople.addEventListener('input', updateTip);
+
+      document.getElementById('btnUseTip').addEventListener('click', () => {
+        const val = tipSumEach.textContent.replace('$', '');
+        handleDigitOrOp(val);
+        utilsOverlay.classList.remove('open');
+        showToast(`Inserted $${val} to calculator`);
+      });
+
+      /* ------------------------------------------------------------------------
+         16. UNIT CONVERTER
+         ------------------------------------------------------------------------ */
+      const CONV_TABLE = {
+        length: {
+          'Meters (m)': 1, 'Kilometers (km)': 1000, 'Centimeters (cm)': 0.01,
+          'Feet (ft)': 0.3048, 'Inches (in)': 0.0254, 'Miles (mi)': 1609.344
+        },
+        weight: {
+          'Kilograms (kg)': 1, 'Grams (g)': 0.001, 'Pounds (lb)': 0.45359237, 'Ounces (oz)': 0.02834952
+        },
+        temp: {
+          'Celsius (°C)': 'C', 'Fahrenheit (°F)': 'F', 'Kelvin (K)': 'K'
+        },
+        data: {
+          'Megabytes (MB)': 1, 'Kilobytes (KB)': 0.001, 'Gigabytes (GB)': 1000, 'Terabytes (TB)': 1000000, 'Bytes (B)': 0.000001
+        }
+      };
+
+      const catSel = document.getElementById('convCategory');
+      const unitFrom = document.getElementById('convUnitFrom');
+      const unitTo = document.getElementById('convUnitTo');
+      const inVal = document.getElementById('convInVal');
+      const outVal = document.getElementById('convOutVal');
+
+      function initConvUnits() {
+        if (!catSel) return;
+        const cat = catSel.value || 'length';
+        const units = Object.keys(CONV_TABLE[cat] || CONV_TABLE.length);
+        unitFrom.innerHTML = units.map(u => `<option value="${u}">${u}</option>`).join('');
+        unitTo.innerHTML = units.map(u => `<option value="${u}">${u}</option>`).join('');
+        if (units.length > 1) unitTo.selectedIndex = 1;
+        runConv();
+      }
+
+      function runConv() {
+        const cat = catSel.value || 'length';
+        const val = parseFloat(inVal.value) || 0;
+        const uF = unitFrom.value;
+        const uT = unitTo.value;
+
+        if (!CONV_TABLE[cat]) return;
+
+        if (cat === 'temp') {
+          const fromT = CONV_TABLE.temp[uF];
+          const toT = CONV_TABLE.temp[uT];
+          let c = fromT === 'C' ? val : fromT === 'F' ? (val - 32) * (5 / 9) : val - 273.15;
+          let res = toT === 'C' ? c : toT === 'F' ? (c * (9 / 5)) + 32 : c + 273.15;
+          outVal.value = formatNumber(res);
+        } else {
+          const base = val * CONV_TABLE[cat][uF];
+          const res = base / CONV_TABLE[cat][uT];
+          outVal.value = formatNumber(res);
+        }
+      }
+
+      catSel.addEventListener('change', initConvUnits);
+      unitFrom.addEventListener('change', runConv);
+      unitTo.addEventListener('change', runConv);
+      inVal.addEventListener('input', runConv);
+
+      document.getElementById('btnUseConv').addEventListener('click', () => {
+        handleDigitOrOp(outVal.value);
+        utilsOverlay.classList.remove('open');
+        showToast(`Inserted ${outVal.value} to calculator`);
+      });
+
+      /* ------------------------------------------------------------------------
+         17. INITIALIZATION
+         ------------------------------------------------------------------------ */
+      loadStorage();
+      applyTheme(STATE.theme);
+      updateMemDisplay();
+      updateJournalUI();
+      initCurrencySelectors();
+      initConvUnits();
+      updateTip();
+      renderDisplay();
+
+      // Sync menu status tags
+      menu3DStatus.textContent = STATE.motion3D ? 'ON' : 'OFF';
+      menuSoundStatus.textContent = STATE.soundOn ? 'ON' : 'MUTED';
+      menuThemeStatus.textContent = STATE.theme.toUpperCase();
+
+    })();
+  </script>
+</body>
+</html>

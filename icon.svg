@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161b1e"/>
+      <stop offset="100%" stop-color="#07090b"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- App Background Squircle -->
+  <rect x="24" y="24" width="464" height="464" rx="104" fill="url(#bg)" stroke="#22292d" stroke-width="6" filter="url(#shadow)"/>
+
+  <!-- Reachmark Electric Lime Icon -->
+  <g transform="translate(106, 106)">
+    <!-- Lime Squircle -->
+    <rect width="300" height="300" rx="72" fill="#d6f269"/>
+
+    <!-- Dark R and Dot -->
+    <path d="M 66 66 L 168 66 C 204 66 225 87 225 117 C 225 144 204 159 168 165 L 231 234 L 177 234 L 126 174 L 114 174 L 114 234 L 66 234 Z M 114 108 L 114 135 L 159 135 C 171 135 180 129 180 121.5 C 180 114 171 108 159 108 Z" fill="#101416"/>
+    <circle cx="228" cy="72" r="22.5" fill="#101416"/>
+  </g>
+</svg>
