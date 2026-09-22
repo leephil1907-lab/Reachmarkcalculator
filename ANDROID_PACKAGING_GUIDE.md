@@ -57,11 +57,65 @@ To ensure full-screen display **without Chrome's URL or address bar**, Android r
 - **Root Domain:** `https://leephil1907-lab.github.io/.well-known/assetlinks.json` (Live and verified by Google DAL API)
 - **Subpath Mirror:** `https://leephil1907-lab.github.io/Reachmarkcalculator/.well-known/assetlinks.json`
 - **Package ID:** `io.github.leephil1907_lab.twa`
-- **SHA-256 Fingerprint:**
+- **Current Upload SHA-256 Fingerprint:**
   `04:3F:D5:EA:6C:AB:2B:04:01:0E:48:24:04:C8:50:EC:C5:BC:BA:E9:43:CF:93:0A:2A:ED:0E:98:11:50:46:76`
 
-> **Note on Chrome Verification Cache:**
-> Android and Chrome cache DAL verification results. If you launched the app before Digital Asset Links were live:
-> 1. Close the app from Recent Apps.
-> 2. Open Android **Settings > Apps > Chrome > Storage > Clear Cache**.
-> 3. Re-launch Reachmark Calculator. The address link will now be completely hidden!
+---
+
+## 4. Chrome's DAL Caching Behavior & Cache Clearing Guide
+
+Chrome and Android aggressively cache Digital Asset Links verification results across two distinct layers:
+
+| Layer | Who Caches | Duration / Behavior | Practical Impact |
+|-------|------------|---------------------|------------------|
+| **Google Servers** | `digitalassetlinks.googleapis.com` | Up to **8 days** max TTL | Changes can take hours to propagate through Google's CDN. |
+| **On-Device (Chrome)** | Chrome on the phone | Persistent across app restarts | Stores both **success and failure** results. An earlier failed check (before `assetlinks.json` was active) is remembered and reused. |
+
+### Most Effective Steps to Clear the On-Device Cache:
+
+1. **Force-stop** the Reachmark Calculator app.
+2. Open Android **Settings → Apps → Chrome → Storage & cache → Clear cache** (and **Clear storage** if needed).
+3. In Chrome on the phone, open:
+   - `chrome://net-internals/#dns` → Tap **Clear host cache**.
+   - `chrome://net-internals/#sockets` → Tap **Flush socket pools**.
+4. **Uninstall** the Reachmark app completely from the device.
+5. **Reinstall** the APK/AAB.
+6. Launch the app. With the live root assetlinks statement now returning 200 OK, Android will verify the signature and run without any URL bar.
+
+### Diagnostic ADB Commands:
+
+Verify the live verification status via Android Logcat:
+```bash
+adb logcat -v brief | grep -e OriginVerifier -e digital_asset_links
+```
+Look for `Verification succeeded`.
+
+Force Android to immediately re-verify (Android 12+):
+```bash
+adb shell pm verify-app-links --re-verify io.github.leephil1907_lab.twa
+```
+
+---
+
+## 5. Google Play Store Publishing (Dual Fingerprints)
+
+When you publish to the Google Play Store with **Play App Signing** enabled, Google signs the distributed APK with a separate release key. To ensure the address bar never reappears for Play Store users:
+1. Open Google Play Console $\rightarrow$ Your App $\rightarrow$ **Release $\rightarrow$ Setup $\rightarrow$ App signing**.
+2. Copy the **App signing key certificate SHA-256 fingerprint**.
+3. Add it as a second entry in `.well-known/assetlinks.json`:
+```json
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.leephil1907_lab.twa",
+      "sha256_cert_fingerprints": [
+        "04:3F:D5:EA:6C:AB:2B:04:01:0E:48:24:04:C8:50:EC:C5:BC:BA:E9:43:CF:93:0A:2A:ED:0E:98:11:50:46:76",
+        "<PASTE_GOOGLE_PLAY_APP_SIGNING_SHA256_HERE>"
+      ]
+    }
+  }
+]
+```
+4. Push the update to both the `Reachmarkcalculator` repository and the `leephil1907-lab.github.io` root repository.
