@@ -24,7 +24,7 @@
       "url": "./index.html"
     }
   },
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "background_color": "#0b0f14",
   "theme_color": "#0b0f14",
   "lang": "en-US",
@@ -52,34 +52,6 @@
     {
       "type": "origin",
       "origin": "https://leephil1907-lab.github.io"
-    },
-    {
-      "type": "origin",
-      "origin": "https://*.github.io"
-    },
-    {
-      "type": "origin",
-      "origin": "https://reachmark-calculator.netlify.app"
-    },
-    {
-      "type": "origin",
-      "origin": "https://*.netlify.app"
-    },
-    {
-      "type": "origin",
-      "origin": "https://calculator.reachmark.com"
-    },
-    {
-      "type": "origin",
-      "origin": "https://app.reachmark.com"
-    },
-    {
-      "type": "origin",
-      "origin": "https://reachmark.com"
-    },
-    {
-      "type": "origin",
-      "origin": "https://*.reachmark.com"
     }
   ],
   "protocol_handlers": [
@@ -186,30 +158,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
-    },
-    {
-      "src": "icon-144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
     }
   ],
   "screenshots": [
