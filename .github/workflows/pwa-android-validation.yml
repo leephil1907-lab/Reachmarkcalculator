@@ -24,8 +24,11 @@ jobs:
       - name: Install Bubblewrap 1.25.0
         run: npm install --global @bubblewrap/cli@1.25.0
 
-      - name: Configure Bubblewrap JDK
-        run: bubblewrap updateConfig --jdkPath="$JAVA_HOME"
+      - name: Configure Bubblewrap CI toolchain
+        run: |
+          SDK_PATH="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          mkdir -p "$HOME/.bubblewrap"
+          printf '{"jdkPath":"%s","androidSdkPath":"%s"}\n' "$JAVA_HOME" "$SDK_PATH" > "$HOME/.bubblewrap/config.json"
 
       - name: Validate PWA for Trusted Web Activity
         run: bubblewrap validate --url=https://leephil1907-lab.github.io/Reachmarkcalculator/
