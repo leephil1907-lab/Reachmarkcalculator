@@ -46,7 +46,7 @@ jobs:
 
       - name: Verify live PWA manifest and packaging assets
         run: |
-          node <<'NODE'
+          node --input-type=module <<'NODE'
           const base = 'https://leephil1907-lab.github.io/Reachmarkcalculator/';
           const manifestUrl = base + 'manifest.webmanifest';
           const res = await fetch(manifestUrl, { cache: 'no-store' });
