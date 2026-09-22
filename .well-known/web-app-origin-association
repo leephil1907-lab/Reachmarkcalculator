@@ -1,0 +1,25 @@
+{
+  "https://leephil1907-lab.github.io/Reachmarkcalculator/manifest.webmanifest": {
+    "scope": "/"
+  },
+  "https://leephil1907-lab.github.io/Reachmarkcalculator/manifest.json": {
+    "scope": "/"
+  },
+  "https://leephil1907-lab.github.io/Reachmarkcalculator/index.html": {
+    "scope": "/"
+  },
+  "web_apps": [
+    {
+      "manifest": "https://leephil1907-lab.github.io/Reachmarkcalculator/manifest.webmanifest",
+      "details": {
+        "scope": "/"
+      }
+    },
+    {
+      "manifest": "https://leephil1907-lab.github.io/Reachmarkcalculator/manifest.json",
+      "details": {
+        "scope": "/"
+      }
+    }
+  ]
+}
