@@ -46,6 +46,11 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="mask-icon" href="icon.svg" color="#d6f269">
 
+  <!-- Typography: Space Grotesk for high-character numerals and brand legibility -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
   <script>
     // Capture beforeinstallprompt immediately in <head> so it is never missed
     window.reachmarkDeferredPrompt = null;
@@ -64,54 +69,58 @@
       /* Official Reachmark Signature Colors */
       --rm-lime: #d6f269;
       --rm-lime-hover: #c5e454;
-      --rm-lime-active: #b2d33c;
-      --rm-lime-glow: rgba(214, 242, 105, 0.4);
+      --rm-lime-active: #b2d738;
+      --rm-lime-glow: rgba(214, 242, 105, 0.45);
       --rm-lime-subtle: rgba(214, 242, 105, 0.12);
 
-      /* Obsidian Dark Titanium (Default Theme) */
-      --bg-gradient: radial-gradient(circle at 50% 15%, #181d20 0%, #07090a 100%);
+      /* Obsidian Deep Black Foundation (#0b0f14, #101416) */
+      --bg-base: #0b0f14;
+      --bg-gradient: radial-gradient(circle at 50% 12%, #151b22 0%, #0b0f14 100%);
       --chassis-bg: #101416;
-      --chassis-border: #22292d;
-      --chassis-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.5);
+      --chassis-border: #1f272d;
+      --chassis-shadow: 0 25px 60px rgba(0, 0, 0, 0.88), 0 8px 24px rgba(0, 0, 0, 0.65);
 
-      --screen-bg: #07090b;
-      --screen-border: #1a2125;
+      --screen-bg: #0b0f14;
+      --screen-border: #1a2228;
       
       --text-main: #ffffff;
       --text-muted: #88979e;
       --text-dim: #48545a;
 
-      /* 3D Physical Keys */
-      --key-num-bg: #1c2226;
-      --key-num-hover: #242c31;
-      --key-num-shadow: #0e1214;
+      /* 3D Physical Keys: Controlled Layered Shadows & Highlights */
+      --key-num-bg: linear-gradient(180deg, #242a30 0%, #1b2025 100%);
+      --key-num-hover: linear-gradient(180deg, #2c343b 0%, #21272d 100%);
+      --key-num-shadow: #0d1113;
       --key-num-text: #f3f6f8;
 
-      --key-op-bg: #232c31;
-      --key-op-hover: #2c373e;
-      --key-op-shadow: #12171a;
+      --key-op-bg: linear-gradient(180deg, #27333a 0%, #1d262c 100%);
+      --key-op-hover: linear-gradient(180deg, #2f3e46 0%, #232e35 100%);
+      --key-op-shadow: #0f1519;
       --key-op-text: #d6f269;
 
-      --key-accent-bg: #d6f269;
-      --key-accent-hover: #c4e452;
-      --key-accent-shadow: #8fa928;
-      --key-accent-text: #0e1214;
+      /* Hero Equals Key: Signature Neon Lime Gradient */
+      --key-accent-bg: linear-gradient(135deg, #e4ff7d 0%, #d6f269 40%, #b2d738 100%);
+      --key-accent-hover: linear-gradient(135deg, #edff8f 0%, #ddf673 40%, #badf3f 100%);
+      --key-accent-shadow: #8fae22;
+      --key-accent-text: #0b0f14;
 
-      --key-danger-bg: #2c1618;
-      --key-danger-hover: #381c1f;
-      --key-danger-shadow: #15090a;
+      --key-danger-bg: linear-gradient(180deg, #36171a 0%, #271012 100%);
+      --key-danger-hover: linear-gradient(180deg, #441d21 0%, #311417 100%);
+      --key-danger-shadow: #130708;
       --key-danger-text: #ff6161;
 
-      --drawer-bg: #121619;
-      --drawer-border: #232b2f;
-      --modal-overlay: rgba(0, 0, 0, 0.75);
+      --drawer-bg: #101416;
+      --drawer-border: #1f272d;
+      --modal-overlay: rgba(0, 0, 0, 0.8);
 
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     /* Light Theme */
     body.theme-light {
-      --bg-gradient: radial-gradient(circle at 50% 15%, #f6f8fa 0%, #d8e2ea 100%);
+      --bg-base: #f1f5f9;
+      --bg-gradient: radial-gradient(circle at 50% 15%, #ffffff 0%, #e2e8f0 100%);
       --chassis-bg: #ffffff;
       --chassis-border: #e2e8f0;
       --chassis-shadow: 0 25px 50px rgba(10, 25, 40, 0.12), 0 8px 20px rgba(0, 0, 0, 0.05);
@@ -123,23 +132,23 @@
       --text-muted: #64748b;
       --text-dim: #94a3b8;
 
-      --key-num-bg: #ffffff;
-      --key-num-hover: #f1f5f9;
+      --key-num-bg: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+      --key-num-hover: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
       --key-num-shadow: #cbd5e1;
       --key-num-text: #1e293b;
 
-      --key-op-bg: #f1f5f9;
-      --key-op-hover: #e2e8f0;
+      --key-op-bg: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+      --key-op-hover: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
       --key-op-shadow: #cbd5e1;
       --key-op-text: #2f4007;
 
-      --key-accent-bg: #d6f269;
-      --key-accent-hover: #c4e452;
+      --key-accent-bg: linear-gradient(135deg, #e4ff7d 0%, #d6f269 40%, #b2d738 100%);
+      --key-accent-hover: linear-gradient(135deg, #edff8f 0%, #ddf673 40%, #badf3f 100%);
       --key-accent-shadow: #98b32e;
       --key-accent-text: #0e1214;
 
-      --key-danger-bg: #fee2e2;
-      --key-danger-hover: #fecaca;
+      --key-danger-bg: linear-gradient(180deg, #fff1f2 0%, #ffe4e6 100%);
+      --key-danger-hover: linear-gradient(180deg, #ffffff 0%, #fecdd3 100%);
       --key-danger-shadow: #fca5a5;
       --key-danger-text: #dc2626;
 
@@ -149,6 +158,7 @@
 
     /* Cyber Theme */
     body.theme-cyber {
+      --bg-base: #030805;
       --bg-gradient: radial-gradient(circle at 50% 10%, #0c2016 0%, #030805 100%);
       --chassis-bg: #0b1a13;
       --chassis-border: #183e2c;
@@ -161,18 +171,28 @@
       --text-muted: #6ee7b7;
       --text-dim: #235d44;
 
-      --key-num-bg: #10261d;
-      --key-num-hover: #163629;
+      --key-num-bg: linear-gradient(180deg, #132f24 0%, #0c2118 100%);
+      --key-num-hover: linear-gradient(180deg, #193c2e 0%, #102a1f 100%);
       --key-num-shadow: #07130e;
       --key-num-text: #f0fdf4;
 
-      --key-op-bg: #16382a;
-      --key-op-hover: #1f4d3a;
+      --key-op-bg: linear-gradient(180deg, #184232 0%, #102e22 100%);
+      --key-op-hover: linear-gradient(180deg, #20533f 0%, #143b2c 100%);
       --key-op-shadow: #0a1b14;
       --key-op-text: #d6f269;
 
-      --drawer-bg: #0d1e16;
-      --drawer-border: #1c4735;
+      --key-accent-bg: linear-gradient(135deg, #e4ff7d 0%, #d6f269 40%, #b2d738 100%);
+      --key-accent-hover: linear-gradient(135deg, #edff8f 0%, #ddf673 40%, #badf3f 100%);
+      --key-accent-shadow: #637f17;
+      --key-accent-text: #05140b;
+
+      --key-danger-bg: linear-gradient(180deg, #381215 0%, #290b0d 100%);
+      --key-danger-hover: linear-gradient(180deg, #47171a 0%, #340e11 100%);
+      --key-danger-shadow: #140506;
+      --key-danger-text: #ff6b6b;
+
+      --drawer-bg: #0b1a13;
+      --drawer-border: #183e2c;
     }
 
     /* Base Reset */
@@ -200,7 +220,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: var(--bg-gradient);
+      background-color: var(--bg-base);
+      background-image: var(--bg-gradient);
       font-family: var(--font-family);
       color: var(--text-main);
       padding: 12px;
@@ -288,6 +309,7 @@
     }
 
     .rm-brand-text {
+      font-family: var(--font-display);
       font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.5px;
@@ -600,30 +622,32 @@
 
     /* Top Line: Formula */
     .formula-line {
-      min-height: 22px;
+      min-height: 24px;
       color: var(--text-muted);
       font-size: 15px;
       text-align: right;
       word-break: break-all;
       overflow-wrap: break-word;
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      letter-spacing: 0.5px;
+      font-family: var(--font-display);
+      letter-spacing: 0.3px;
+      font-weight: 500;
     }
 
     /* Main Big Value Display */
     .value-line {
       color: var(--text-main);
       font-size: 38px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -0.5px;
       text-align: right;
       width: 100%;
       word-break: break-all;
       line-height: 1.15;
       cursor: pointer;
+      font-family: var(--font-display);
       font-variant-numeric: tabular-nums;
       margin-top: 4px;
-      transition: color 0.15s;
+      transition: color 0.18s ease, text-shadow 0.2s ease, transform 0.18s ease;
     }
 
     .value-line:hover {
@@ -632,7 +656,15 @@
 
     .value-line.is-evaluated {
       color: var(--rm-lime);
-      font-weight: 700;
+      font-weight: 800;
+      text-shadow: 0 0 16px var(--rm-lime-glow), 0 0 32px rgba(214, 242, 105, 0.22);
+      animation: evaluatedGlowPop 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes evaluatedGlowPop {
+      0% { transform: scale(0.97); opacity: 0.9; }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .value-line.is-error {
@@ -664,25 +696,28 @@
     }
 
     .mem-key {
-      background: transparent;
-      border: 1px solid var(--screen-border);
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 2px 4px rgba(0, 0, 0, 0.25);
       color: var(--text-muted);
       font-size: 11px;
       font-weight: 700;
       padding: 6px 0;
-      border-radius: 8px;
+      border-radius: 9px;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: transform 0.09s ease, background 0.14s ease, border-color 0.14s ease, color 0.14s ease;
     }
 
     .mem-key:hover {
-      background: var(--screen-bg);
+      background: rgba(214, 242, 105, 0.08);
       color: var(--rm-lime);
       border-color: rgba(214, 242, 105, 0.3);
+      transform: translateY(-1px);
     }
 
     .mem-key:active {
-      transform: scale(0.95);
+      transform: translateY(1.5px);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
     }
 
     /* ==========================================================================
@@ -712,13 +747,14 @@
       gap: 10px;
     }
 
-    /* Solid 3D Keycap Buttons */
+    /* Solid 3D Keycap Buttons with Controlled Tactile Depth */
     .key {
       appearance: none;
       outline: none;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       height: 56px;
-      border-radius: 15px;
+      border-radius: 16px;
+      font-family: var(--font-display);
       font-size: 22px;
       font-weight: 600;
       cursor: pointer;
@@ -730,76 +766,104 @@
       -webkit-user-select: none;
       pointer-events: auto;
       transform: translateY(0);
-      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
+      transition: transform 0.09s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.09s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.15s ease, border-color 0.15s ease;
     }
 
     .key * {
       pointer-events: none;
     }
 
-    /* 3D Shadows */
+    /* 3D Shadows & Layered Tactile Depths */
     .key-num {
       background: var(--key-num-bg);
       color: var(--key-num-text);
-      box-shadow: 0 4px 0 var(--key-num-shadow), 0 6px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.35), 0 4.5px 0 var(--key-num-shadow), 0 7px 14px rgba(0, 0, 0, 0.45);
+      border-color: rgba(255, 255, 255, 0.07);
     }
-    .key-num:hover { background: var(--key-num-hover); }
+    .key-num:hover {
+      background: var(--key-num-hover);
+      transform: translateY(-1.5px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(0, 0, 0, 0.35), 0 6px 0 var(--key-num-shadow), 0 10px 18px rgba(0, 0, 0, 0.52);
+    }
 
     .key-op {
       background: var(--key-op-bg);
       color: var(--key-op-text);
-      box-shadow: 0 4px 0 var(--key-op-shadow), 0 6px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 1px 0 rgba(214, 242, 105, 0.16), inset 0 -1px 0 rgba(0, 0, 0, 0.4), 0 4.5px 0 var(--key-op-shadow), 0 7px 14px rgba(0, 0, 0, 0.45);
+      border-color: rgba(214, 242, 105, 0.18);
     }
-    .key-op:hover { background: var(--key-op-hover); }
+    .key-op:hover {
+      background: var(--key-op-hover);
+      border-color: rgba(214, 242, 105, 0.36);
+      transform: translateY(-1.5px);
+      box-shadow: inset 0 1px 0 rgba(214, 242, 105, 0.28), inset 0 -1px 0 rgba(0, 0, 0, 0.4), 0 6px 0 var(--key-op-shadow), 0 10px 18px rgba(0, 0, 0, 0.52);
+    }
 
     .key-sci {
       background: var(--key-num-bg);
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 600;
-      height: 46px;
+      height: 44px;
       border-radius: 12px;
-      box-shadow: 0 3px 0 var(--key-num-shadow), 0 4px 6px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.35), 0 3.5px 0 var(--key-num-shadow), 0 5px 10px rgba(0, 0, 0, 0.35);
+      border-color: rgba(255, 255, 255, 0.05);
     }
     .key-sci:hover {
       background: var(--key-num-hover);
       color: var(--rm-lime);
+      transform: translateY(-1px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(0, 0, 0, 0.35), 0 4.5px 0 var(--key-num-shadow), 0 7px 12px rgba(0, 0, 0, 0.4);
     }
 
     .key-danger {
       background: var(--key-danger-bg);
       color: var(--key-danger-text);
-      box-shadow: 0 4px 0 var(--key-danger-shadow), 0 6px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 1px 0 rgba(255, 120, 120, 0.22), inset 0 -1px 0 rgba(0, 0, 0, 0.4), 0 4.5px 0 var(--key-danger-shadow), 0 7px 14px rgba(0, 0, 0, 0.45);
+      border-color: rgba(255, 97, 97, 0.24);
     }
-    .key-danger:hover { background: var(--key-danger-hover); }
+    .key-danger:hover {
+      background: var(--key-danger-hover);
+      border-color: rgba(255, 97, 97, 0.45);
+      transform: translateY(-1.5px);
+      box-shadow: inset 0 1px 0 rgba(255, 140, 140, 0.32), inset 0 -1px 0 rgba(0, 0, 0, 0.4), 0 6px 0 var(--key-danger-shadow), 0 10px 18px rgba(0, 0, 0, 0.52);
+    }
 
+    /* Hero Equals Key: Signature Neon Gradient with Specular Sheen */
     .key-equals {
       background: var(--key-accent-bg);
       color: var(--key-accent-text);
-      box-shadow: 0 4px 0 var(--key-accent-shadow), 0 8px 16px var(--rm-lime-glow);
-      font-size: 26px;
+      box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.65), inset 0 -1.5px 2px rgba(0, 0, 0, 0.22), 0 4.5px 0 var(--key-accent-shadow), 0 9px 20px var(--rm-lime-glow);
+      font-size: 28px;
       font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
     }
-    .key-equals:hover { background: var(--key-accent-hover); }
+    .key-equals:hover {
+      background: var(--key-accent-hover);
+      transform: translateY(-1.5px);
+      box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.8), inset 0 -1.5px 2px rgba(0, 0, 0, 0.22), 0 6px 0 var(--key-accent-shadow), 0 13px 26px var(--rm-lime-glow);
+    }
 
     /* Tactile Press Down Effect */
     .key:active, .key.is-pressed {
-      transform: translateY(3px) scale(0.985);
+      transform: translateY(3.5px) scale(0.985);
     }
     .key-num:active, .key-num.is-pressed {
-      box-shadow: 0 1px 0 var(--key-num-shadow), 0 2px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 0 var(--key-num-shadow), 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     .key-op:active, .key-op.is-pressed {
-      box-shadow: 0 1px 0 var(--key-op-shadow), 0 2px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 0 var(--key-op-shadow), 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     .key-sci:active, .key-sci.is-pressed {
-      box-shadow: 0 1px 0 var(--key-num-shadow), 0 1px 2px rgba(0, 0, 0, 0.15);
+      transform: translateY(2.5px) scale(0.985);
+      box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.45), 0 1px 0 var(--key-num-shadow);
     }
     .key-danger:active, .key-danger.is-pressed {
-      box-shadow: 0 1px 0 var(--key-danger-shadow), 0 2px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 0 var(--key-danger-shadow), 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     .key-equals:active, .key-equals.is-pressed {
-      box-shadow: 0 1px 0 var(--key-accent-shadow), 0 3px 6px var(--rm-lime-glow);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.28), 0 1px 0 var(--key-accent-shadow), 0 3px 8px var(--rm-lime-glow);
     }
 
     .sub {
@@ -1212,7 +1276,7 @@
     }
 
     /* Responsive Mobile & Standalone Full-Screen App Layout */
-    @media (max-width: 600px), (display-mode: standalone) {
+    @media (max-width: 600px), ((display-mode: standalone) and (max-width: 979px)) {
       html, body {
         height: 100%;
         height: 100dvh;
@@ -1224,7 +1288,7 @@
         margin: 0 !important;
         align-items: stretch !important;
         justify-content: stretch !important;
-        background: var(--chassis-bg);
+        background: var(--chassis-bg) !important;
       }
 
       .viewport-3d {
@@ -1276,13 +1340,13 @@
         line-height: 1.1;
       }
 
-      .mem-bar {
+      .mem-bar, .memory-row {
         padding: 0 12px 4px;
         flex-shrink: 0;
       }
 
       .mem-key {
-        height: 32px;
+        height: 34px;
         font-size: 11px;
       }
 
@@ -1291,7 +1355,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        padding: 4px 12px 10px;
+        padding: 4px 12px max(10px, env(safe-area-inset-bottom, 0px));
         gap: 8px;
         min-height: 0;
       }
@@ -1634,24 +1698,6 @@
       background: linear-gradient(115deg, rgba(255,255,255,.035), transparent 25%, transparent 72%, rgba(214,242,105,.025));
     }
 
-    .value-line {
-      text-shadow: 0 0 28px rgba(214,242,105,.06);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .key {
-      transition: transform .11s cubic-bezier(.2,.8,.2,1), box-shadow .11s ease, background .16s ease;
-    }
-
-    .key:hover { transform: translateY(-1px); }
-    .key:active { transform: translateY(2px) scale(.985); }
-
-    .memory-row .mem-key {
-      transition: transform .12s ease, background .15s ease, border-color .15s ease;
-    }
-
-    .memory-row .mem-key:hover { transform: translateY(-1px); }
-
     .rm-desktop-rail {
       display: none;
     }
@@ -1973,30 +2019,34 @@
     @media (min-width: 980px) {
       body {
         align-items: center;
-        padding: 24px;
+        justify-content: center;
+        padding: 32px 24px;
       }
 
       .viewport-3d {
-        max-width: 1080px;
+        max-width: 1040px;
         display: grid;
-        grid-template-columns: minmax(390px, 430px) minmax(0, 1fr);
-        gap: 18px;
+        grid-template-columns: minmax(380px, 420px) minmax(360px, 1fr);
+        gap: 24px;
+        align-items: center;
       }
 
       .viewport-3d.scientific-active {
-        max-width: 1080px;
+        max-width: 1160px;
+        grid-template-columns: minmax(460px, 520px) minmax(360px, 1fr);
       }
 
       .rm-desktop-rail {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 14px;
         min-width: 0;
       }
 
       .calculator-chassis {
-        height: min(900px, calc(100dvh - 48px));
-        overflow: hidden;
+        max-height: min(900px, calc(100dvh - 64px));
+        overflow-y: auto;
+        overflow-x: hidden;
       }
 
       .rm-smart-tools-mobile { display: none !important; }
@@ -2035,7 +2085,7 @@
   <div class="viewport-3d" id="viewport3D">
     
     <!-- Chassis Card -->
-    <div class="calculator-chassis" id="calcChassis">
+    <main class="calculator-chassis" id="calcChassis">
       
       <!-- Top Brand Header: Reachmark + FX + Menu -->
       <header class="brand-header">
@@ -2223,35 +2273,6 @@
         </div>
       </header>
 
-
-      <!-- REACHMARK PRO UX ENHANCEMENT: DESKTOP PRODUCT RAIL -->
-      <aside class="rm-desktop-rail" aria-label="Reachmark smart tools">
-        <section class="rm-rail-card">
-          <div class="rm-rail-kicker">Reachmark / Everyday Engine</div>
-          <div class="rm-rail-title">Calculate anything. Keep moving.</div>
-          <p class="rm-rail-copy">A faster workspace for numbers, money and everyday decisions — built around the calculator you already use.</p>
-          <div class="rm-tool-grid">
-            <button class="rm-tool-card" type="button" data-smart-tool="percentage"><span class="rm-tool-icon">%</span><span class="rm-tool-name">Percentage</span><span class="rm-tool-desc">Find a percentage of any value.</span></button>
-            <button class="rm-tool-card" type="button" data-smart-tool="discount"><span class="rm-tool-icon">↘</span><span class="rm-tool-name">Discount & Tax</span><span class="rm-tool-desc">Price after discount or tax.</span></button>
-            <button class="rm-tool-card" type="button" data-smart-tool="compound"><span class="rm-tool-icon">↗</span><span class="rm-tool-name">Compound Interest</span><span class="rm-tool-desc">Model growth over time.</span></button>
-            <button class="rm-tool-card" type="button" data-smart-tool="margin"><span class="rm-tool-icon">◒</span><span class="rm-tool-name">Profit Margin</span><span class="rm-tool-desc">Revenue, profit and margin.</span></button>
-          </div>
-        </section>
-        <section class="rm-rail-card">
-          <div class="rm-rail-kicker">Live workspace</div>
-          <div class="rm-rail-stats">
-            <div class="rm-stat"><span class="rm-stat-label">Memory</span><span class="rm-stat-value" id="railMemory">0</span></div>
-            <div class="rm-stat"><span class="rm-stat-label">History</span><span class="rm-stat-value" id="railHistory">0</span></div>
-            <div class="rm-stat"><span class="rm-stat-label">Mode</span><span class="rm-stat-value" id="railMode">DEG</span></div>
-          </div>
-        </section>
-        <section class="rm-rail-card">
-          <div class="rm-rail-kicker">Quick philosophy</div>
-          <p class="rm-rail-copy" style="margin-bottom:0">Fast input. Clear results. Useful tools. No clutter.</p>
-        </section>
-      </aside>
-
-
       <!-- Main Display -->
       <section class="display-deck" id="displayDeck">
         <div class="screen-status-bar">
@@ -2281,8 +2302,8 @@
         <button type="button" class="mem-key" data-mem="MS" title="Memory Store">MS</button>
       </div>
 
-      <!-- Keypad -->
-      <main class="keypad-container" id="keypadContainer">
+      <!-- Keypad Container -->
+      <div class="keypad-container" id="keypadContainer">
         
         <!-- Scientific Grid (Collapsible) -->
         <div class="scientific-grid" id="scientificGrid">
@@ -2350,7 +2371,7 @@
           <button type="button" class="key key-equals" data-action="equals" data-kbd="Enter" title="Calculate (=)">=</button>
         </div>
 
-      </main>
+      </div>
 
       <!-- Footer Info -->
       <footer class="calc-footer">
@@ -2358,7 +2379,35 @@
         <a href="javascript:void(0)" id="footerHelpBtn" title="Keyboard Guide">Shortcuts ( ? )</a>
       </footer>
 
-    </div>
+    </main>
+
+    <!-- REACHMARK PRO UX ENHANCEMENT: DESKTOP PRODUCT RAIL -->
+    <aside class="rm-desktop-rail" aria-label="Reachmark smart tools">
+      <section class="rm-rail-card">
+        <div class="rm-rail-kicker">Reachmark / Everyday Engine</div>
+        <div class="rm-rail-title">Calculate anything. Keep moving.</div>
+        <p class="rm-rail-copy">A faster workspace for numbers, money and everyday decisions — built around the calculator you already use.</p>
+        <div class="rm-tool-grid">
+          <button class="rm-tool-card" type="button" data-smart-tool="percentage"><span class="rm-tool-icon">%</span><span class="rm-tool-name">Percentage</span><span class="rm-tool-desc">Find a percentage of any value.</span></button>
+          <button class="rm-tool-card" type="button" data-smart-tool="discount"><span class="rm-tool-icon">↘</span><span class="rm-tool-name">Discount & Tax</span><span class="rm-tool-desc">Price after discount or tax.</span></button>
+          <button class="rm-tool-card" type="button" data-smart-tool="compound"><span class="rm-tool-icon">↗</span><span class="rm-tool-name">Compound Interest</span><span class="rm-tool-desc">Model growth over time.</span></button>
+          <button class="rm-tool-card" type="button" data-smart-tool="margin"><span class="rm-tool-icon">◒</span><span class="rm-tool-name">Profit Margin</span><span class="rm-tool-desc">Revenue, profit and margin.</span></button>
+        </div>
+      </section>
+      <section class="rm-rail-card">
+        <div class="rm-rail-kicker">Live workspace</div>
+        <div class="rm-rail-stats">
+          <div class="rm-stat"><span class="rm-stat-label">Memory</span><span class="rm-stat-value" id="railMemory">0</span></div>
+          <div class="rm-stat"><span class="rm-stat-label">History</span><span class="rm-stat-value" id="railHistory">0</span></div>
+          <div class="rm-stat"><span class="rm-stat-label">Mode</span><span class="rm-stat-value" id="railMode">DEG</span></div>
+        </div>
+      </section>
+      <section class="rm-rail-card">
+        <div class="rm-rail-kicker">Quick philosophy</div>
+        <p class="rm-rail-copy" style="margin-bottom:0">Fast input. Clear results. Useful tools. No clutter.</p>
+      </section>
+    </aside>
+
   </div>
 
   <!-- ==========================================================================
