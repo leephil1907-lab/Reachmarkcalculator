@@ -1,0 +1,34 @@
+name: Reachmark PWA + Android validation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate-pwa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate manifest JSON
+        run: node -e "const fs=require('fs'); for (const f of ['manifest.webmanifest','manifest.json','android/twa-manifest.template.json']) JSON.parse(fs.readFileSync(f,'utf8')); console.log('JSON manifests valid');"
+
+      - name: Install Bubblewrap 1.25.0
+        run: npm install --global @bubblewrap/cli@1.25.0
+
+      - name: Validate PWA for Trusted Web Activity
+        run: bubblewrap validate --url=https://leephil1907-lab.github.io/Reachmarkcalculator/
+
+      - name: Verify Android packaging inputs
+        run: |
+          test -f manifest.webmanifest
+          test -f icon-512.png
+          test -f icon-maskable-512.png
+          test -f screenshot-desktop.png
+          test -f screenshot-mobile.png
+          test -f shortcut-currency.png
+          test -f shortcut-scientific.png
+          test -f shortcut-history.png
+          echo "Reachmark Android packaging assets are present."
