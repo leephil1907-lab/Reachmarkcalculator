@@ -2416,6 +2416,67 @@
     <span id="toastText">Copied</span>
   </div>
 
+
+  <!-- REACHMARK PRO UX ENHANCEMENT: SMART TOOLS -->
+  <div class="rm-smart-overlay" id="smartToolsOverlay" aria-hidden="true">
+    <section class="rm-smart-modal" role="dialog" aria-modal="true" aria-labelledby="smartToolsTitle">
+      <header class="rm-smart-head">
+        <div>
+          <div class="rm-smart-eyebrow">Reachmark Smart Tools</div>
+          <h2 id="smartToolsTitle">More than a calculator.</h2>
+          <p>Useful financial calculations with instant, copyable results.</p>
+        </div>
+        <button type="button" class="rm-smart-close" id="btnCloseSmartTools" aria-label="Close smart tools">×</button>
+      </header>
+      <nav class="rm-smart-tabs" aria-label="Smart tool categories">
+        <button type="button" class="rm-smart-tab active" data-smart-tab="percentage">Percentage</button>
+        <button type="button" class="rm-smart-tab" data-smart-tab="discount">Discount & Tax</button>
+        <button type="button" class="rm-smart-tab" data-smart-tab="compound">Compound</button>
+        <button type="button" class="rm-smart-tab" data-smart-tab="margin">Profit Margin</button>
+      </nav>
+
+      <div class="rm-tool-panel active" data-smart-panel="percentage">
+        <div class="rm-form-grid">
+          <div class="rm-field"><label for="rmPercentBase">Base value</label><input id="rmPercentBase" type="number" inputmode="decimal" value="100"></div>
+          <div class="rm-field"><label for="rmPercentRate">Percentage</label><input id="rmPercentRate" type="number" inputmode="decimal" value="15"></div>
+        </div>
+        <div class="rm-result"><div class="rm-result-label">Result</div><div class="rm-result-value" id="rmPercentResult">15.00</div><div class="rm-result-sub" id="rmPercentSub">15% of 100</div></div>
+        <div class="rm-smart-actions"><button class="rm-action" type="button" data-copy-result="rmPercentResult">Copy result</button><button class="rm-action primary" type="button" data-use-result="rmPercentResult">Use result</button></div>
+      </div>
+
+      <div class="rm-tool-panel" data-smart-panel="discount">
+        <div class="rm-form-grid">
+          <div class="rm-field"><label for="rmDiscountPrice">Original price</label><input id="rmDiscountPrice" type="number" inputmode="decimal" value="100"></div>
+          <div class="rm-field"><label for="rmDiscountRate">Discount %</label><input id="rmDiscountRate" type="number" inputmode="decimal" value="10"></div>
+          <div class="rm-field"><label for="rmTaxRate">Tax %</label><input id="rmTaxRate" type="number" inputmode="decimal" value="0"></div>
+        </div>
+        <div class="rm-result"><div class="rm-result-label">Final price</div><div class="rm-result-value" id="rmDiscountResult">90.00</div><div class="rm-result-sub" id="rmDiscountSub">Discount: 10.00 · Tax: 0.00</div></div>
+        <div class="rm-smart-actions"><button class="rm-action" type="button" data-copy-result="rmDiscountResult">Copy result</button><button class="rm-action primary" type="button" data-use-result="rmDiscountResult">Use result</button></div>
+      </div>
+
+      <div class="rm-tool-panel" data-smart-panel="compound">
+        <div class="rm-form-grid">
+          <div class="rm-field"><label for="rmCompoundPrincipal">Principal</label><input id="rmCompoundPrincipal" type="number" inputmode="decimal" value="1000"></div>
+          <div class="rm-field"><label for="rmCompoundRate">Annual rate %</label><input id="rmCompoundRate" type="number" inputmode="decimal" value="8"></div>
+          <div class="rm-field"><label for="rmCompoundYears">Years</label><input id="rmCompoundYears" type="number" inputmode="decimal" value="5"></div>
+          <div class="rm-field"><label for="rmCompoundFrequency">Compounds / year</label><input id="rmCompoundFrequency" type="number" inputmode="numeric" value="12" min="1"></div>
+        </div>
+        <div class="rm-result"><div class="rm-result-label">Future value</div><div class="rm-result-value" id="rmCompoundResult">1,489.85</div><div class="rm-result-sub" id="rmCompoundSub">Interest earned: 489.85</div></div>
+        <div class="rm-smart-actions"><button class="rm-action" type="button" data-copy-result="rmCompoundResult">Copy result</button><button class="rm-action primary" type="button" data-use-result="rmCompoundResult">Use result</button></div>
+      </div>
+
+      <div class="rm-tool-panel" data-smart-panel="margin">
+        <div class="rm-form-grid">
+          <div class="rm-field"><label for="rmMarginRevenue">Revenue</label><input id="rmMarginRevenue" type="number" inputmode="decimal" value="1000"></div>
+          <div class="rm-field"><label for="rmMarginCost">Cost</label><input id="rmMarginCost" type="number" inputmode="decimal" value="650"></div>
+        </div>
+        <div class="rm-result"><div class="rm-result-label">Profit margin</div><div class="rm-result-value" id="rmMarginResult">35.00%</div><div class="rm-result-sub" id="rmMarginSub">Profit: 350.00 · Markup: 53.85%</div></div>
+        <div class="rm-smart-actions"><button class="rm-action" type="button" data-copy-result="rmMarginResult">Copy result</button><button class="rm-action primary" type="button" data-use-result="rmMarginResult">Use result</button></div>
+      </div>
+    </section>
+  </div>
+
+
   <!-- PWA Instant In-App Install Sheet -->
   <div class="pwa-install-banner" id="pwaInstallBanner" aria-live="polite">
     <div class="pwa-banner-left">
