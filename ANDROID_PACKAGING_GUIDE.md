@@ -51,12 +51,17 @@ This compiles:
 
 ---
 
-## 3. Digital Asset Links Verification
+## 3. Digital Asset Links Verification (Hiding the URL / Address Bar)
 
-To ensure full-screen display without Chrome's URL bar, Android requires Digital Asset Links verification:
-- Domain: `https://leephil1907-lab.github.io/Reachmarkcalculator/.well-known/assetlinks.json`
-- Package Name: `io.github.leephil1907_lab.twa`
-- SHA-256 Fingerprint:
+To ensure full-screen display **without Chrome's URL or address bar**, Android requires Digital Asset Links verification:
+- **Root Domain:** `https://leephil1907-lab.github.io/.well-known/assetlinks.json` (Live and verified by Google DAL API)
+- **Subpath Mirror:** `https://leephil1907-lab.github.io/Reachmarkcalculator/.well-known/assetlinks.json`
+- **Package ID:** `io.github.leephil1907_lab.twa`
+- **SHA-256 Fingerprint:**
   `04:3F:D5:EA:6C:AB:2B:04:01:0E:48:24:04:C8:50:EC:C5:BC:BA:E9:43:CF:93:0A:2A:ED:0E:98:11:50:46:76`
 
-This file is already active in production.
+> **Note on Chrome Verification Cache:**
+> Android and Chrome cache DAL verification results. If you launched the app before Digital Asset Links were live:
+> 1. Close the app from Recent Apps.
+> 2. Open Android **Settings > Apps > Chrome > Storage > Clear Cache**.
+> 3. Re-launch Reachmark Calculator. The address link will now be completely hidden!

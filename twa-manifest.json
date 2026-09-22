@@ -10,7 +10,7 @@
   "navigationDividerColorDark": "#22292D",
   "backgroundColor": "#0B0F14",
   "enableNotifications": true,
-  "startUrl": "/Reachmarkcalculator/index.html?source=pwa",
+  "startUrl": "/Reachmarkcalculator/index.html",
   "iconUrl": "https://leephil1907-lab.github.io/Reachmarkcalculator/icon-512.png",
   "maskableIconUrl": "https://leephil1907-lab.github.io/Reachmarkcalculator/icon-maskable-512.png",
   "appVersionName": "1.0.0",
