@@ -15,3 +15,20 @@ test_svg.html
 # Archives and uploads
 *.zip
 uploads/
+
+# Reachmark Android/TWA generated artifacts
+android/*.keystore
+android/*.jks
+android/*.p12
+android/*.aab
+android/*.apk
+android/manifest-checksum.txt
+android/build/
+android/app/
+android/gradle/
+android/gradlew
+android/gradlew.bat
+android/.gradle/
+android/.idea/
+android/local.properties
+android-build/
