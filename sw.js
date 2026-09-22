@@ -28,7 +28,8 @@ const PRECACHE_ASSETS = [
   './reachmark-logo.jpg',
   './widget-template.json',
   './widget-data.json',
-  './.well-known/web-app-origin-association'
+  './.well-known/web-app-origin-association',
+  './.well-known/assetlinks.json'
 ];
 
 // Install: precache app shell & critical assets
