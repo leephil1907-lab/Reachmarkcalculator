@@ -1,5 +1,5 @@
 /* Reachmark Calculator - Production Service Worker with Full PWA Capabilities */
-const CACHE_NAME = 'reachmark-calc-v7';
+const CACHE_NAME = 'reachmark-calc-v8';
 
 const PRECACHE_ASSETS = [
   './',
