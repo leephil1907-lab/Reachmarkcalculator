@@ -2059,6 +2059,16 @@
               </div>
             </button>
 
+            <button type="button" class="menu-item" id="menuItemSmartTools">
+              <div class="menu-item-left">
+                <span class="menu-item-icon" style="color:var(--rm-lime); font-size:14px; display:inline-flex; align-items:center; justify-content:center;">
+                  ✦
+                </span>
+                <span>Smart Financial Tools</span>
+              </div>
+              <span class="menu-badge" style="color:var(--rm-lime); border-color:var(--rm-lime);">PRO</span>
+            </button>
+
             <div class="menu-divider"></div>
 
             <button type="button" class="menu-item" id="menuItem3D">
@@ -3097,6 +3107,20 @@
         toastEl.classList.add('show');
         setTimeout(() => toastEl.classList.remove('show'), 1600);
       }
+      window.showToast = showToast;
+
+      window.reachmarkInsertValue = function (val) {
+        if (!val) return;
+        const str = String(val).trim();
+        if (STATE.isEvaluated) {
+          STATE.formula = str;
+        } else {
+          STATE.formula += str;
+        }
+        STATE.activeValue = str;
+        STATE.isEvaluated = false;
+        renderDisplay();
+      };
 
       /* ------------------------------------------------------------------------
          6. PERSISTENT JOURNAL
@@ -3601,6 +3625,14 @@
         menuDropdown.classList.remove('open');
         btnMenuToggle.classList.remove('open');
         openUtilsModal('tip');
+      });
+
+      document.getElementById('menuItemSmartTools').addEventListener('click', () => {
+        menuDropdown.classList.remove('open');
+        btnMenuToggle.classList.remove('open');
+        if (typeof window.openSmartTools === 'function') {
+          window.openSmartTools();
+        }
       });
 
       document.getElementById('menuItem3D').addEventListener('click', () => {
@@ -4299,13 +4331,15 @@
   </script>
 
 <script>
-  /* REACHMARK PRO UX ENHANCEMENT */
+  /* REACHMARK PRO UX ENHANCEMENT: FULLY FUNCTIONAL SMART TOOLS & DESKTOP WORKSPACE */
   (() => {
-    const $ = (id) => document.getElementById(id);
-    const qsa = (sel) => Array.from(document.querySelectorAll(sel));
-    const money = (n) => Number.isFinite(n) ? n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}) : "0.00";
+    // Universal selector: handles IDs, classes, attribute selectors, and tags safely
+    const $ = (id) => (typeof id === 'string' && document.getElementById(id)) || document.querySelector(id);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+    const money = (n) => Number.isFinite(n) ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "0.00";
     const num = (id) => {
-      const n = parseFloat($(id)?.value);
+      const el = $(id);
+      const n = parseFloat(el?.value);
       return Number.isFinite(n) ? n : 0;
     };
 
@@ -4313,7 +4347,7 @@
       const overlay = $("smartToolsOverlay");
       if (!overlay) return;
       overlay.classList.add("open");
-      overlay.setAttribute("aria-hidden","false");
+      overlay.setAttribute("aria-hidden", "false");
       activateSmartTab(tab);
       document.body.style.overflow = "hidden";
     }
@@ -4322,85 +4356,137 @@
       const overlay = $("smartToolsOverlay");
       if (!overlay) return;
       overlay.classList.remove("open");
-      overlay.setAttribute("aria-hidden","true");
+      overlay.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
     }
 
+    window.openSmartTools = openSmartTools;
+    window.closeSmartTools = closeSmartTools;
+
     function activateSmartTab(tab) {
-      $(".rm-smart-tab").forEach(btn => btn.classList.toggle("active", btn.dataset.smartTab === tab));
-      $(".rm-tool-panel").forEach(panel => panel.classList.toggle("active", panel.dataset.smartPanel === tab));
+      $$(".rm-smart-tab").forEach(btn => btn.classList.toggle("active", btn.dataset.smartTab === tab));
+      $$(".rm-tool-panel").forEach(panel => panel.classList.toggle("active", panel.dataset.smartPanel === tab));
       calculateSmartTool(tab);
     }
 
     function calculateSmartTool(tab) {
       if (tab === "percentage") {
-        const base=num("rmPercentBase"), rate=num("rmPercentRate"), result=base*rate/100;
-        $("rmPercentResult").textContent=money(result);
-        $("rmPercentSub").textContent=money(rate) + "% of " + money(base);
+        const base = num("rmPercentBase"), rate = num("rmPercentRate"), result = base * rate / 100;
+        const resEl = $("rmPercentResult");
+        const subEl = $("rmPercentSub");
+        if (resEl) resEl.textContent = money(result);
+        if (subEl) subEl.textContent = money(rate) + "% of " + money(base);
       }
       if (tab === "discount") {
-        const price=num("rmDiscountPrice"), discount=num("rmDiscountRate"), tax=num("rmTaxRate");
-        const discounted=price*(1-discount/100), taxValue=discounted*tax/100, final=discounted+taxValue;
-        $("rmDiscountResult").textContent=money(final);
-        $("rmDiscountSub").textContent="Discount: "+money(price*discount/100)+" · Tax: "+money(taxValue);
+        const price = num("rmDiscountPrice"), discount = num("rmDiscountRate"), tax = num("rmTaxRate");
+        const discounted = price * (1 - discount / 100);
+        const taxValue = discounted * (tax / 100);
+        const final = discounted + taxValue;
+        const resEl = $("rmDiscountResult");
+        const subEl = $("rmDiscountSub");
+        if (resEl) resEl.textContent = money(final);
+        if (subEl) subEl.textContent = "Discount: " + money(price * discount / 100) + " · Tax: " + money(taxValue);
       }
       if (tab === "compound") {
-        const principal=num("rmCompoundPrincipal"), rate=num("rmCompoundRate"), years=num("rmCompoundYears"), freq=Math.max(1,Math.floor(num("rmCompoundFrequency")));
-        const result=principal*Math.pow(1+(rate/100)/freq,freq*years);
-        $("rmCompoundResult").textContent=money(result);
-        $("rmCompoundSub").textContent="Interest earned: "+money(result-principal);
+        const principal = num("rmCompoundPrincipal"), rate = num("rmCompoundRate"), years = num("rmCompoundYears"), freq = Math.max(1, Math.floor(num("rmCompoundFrequency")));
+        const result = principal * Math.pow(1 + (rate / 100) / freq, freq * years);
+        const resEl = $("rmCompoundResult");
+        const subEl = $("rmCompoundSub");
+        if (resEl) resEl.textContent = money(result);
+        if (subEl) subEl.textContent = "Interest earned: " + money(result - principal);
       }
       if (tab === "margin") {
-        const revenue=num("rmMarginRevenue"), cost=num("rmMarginCost"), profit=revenue-cost;
-        const margin=revenue ? (profit/revenue)*100 : 0;
-        const markup=cost ? (profit/cost)*100 : 0;
-        $("rmMarginResult").textContent=money(margin)+"%";
-        $("rmMarginSub").textContent="Profit: "+money(profit)+" · Markup: "+money(markup)+"%";
+        const revenue = num("rmMarginRevenue"), cost = num("rmMarginCost"), profit = revenue - cost;
+        const margin = revenue ? (profit / revenue) * 100 : 0;
+        const markup = cost ? (profit / cost) * 100 : 0;
+        const resEl = $("rmMarginResult");
+        const subEl = $("rmMarginSub");
+        if (resEl) resEl.textContent = money(margin) + "%";
+        if (subEl) subEl.textContent = "Profit: " + money(profit) + " · Markup: " + money(markup) + "%";
       }
     }
 
     function copyResult(id) {
-      const value=$(id)?.textContent || "";
-      navigator.clipboard?.writeText(value.replace(/,/g,"")).then(
-        () => window.showToast ? window.showToast("Result copied") : null,
-        () => window.showToast ? window.showToast("Result ready to copy") : null
-      );
+      const el = $(id);
+      const raw = (el?.textContent || "").replace(/,/g, "").replace("%", "").trim();
+      if (!raw) return;
+      navigator.clipboard?.writeText(raw).then(() => {
+        if (window.showToast) window.showToast("Copied: " + raw);
+      }).catch(() => {
+        if (window.showToast) window.showToast("Copied: " + raw);
+      });
     }
 
     function useResult(id) {
-      const raw=($(id)?.textContent || "0").replace(/,/g,"").replace("%","");
+      const el = $(id);
+      const raw = (el?.textContent || "0").replace(/,/g, "").replace("%", "").trim();
       navigator.clipboard?.writeText(raw);
-      if (window.showToast) window.showToast("Result copied to clipboard");
+
+      // Insert directly into the calculator engine!
+      if (window.reachmarkInsertValue) {
+        window.reachmarkInsertValue(raw);
+      }
+      if (window.showToast) {
+        window.showToast("Inserted " + raw + " into calculator");
+      }
       closeSmartTools();
     }
 
     function syncRail() {
-      const mem=$("memDisplayVal")?.textContent || "0";
-      const history=$("menuHistoryCount")?.textContent || "0";
-      const mode=$("anglePill")?.textContent || "DEG";
-      if ($("railMemory")) $("railMemory").textContent=mem;
-      if ($("railHistory")) $("railHistory").textContent=history;
-      if ($("railMode")) $("railMode").textContent=mode;
+      const mem = $("memDisplayVal")?.textContent || "0";
+      const history = $("menuHistoryCount")?.textContent || "0";
+      const mode = $("anglePill")?.textContent || "DEG";
+      if ($("railMemory")) $("railMemory").textContent = mem;
+      if ($("railHistory")) $("railHistory").textContent = history;
+      if ($("railMode")) $("railMode").textContent = mode;
     }
 
-    $("btnSmartTools")?.addEventListener("click",()=>openSmartTools());
-    $("btnCloseSmartTools")?.addEventListener("click",closeSmartTools);
-    $("smartToolsOverlay")?.addEventListener("click",(e)=>{ if(e.target.id==="smartToolsOverlay") closeSmartTools(); });
-
-    $(".rm-tool-card").forEach(btn=>btn.addEventListener("click",()=>openSmartTools(btn.dataset.smartTool)));
-    $(".rm-smart-tab").forEach(btn=>btn.addEventListener("click",()=>activateSmartTab(btn.dataset.smartTab)));
-    $("[data-copy-result]").forEach(btn=>btn.addEventListener("click",()=>copyResult(btn.dataset.copyResult)));
-    $("[data-use-result]").forEach(btn=>btn.addEventListener("click",()=>useResult(btn.dataset.useResult)));
-
-    ["rmPercentBase","rmPercentRate","rmDiscountPrice","rmDiscountRate","rmTaxRate","rmCompoundPrincipal","rmCompoundRate","rmCompoundYears","rmCompoundFrequency","rmMarginRevenue","rmMarginCost"]
-      .forEach(id=>$(id)?.addEventListener("input",()=> {
-        const active=$(".rm-smart-tab.active")?.dataset.smartTab || "percentage";
-        calculateSmartTool(active);
-      }));
-
-    document.addEventListener("keydown",(e)=>{
-      if(e.key==="Escape") closeSmartTools();
+    // Connect trigger and close buttons
+    $("btnSmartTools")?.addEventListener("click", () => openSmartTools());
+    $("btnCloseSmartTools")?.addEventListener("click", closeSmartTools);
+    $("smartToolsOverlay")?.addEventListener("click", (e) => {
+      if (e.target.id === "smartToolsOverlay") closeSmartTools();
     });
+
+    // Connect cards & tabs using $$ (querySelectorAll array)
+    $$(".rm-tool-card").forEach(btn => {
+      btn.addEventListener("click", () => openSmartTools(btn.dataset.smartTool));
+    });
+
+    $$(".rm-smart-tab").forEach(btn => {
+      btn.addEventListener("click", () => activateSmartTab(btn.dataset.smartTab));
+    });
+
+    $$("[data-copy-result]").forEach(btn => {
+      btn.addEventListener("click", () => copyResult(btn.dataset.copyResult));
+    });
+
+    $$("[data-use-result]").forEach(btn => {
+      btn.addEventListener("click", () => useResult(btn.dataset.useResult));
+    });
+
+    // Real-time input calculation listeners
+    [
+      "rmPercentBase", "rmPercentRate",
+      "rmDiscountPrice", "rmDiscountRate", "rmTaxRate",
+      "rmCompoundPrincipal", "rmCompoundRate", "rmCompoundYears", "rmCompoundFrequency",
+      "rmMarginRevenue", "rmMarginCost"
+    ].forEach(id => {
+      $(id)?.addEventListener("input", () => {
+        const activeTab = document.querySelector(".rm-smart-tab.active")?.dataset.smartTab || "percentage";
+        calculateSmartTool(activeTab);
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeSmartTools();
+    });
+
+    // Initial calculation for all tabs so numbers are ready immediately
+    calculateSmartTool("percentage");
+    calculateSmartTool("discount");
+    calculateSmartTool("compound");
+    calculateSmartTool("margin");
 
     setInterval(syncRail, 500);
     window.addEventListener("load", syncRail);
