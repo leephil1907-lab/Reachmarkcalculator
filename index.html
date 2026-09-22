@@ -1933,6 +1933,34 @@
     </div>
   </div>
 
+  <!-- Android Chrome Install Guidance Sheet -->
+  <div class="ios-install-modal" id="androidInstallModal">
+    <div class="ios-modal-card">
+      <div class="ios-modal-header">
+        <h3>Install on Android</h3>
+        <button type="button" class="btn-pwa-dismiss" id="btnCloseAndroidModal" aria-label="Close">✕</button>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin: 6px 0 14px;">
+        Install Reachmark directly to your phone for full-screen offline calculations:
+      </p>
+      <div class="ios-step">
+        <span class="ios-step-num">1</span>
+        <span>Tap the <strong>three dots (⋮)</strong> at the top right of Chrome.</span>
+      </div>
+      <div class="ios-step">
+        <span class="ios-step-num">2</span>
+        <span>Tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.</span>
+      </div>
+      <div class="ios-step">
+        <span class="ios-step-num">3</span>
+        <span>Tap <strong>Install</strong> to confirm. It will install into your phone's app list!</span>
+      </div>
+      <button type="button" class="btn-pwa-install" id="btnAndroidGotIt" style="width:100%; justify-content:center; margin-top:14px; padding:11px;">
+        Got it!
+      </button>
+    </div>
+  </div>
+
   <!-- ==========================================================================
        ROBUST APPLICATION LOGIC
        ========================================================================== -->
@@ -3370,18 +3398,26 @@
       const iosModal = document.getElementById('iosInstallModal');
       const btnCloseIosModal = document.getElementById('btnCloseIosModal');
       const btnIosGotIt = document.getElementById('btnIosGotIt');
+      const androidModal = document.getElementById('androidInstallModal');
+      const btnCloseAndroidModal = document.getElementById('btnCloseAndroidModal');
+      const btnAndroidGotIt = document.getElementById('btnAndroidGotIt');
 
+      // Check if running as installed standalone app
       const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
       const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
 
       function showInstallBanner() {
         if (isStandalone) return;
-        if (sessionStorage.getItem('rm_install_dismissed') === 'true') return;
         if (pwaBanner) {
           setTimeout(() => {
             pwaBanner.classList.add('visible');
-          }, 1500);
+          }, 600);
         }
+      }
+
+      // Show banner on mobile web browser
+      if (!isStandalone) {
+        showInstallBanner();
       }
 
       window.addEventListener('beforeinstallprompt', (e) => {
@@ -3392,11 +3428,6 @@
         }
         showInstallBanner();
       });
-
-      // Show install banner on iOS if not installed already
-      if (isIos && !isStandalone) {
-        showInstallBanner();
-      }
 
       async function triggerInstallFlow() {
         if (deferredInstallPrompt) {
@@ -3409,7 +3440,12 @@
           if (pwaBanner) pwaBanner.classList.remove('visible');
           if (iosModal) iosModal.classList.add('open');
         } else {
-          showToast('To install: open browser menu (⋮ / Share) & tap "Install" / "Add to Home Screen"');
+          if (pwaBanner) pwaBanner.classList.remove('visible');
+          if (androidModal) {
+            androidModal.classList.add('open');
+          } else {
+            showToast('Tap browser menu (⋮) & select "Install app"');
+          }
         }
       }
 
@@ -3428,7 +3464,6 @@
       if (btnPwaDismiss) {
         btnPwaDismiss.addEventListener('click', () => {
           if (pwaBanner) pwaBanner.classList.remove('visible');
-          sessionStorage.setItem('rm_install_dismissed', 'true');
         });
       }
 
@@ -3441,6 +3476,18 @@
       if (btnIosGotIt) {
         btnIosGotIt.addEventListener('click', () => {
           if (iosModal) iosModal.classList.remove('open');
+        });
+      }
+
+      if (btnCloseAndroidModal) {
+        btnCloseAndroidModal.addEventListener('click', () => {
+          if (androidModal) androidModal.classList.remove('open');
+        });
+      }
+
+      if (btnAndroidGotIt) {
+        btnAndroidGotIt.addEventListener('click', () => {
+          if (androidModal) androidModal.classList.remove('open');
         });
       }
 
