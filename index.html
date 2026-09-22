@@ -3009,7 +3009,7 @@
         showToast('Reachmark installed successfully!');
       });
 
-      // Handle PWA shortcuts and deep links (#currency, #scientific, #history)
+      // Handle PWA shortcuts, protocol handlers (?calc=, ?math=) and share target
       function handleAppShortcuts() {
         const hash = (window.location.hash || '').toLowerCase();
         if (hash === '#currency' || hash === '#curr') {
@@ -3027,16 +3027,18 @@
           openUtilsModal('tip');
         }
 
-        // Shared text target
+        // Protocol handlers (web+calc, web+math) & Share Target (?text=, ?calc=, ?math=)
         try {
           const params = new URLSearchParams(window.location.search);
-          const sharedVal = params.get('text') || params.get('title');
-          if (sharedVal) {
-            const clean = sharedVal.replace(/[^0-9+\-*/.()]/g, '');
+          const rawExpr = params.get('calc') || params.get('math') || params.get('text') || params.get('title');
+          if (rawExpr) {
+            // Unescape protocol handler prefix if passed as web+calc://...
+            const stripped = decodeURIComponent(rawExpr).replace(/^web\+[a-z]+:\/\/?/i, '');
+            const clean = stripped.replace(/[^0-9+\-*/.()^eπ!]/gi, '');
             if (clean) {
               STATE.currentVal = clean;
               renderDisplay();
-              showToast(`Loaded: ${clean}`);
+              showToast(`Loaded expression: ${clean}`);
             }
           }
         } catch (e) {}
@@ -3045,16 +3047,51 @@
       window.addEventListener('hashchange', handleAppShortcuts);
       handleAppShortcuts();
 
-      // Register Service Worker for offline PWA compliance
+      // PWA File Handling API (launchQueue for .csv, .calc, .txt files)
+      if ('launchQueue' in window) {
+        window.launchQueue.setConsumer(async (launchParams) => {
+          if (!launchParams.files || !launchParams.files.length) return;
+          try {
+            const fileHandle = launchParams.files[0];
+            const file = await fileHandle.getFile();
+            const text = await file.text();
+            const firstLine = text.split('\n')[0].trim();
+            const clean = firstLine.replace(/[^0-9+\-*/.()]/g, '');
+            if (clean) {
+              STATE.currentVal = clean;
+              renderDisplay();
+              showToast(`Loaded file: ${file.name}`);
+            }
+          } catch (err) {
+            console.warn('[Reachmark] File launch error:', err);
+          }
+        });
+      }
+
+      // Register Service Worker with Background Sync & Periodic Sync support
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js')
-            .then((registration) => {
-              console.log('[Reachmark] PWA Service Worker active:', registration.scope);
-            })
-            .catch((error) => {
-              console.warn('[Reachmark] Service Worker registration failed:', error);
-            });
+        window.addEventListener('load', async () => {
+          try {
+            const registration = await navigator.serviceWorker.register('./sw.js');
+            console.log('[Reachmark] PWA Service Worker active:', registration.scope);
+
+            // Register Periodic Background Sync if available
+            if ('periodicSync' in registration) {
+              const status = await navigator.permissions.query({ name: 'periodic-background-sync' }).catch(() => null);
+              if (status && status.state === 'granted') {
+                await registration.periodicSync.register('update-rates', {
+                  minInterval: 24 * 60 * 60 * 1000 // 24 hours
+                }).catch(() => {});
+              }
+            }
+
+            // Register Background Sync if available
+            if ('sync' in registration) {
+              await registration.sync.register('sync-calculations').catch(() => {});
+            }
+          } catch (error) {
+            console.warn('[Reachmark] Service Worker registration failed:', error);
+          }
         });
       }
 

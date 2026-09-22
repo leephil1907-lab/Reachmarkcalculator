@@ -8,9 +8,22 @@
   "display": "standalone",
   "display_override": [
     "window-controls-overlay",
+    "tabbed",
     "standalone",
     "minimal-ui"
   ],
+  "tab_strip": {
+    "home_tab": {
+      "scope_patterns": [
+        {
+          "pathname": "./index.html"
+        }
+      ]
+    },
+    "new_tab_button": {
+      "url": "./index.html"
+    }
+  },
   "orientation": "portrait-primary",
   "background_color": "#0b0f14",
   "theme_color": "#0b0f14",
@@ -22,8 +35,93 @@
     "productivity",
     "education"
   ],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ec4e53b7",
   "prefer_related_applications": false,
-  "related_applications": [],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://leephil1907-lab.github.io/Reachmarkcalculator/manifest.webmanifest",
+      "id": "reachmark.calculator.app"
+    },
+    {
+      "platform": "windows",
+      "id": "Reachmark.3DMotionCalculator"
+    }
+  ],
+  "scope_extensions": [
+    {
+      "origin": "https://leephil1907-lab.github.io"
+    },
+    {
+      "origin": "https://reachmark-calculator.netlify.app"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+calc",
+      "url": "./index.html?calc=%s"
+    },
+    {
+      "protocol": "web+math",
+      "url": "./index.html?math=%s"
+    }
+  ],
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "note_taking": {
+    "new_note_url": "./index.html#history"
+  },
+  "file_handlers": [
+    {
+      "action": "./index.html",
+      "name": "Reachmark Calculation Tape File",
+      "icons": [
+        {
+          "src": "icon-96.png",
+          "sizes": "96x96"
+        }
+      ],
+      "accept": {
+        "text/csv": [".csv"],
+        "application/json": [".json"],
+        "text/plain": [".txt", ".calc"]
+      }
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Reachmark Quick Calculator",
+      "short_name": "Calculator",
+      "description": "Quick access to Reachmark 3D motion calculator and live exchange rates",
+      "tag": "reachmark-quick-calc",
+      "template": "reachmark-calc-template",
+      "ms_ac_template": "./widget-template.json",
+      "data": "./widget-data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "screenshot-desktop.png",
+          "sizes": "1280x720",
+          "label": "Reachmark Calculator Widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ],
+      "auth": false,
+      "update": 86400
+    }
+  ],
   "handle_links": "preferred",
   "launch_handler": {
     "client_mode": "auto"

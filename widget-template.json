@@ -1,0 +1,76 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "https://leephil1907-lab.github.io/Reachmarkcalculator/icon-192.png",
+                  "size": "Small",
+                  "style": "Person"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Reachmark Calculator",
+                  "weight": "Bolder",
+                  "size": "Medium",
+                  "color": "Light"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "3D Motion Math & 120+ Currencies",
+                  "size": "Small",
+                  "color": "Accent",
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "${latestCalculation}",
+      "size": "ExtraLarge",
+      "weight": "Bolder",
+      "horizontalAlignment": "Right"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${exchangeSummary}",
+      "size": "Small",
+      "horizontalAlignment": "Right",
+      "isSubtle": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Open Calculator",
+      "url": "https://leephil1907-lab.github.io/Reachmarkcalculator/"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Currency Exchanger",
+      "url": "https://leephil1907-lab.github.io/Reachmarkcalculator/#currency"
+    }
+  ]
+}
