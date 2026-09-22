@@ -4212,7 +4212,7 @@
   /* REACHMARK PRO UX ENHANCEMENT */
   (() => {
     const $ = (id) => document.getElementById(id);
-    const $ = (sel) => Array.from(document.querySelectorAll(sel));
+    const qsa = (sel) => Array.from(document.querySelectorAll(sel));
     const money = (n) => Number.isFinite(n) ? n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}) : "0.00";
     const num = (id) => {
       const n = parseFloat($(id)?.value);
