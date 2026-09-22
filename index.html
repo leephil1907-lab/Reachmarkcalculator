@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   
   <!-- Primary Meta Data -->
-  <title>Reachmark Calculator | 3D Motion & Global Currency Exchanger</title>
-  <meta name="title" content="Reachmark Calculator | 3D Motion & Global Currency Exchanger">
-  <meta name="description" content="Reachmark Calculator is a high-precision 3D tactile motion calculator with calculation memory tape, global currency exchanger for 120+ countries, unit converter, and scientific math engine.">
+  <title>Reachmark — Everyday Calculation Engine</title>
+  <meta name="title" content="Reachmark — Everyday Calculation Engine">
+  <meta name="description" content="Reachmark is an everyday calculation engine with a premium scientific calculator, memory, currency exchange, conversions and smart financial tools.">
   <meta name="keywords" content="Reachmark, Reachmark Calculator, calculator, 3D calculator, currency exchanger, currency converter, scientific calculator, motion calculator, calculation memory">
   <meta name="author" content="Reachmark">
   <meta name="robots" content="index, follow">
@@ -15,14 +15,14 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://leephil1907-lab.github.io/Reachmarkcalculator/">
-  <meta property="og:title" content="Reachmark Calculator | 3D Motion & Global Currency Exchanger">
-  <meta property="og:description" content="High-precision 3D tactile calculator with persistent calculation memory journal, global currency exchanger, and scientific tools by Reachmark.">
+  <meta property="og:title" content="Reachmark — Everyday Calculation Engine">
+  <meta property="og:description" content="Calculate, convert and model everyday numbers with Reachmark.">
   <meta property="og:image" content="reachmark-squircle.jpg">
 
   <!-- Twitter Card -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="Reachmark Calculator | 3D Motion & Global Currency Exchanger">
-  <meta property="twitter:description" content="High-precision 3D tactile calculator with persistent calculation memory journal, global currency exchanger, and scientific tools by Reachmark.">
+  <meta property="twitter:title" content="Reachmark — Everyday Calculation Engine">
+  <meta property="twitter:description" content="Calculate, convert and model everyday numbers with Reachmark.">
   <meta property="twitter:image" content="reachmark-squircle.jpg">
 
   <!-- Mobile & PWA App Meta -->
@@ -1461,6 +1461,497 @@
       justify-content: center;
       flex-shrink: 0;
     }
+  
+    /* ==========================================================================
+       REACHMARK PRO UX ENHANCEMENT
+       Production-oriented visual layer: desktop workspace, smart tools, motion.
+       ========================================================================== */
+    :root {
+      --rm-panel: rgba(16, 20, 22, 0.82);
+      --rm-panel-solid: #11171a;
+      --rm-line: rgba(255,255,255,.075);
+      --rm-line-lime: rgba(214,242,105,.24);
+      --rm-glass: rgba(255,255,255,.045);
+      --rm-radius-xl: 22px;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 12% 12%, rgba(214,242,105,.08), transparent 28%),
+        radial-gradient(circle at 88% 84%, rgba(214,242,105,.055), transparent 26%),
+        var(--bg-gradient);
+    }
+
+    .viewport-3d {
+      max-width: 430px;
+      align-items: stretch;
+    }
+
+    .calculator-chassis {
+      overflow: visible;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .brand-header {
+      min-height: 66px;
+      background: linear-gradient(180deg, rgba(255,255,255,.025), transparent);
+    }
+
+    .reachmark-brand {
+      transition: transform .22s cubic-bezier(.16,1,.3,1);
+    }
+
+    .reachmark-brand:hover { transform: translateY(-1px); }
+
+    .rm-logo-squircle {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      box-shadow: 0 0 0 1px rgba(214,242,105,.18), 0 8px 22px rgba(214,242,105,.16);
+    }
+
+    .rm-wordmark { gap: 7px; }
+    .rm-brand-text { letter-spacing: -.025em; }
+    .rm-product-pill {
+      background: rgba(214,242,105,.08);
+      border-color: rgba(214,242,105,.22);
+      color: var(--rm-lime);
+    }
+
+    .header-actions { gap: 7px; }
+
+    .smart-tools-btn {
+      height: 34px;
+      padding: 0 11px;
+      border: 1px solid rgba(214,242,105,.2);
+      border-radius: 10px;
+      background: rgba(214,242,105,.075);
+      color: var(--rm-lime);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      cursor: pointer;
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+    }
+
+    .smart-tools-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(214,242,105,.13);
+      border-color: rgba(214,242,105,.38);
+    }
+
+    .smart-tools-btn:active { transform: scale(.97); }
+
+    .display-deck {
+      position: relative;
+      background:
+        linear-gradient(135deg, rgba(214,242,105,.025), transparent 42%),
+        var(--screen-bg);
+    }
+
+    .display-deck::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background: linear-gradient(115deg, rgba(255,255,255,.035), transparent 25%, transparent 72%, rgba(214,242,105,.025));
+    }
+
+    .value-line {
+      text-shadow: 0 0 28px rgba(214,242,105,.06);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .key {
+      transition: transform .11s cubic-bezier(.2,.8,.2,1), box-shadow .11s ease, background .16s ease;
+    }
+
+    .key:hover { transform: translateY(-1px); }
+    .key:active { transform: translateY(2px) scale(.985); }
+
+    .memory-row .mem-key {
+      transition: transform .12s ease, background .15s ease, border-color .15s ease;
+    }
+
+    .memory-row .mem-key:hover { transform: translateY(-1px); }
+
+    .rm-desktop-rail {
+      display: none;
+    }
+
+    .rm-rail-card {
+      border: 1px solid var(--rm-line);
+      background: var(--rm-panel);
+      border-radius: var(--rm-radius-xl);
+      box-shadow: 0 22px 55px rgba(0,0,0,.28);
+      padding: 20px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .rm-rail-kicker {
+      color: var(--rm-lime);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .rm-rail-title {
+      font-size: clamp(22px, 2.8vw, 31px);
+      line-height: 1.03;
+      letter-spacing: -.045em;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+
+    .rm-rail-copy {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 42ch;
+      margin-bottom: 18px;
+    }
+
+    .rm-tool-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 9px;
+    }
+
+    .rm-tool-card {
+      appearance: none;
+      text-align: left;
+      border: 1px solid var(--rm-line);
+      background: rgba(255,255,255,.025);
+      border-radius: 15px;
+      color: var(--text-main);
+      padding: 14px;
+      cursor: pointer;
+      min-height: 88px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .rm-tool-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--rm-line-lime);
+      background: rgba(214,242,105,.06);
+    }
+
+    .rm-tool-icon {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 9px;
+    }
+
+    .rm-tool-name {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .rm-tool-desc {
+      display: block;
+      color: var(--text-muted);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .rm-rail-stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .rm-stat {
+      padding: 12px;
+      border: 1px solid var(--rm-line);
+      background: rgba(255,255,255,.02);
+      border-radius: 14px;
+    }
+
+    .rm-stat-label {
+      display: block;
+      color: var(--text-dim);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 5px;
+    }
+
+    .rm-stat-value {
+      display: block;
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 800;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rm-smart-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 11000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0,0,0,.74);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease;
+    }
+
+    .rm-smart-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .rm-smart-modal {
+      width: min(760px, 100%);
+      max-height: min(760px, calc(100dvh - 36px));
+      overflow: auto;
+      border: 1px solid var(--rm-line-lime);
+      border-radius: 24px;
+      background: var(--rm-panel-solid);
+      box-shadow: 0 35px 100px rgba(0,0,0,.72), 0 0 60px rgba(214,242,105,.06);
+      transform: translateY(14px) scale(.985);
+      transition: transform .26s cubic-bezier(.16,1,.3,1);
+    }
+
+    .rm-smart-overlay.open .rm-smart-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .rm-smart-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 22px 16px;
+      border-bottom: 1px solid var(--rm-line);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: rgba(17,23,26,.92);
+      backdrop-filter: blur(16px);
+    }
+
+    .rm-smart-eyebrow {
+      color: var(--rm-lime);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .rm-smart-head h2 {
+      margin: 4px 0 5px;
+      font-size: clamp(21px, 4vw, 29px);
+      letter-spacing: -.035em;
+    }
+
+    .rm-smart-head p {
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .rm-smart-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      border: 1px solid var(--rm-line);
+      background: rgba(255,255,255,.04);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .rm-smart-tabs {
+      display: flex;
+      gap: 7px;
+      padding: 14px 22px 0;
+      overflow-x: auto;
+    }
+
+    .rm-smart-tab {
+      flex: 0 0 auto;
+      border: 1px solid var(--rm-line);
+      background: rgba(255,255,255,.025);
+      color: var(--text-muted);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .rm-smart-tab.active {
+      color: #0b0f14;
+      background: var(--rm-lime);
+      border-color: var(--rm-lime);
+    }
+
+    .rm-tool-panel {
+      display: none;
+      padding: 18px 22px 24px;
+    }
+
+    .rm-tool-panel.active { display: block; }
+
+    .rm-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .rm-field label {
+      display: block;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 7px;
+    }
+
+    .rm-field input {
+      width: 100%;
+      height: 46px;
+      border: 1px solid var(--rm-line);
+      border-radius: 12px;
+      outline: none;
+      background: rgba(0,0,0,.2);
+      color: var(--text-main);
+      padding: 0 13px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .rm-field input:focus {
+      border-color: rgba(214,242,105,.55);
+      box-shadow: 0 0 0 3px rgba(214,242,105,.08);
+    }
+
+    .rm-result {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid var(--rm-line-lime);
+      border-radius: 15px;
+      background: linear-gradient(135deg, rgba(214,242,105,.08), rgba(255,255,255,.02));
+    }
+
+    .rm-result-label {
+      color: var(--text-muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .rm-result-value {
+      margin-top: 5px;
+      color: var(--rm-lime);
+      font-size: clamp(25px,5vw,38px);
+      line-height: 1;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .rm-result-sub {
+      margin-top: 7px;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .rm-smart-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .rm-action {
+      border: 1px solid var(--rm-line);
+      background: rgba(255,255,255,.04);
+      color: var(--text-main);
+      border-radius: 10px;
+      padding: 9px 13px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .rm-action.primary {
+      background: var(--rm-lime);
+      border-color: var(--rm-lime);
+      color: #0b0f14;
+    }
+
+    @media (min-width: 980px) {
+      body {
+        align-items: center;
+        padding: 24px;
+      }
+
+      .viewport-3d {
+        max-width: 1080px;
+        display: grid;
+        grid-template-columns: minmax(390px, 430px) minmax(0, 1fr);
+        gap: 18px;
+      }
+
+      .viewport-3d.scientific-active {
+        max-width: 1080px;
+      }
+
+      .rm-desktop-rail {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .calculator-chassis {
+        height: min(900px, calc(100dvh - 48px));
+        overflow: hidden;
+      }
+
+      .rm-smart-tools-mobile { display: none !important; }
+    }
+
+    @media (max-width: 979px) {
+      .rm-desktop-rail { display: none; }
+      .rm-smart-tools-mobile { display: inline-flex; }
+    }
+
+    @media (max-width: 520px) {
+      .smart-tools-btn {
+        width: 34px;
+        padding: 0;
+        font-size: 0;
+      }
+      .smart-tools-btn::before {
+        content: "✦";
+        font-size: 14px;
+      }
+      .rm-smart-head { padding: 18px 16px 14px; }
+      .rm-smart-tabs { padding-left: 16px; padding-right: 16px; }
+      .rm-tool-panel { padding: 16px; }
+      .rm-form-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .key, .reachmark-brand, .rm-tool-card, .rm-smart-overlay, .rm-smart-modal { transition: none !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -1489,6 +1980,9 @@
 
         <!-- Only FX and Menu on the Right -->
         <div class="header-actions">
+          <!-- Smart Tools -->
+          <button type="button" class="smart-tools-btn rm-smart-tools-mobile" id="btnSmartTools" title="Smart Tools" aria-label="Open Smart Tools">✦</button>
+
           <!-- Scientific FX Button -->
           <button type="button" class="fx-btn" id="btnFX" title="Scientific Functions">
             fx
@@ -1623,6 +2117,35 @@
           </div>
         </div>
       </header>
+
+
+      <!-- REACHMARK PRO UX ENHANCEMENT: DESKTOP PRODUCT RAIL -->
+      <aside class="rm-desktop-rail" aria-label="Reachmark smart tools">
+        <section class="rm-rail-card">
+          <div class="rm-rail-kicker">Reachmark / Everyday Engine</div>
+          <div class="rm-rail-title">Calculate anything. Keep moving.</div>
+          <p class="rm-rail-copy">A faster workspace for numbers, money and everyday decisions — built around the calculator you already use.</p>
+          <div class="rm-tool-grid">
+            <button class="rm-tool-card" type="button" data-smart-tool="percentage"><span class="rm-tool-icon">%</span><span class="rm-tool-name">Percentage</span><span class="rm-tool-desc">Find a percentage of any value.</span></button>
+            <button class="rm-tool-card" type="button" data-smart-tool="discount"><span class="rm-tool-icon">↘</span><span class="rm-tool-name">Discount & Tax</span><span class="rm-tool-desc">Price after discount or tax.</span></button>
+            <button class="rm-tool-card" type="button" data-smart-tool="compound"><span class="rm-tool-icon">↗</span><span class="rm-tool-name">Compound Interest</span><span class="rm-tool-desc">Model growth over time.</span></button>
+            <button class="rm-tool-card" type="button" data-smart-tool="margin"><span class="rm-tool-icon">◒</span><span class="rm-tool-name">Profit Margin</span><span class="rm-tool-desc">Revenue, profit and margin.</span></button>
+          </div>
+        </section>
+        <section class="rm-rail-card">
+          <div class="rm-rail-kicker">Live workspace</div>
+          <div class="rm-rail-stats">
+            <div class="rm-stat"><span class="rm-stat-label">Memory</span><span class="rm-stat-value" id="railMemory">0</span></div>
+            <div class="rm-stat"><span class="rm-stat-label">History</span><span class="rm-stat-value" id="railHistory">0</span></div>
+            <div class="rm-stat"><span class="rm-stat-label">Mode</span><span class="rm-stat-value" id="railMode">DEG</span></div>
+          </div>
+        </section>
+        <section class="rm-rail-card">
+          <div class="rm-rail-kicker">Quick philosophy</div>
+          <p class="rm-rail-copy" style="margin-bottom:0">Fast input. Clear results. Useful tools. No clutter.</p>
+        </section>
+      </aside>
+
 
       <!-- Main Display -->
       <section class="display-deck" id="displayDeck">
@@ -3623,5 +4146,115 @@
 
     })();
   </script>
+
+<script>
+  /* REACHMARK PRO UX ENHANCEMENT */
+  (() => {
+    const $ = (id) => document.getElementById(id);
+    const $ = (sel) => Array.from(document.querySelectorAll(sel));
+    const money = (n) => Number.isFinite(n) ? n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}) : "0.00";
+    const num = (id) => {
+      const n = parseFloat($(id)?.value);
+      return Number.isFinite(n) ? n : 0;
+    };
+
+    function openSmartTools(tab = "percentage") {
+      const overlay = $("smartToolsOverlay");
+      if (!overlay) return;
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden","false");
+      activateSmartTab(tab);
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeSmartTools() {
+      const overlay = $("smartToolsOverlay");
+      if (!overlay) return;
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+    }
+
+    function activateSmartTab(tab) {
+      $(".rm-smart-tab").forEach(btn => btn.classList.toggle("active", btn.dataset.smartTab === tab));
+      $(".rm-tool-panel").forEach(panel => panel.classList.toggle("active", panel.dataset.smartPanel === tab));
+      calculateSmartTool(tab);
+    }
+
+    function calculateSmartTool(tab) {
+      if (tab === "percentage") {
+        const base=num("rmPercentBase"), rate=num("rmPercentRate"), result=base*rate/100;
+        $("rmPercentResult").textContent=money(result);
+        $("rmPercentSub").textContent=money(rate) + "% of " + money(base);
+      }
+      if (tab === "discount") {
+        const price=num("rmDiscountPrice"), discount=num("rmDiscountRate"), tax=num("rmTaxRate");
+        const discounted=price*(1-discount/100), taxValue=discounted*tax/100, final=discounted+taxValue;
+        $("rmDiscountResult").textContent=money(final);
+        $("rmDiscountSub").textContent="Discount: "+money(price*discount/100)+" · Tax: "+money(taxValue);
+      }
+      if (tab === "compound") {
+        const principal=num("rmCompoundPrincipal"), rate=num("rmCompoundRate"), years=num("rmCompoundYears"), freq=Math.max(1,Math.floor(num("rmCompoundFrequency")));
+        const result=principal*Math.pow(1+(rate/100)/freq,freq*years);
+        $("rmCompoundResult").textContent=money(result);
+        $("rmCompoundSub").textContent="Interest earned: "+money(result-principal);
+      }
+      if (tab === "margin") {
+        const revenue=num("rmMarginRevenue"), cost=num("rmMarginCost"), profit=revenue-cost;
+        const margin=revenue ? (profit/revenue)*100 : 0;
+        const markup=cost ? (profit/cost)*100 : 0;
+        $("rmMarginResult").textContent=money(margin)+"%";
+        $("rmMarginSub").textContent="Profit: "+money(profit)+" · Markup: "+money(markup)+"%";
+      }
+    }
+
+    function copyResult(id) {
+      const value=$(id)?.textContent || "";
+      navigator.clipboard?.writeText(value.replace(/,/g,"")).then(
+        () => window.showToast ? window.showToast("Result copied") : null,
+        () => window.showToast ? window.showToast("Result ready to copy") : null
+      );
+    }
+
+    function useResult(id) {
+      const raw=($(id)?.textContent || "0").replace(/,/g,"").replace("%","");
+      navigator.clipboard?.writeText(raw);
+      if (window.showToast) window.showToast("Result copied to clipboard");
+      closeSmartTools();
+    }
+
+    function syncRail() {
+      const mem=$("memDisplayVal")?.textContent || "0";
+      const history=$("menuHistoryCount")?.textContent || "0";
+      const mode=$("anglePill")?.textContent || "DEG";
+      if ($("railMemory")) $("railMemory").textContent=mem;
+      if ($("railHistory")) $("railHistory").textContent=history;
+      if ($("railMode")) $("railMode").textContent=mode;
+    }
+
+    $("btnSmartTools")?.addEventListener("click",()=>openSmartTools());
+    $("btnCloseSmartTools")?.addEventListener("click",closeSmartTools);
+    $("smartToolsOverlay")?.addEventListener("click",(e)=>{ if(e.target.id==="smartToolsOverlay") closeSmartTools(); });
+
+    $(".rm-tool-card").forEach(btn=>btn.addEventListener("click",()=>openSmartTools(btn.dataset.smartTool)));
+    $(".rm-smart-tab").forEach(btn=>btn.addEventListener("click",()=>activateSmartTab(btn.dataset.smartTab)));
+    $("[data-copy-result]").forEach(btn=>btn.addEventListener("click",()=>copyResult(btn.dataset.copyResult)));
+    $("[data-use-result]").forEach(btn=>btn.addEventListener("click",()=>useResult(btn.dataset.useResult)));
+
+    ["rmPercentBase","rmPercentRate","rmDiscountPrice","rmDiscountRate","rmTaxRate","rmCompoundPrincipal","rmCompoundRate","rmCompoundYears","rmCompoundFrequency","rmMarginRevenue","rmMarginCost"]
+      .forEach(id=>$(id)?.addEventListener("input",()=> {
+        const active=$(".rm-smart-tab.active")?.dataset.smartTab || "percentage";
+        calculateSmartTool(active);
+      }));
+
+    document.addEventListener("keydown",(e)=>{
+      if(e.key==="Escape") closeSmartTools();
+    });
+
+    setInterval(syncRail, 500);
+    window.addEventListener("load", syncRail);
+  })();
+</script>
+
 </body>
 </html>
