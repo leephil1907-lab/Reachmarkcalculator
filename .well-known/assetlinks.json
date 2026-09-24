@@ -1,14 +1,10 @@
 [
   {
-    "relation": [
-      "delegate_permission/common.handle_all_urls"
-    ],
+    "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
       "package_name": "io.github.leephil1907_lab.twa",
-      "sha256_cert_fingerprints": [
-        "04:3F:D5:EA:6C:AB:2B:04:01:0E:48:24:04:C8:50:EC:C5:BC:BA:E9:43:CF:93:0A:2A:ED:0E:98:11:50:46:76"
-      ]
+      "sha256_cert_fingerprints": ["80:EB:7D:83:28:88:82:C5:92:9C:6F:80:EC:64:81:A0:D4:98:58:67:29:A6:C7:0A:8B:A3:39:5B:66:A9:BD:70"]
     }
   }
 ]

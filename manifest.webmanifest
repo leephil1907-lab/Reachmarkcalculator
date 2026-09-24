@@ -1,7 +1,7 @@
 {
   "id": "./index.html",
   "name": "Reachmark Calculator",
-  "short_name": "Reachmark Calculator",
+  "short_name": "Reachmark",
   "description": "Reachmark Calculator is a high-precision 3D tactile motion calculator with calculation memory tape, 120+ global currency exchanger, and scientific tools.",
   "start_url": "./index.html?source=pwa",
   "scope": "./",
@@ -87,8 +87,9 @@
       "name": "Reachmark Calculation Tape File",
       "icons": [
         {
-          "src": "icon-96.png",
-          "sizes": "96x96"
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ],
       "accept": {
@@ -124,8 +125,9 @@
       ],
       "icons": [
         {
-          "src": "icon-192.png",
-          "sizes": "192x192"
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ],
       "auth": false,
@@ -141,27 +143,15 @@
   },
   "icons": [
     {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-maskable-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icon-maskable-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "maskable"
     }
   ],
@@ -189,9 +179,9 @@
       "url": "./index.html#currency",
       "icons": [
         {
-          "src": "shortcut-currency.png",
-          "sizes": "96x96",
-          "type": "image/png"
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ]
     },
@@ -202,9 +192,9 @@
       "url": "./index.html#scientific",
       "icons": [
         {
-          "src": "shortcut-scientific.png",
-          "sizes": "96x96",
-          "type": "image/png"
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ]
     },
@@ -215,9 +205,9 @@
       "url": "./index.html#history",
       "icons": [
         {
-          "src": "shortcut-history.png",
-          "sizes": "96x96",
-          "type": "image/png"
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ]
     }
