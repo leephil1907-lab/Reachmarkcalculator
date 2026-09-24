@@ -1,31 +1,22 @@
 {
   "id": "./index.html",
   "name": "Reachmark Calculator",
-  "short_name": "Reachmark",
+  "short_name": "Reachmark Calculator",
   "description": "Reachmark Calculator is a high-precision 3D tactile motion calculator with calculation memory tape, 120+ global currency exchanger, and scientific tools.",
-  "start_url": "./index.html",
+  "start_url": "./index.html?source=pwa",
   "scope": "./",
   "display": "standalone",
   "display_override": [
-    "standalone",
-    "fullscreen",
     "window-controls-overlay",
-    "tabbed"
+    "tabbed",
+    "standalone",
+    "minimal-ui"
   ],
   "tab_strip": {
     "home_tab": {
       "scope_patterns": [
         {
-          "pathname": "./"
-        },
-        {
           "pathname": "./index.html"
-        },
-        {
-          "pathname": "/Reachmarkcalculator/"
-        },
-        {
-          "pathname": "/Reachmarkcalculator/index.html"
         }
       ]
     },
